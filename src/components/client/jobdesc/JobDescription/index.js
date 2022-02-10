@@ -5,6 +5,7 @@ import RelatedJob from './RelatedJob';
 const JobDescription = ({ jobDetail }) => {
     const { job_title, job_bounty, job_description, country, state, timezone } = jobDetail
 
+    // console.log(job_description)
 
     return (
         <>
