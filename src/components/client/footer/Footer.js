@@ -63,34 +63,34 @@ export default function Footer() {
                 </ul>
               </nav>
               <div className={styles.footer__social}>
-                <div className={styles.footer__social_item}>
-                  <Link href="https://www.facebook.com/careerbuddyafrica">
-                    <a>
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.footer__social_item}>
-                  <Link href="https://twitter.com/careerbuddyhq">
-                    <a>
-                      <i className="fab fa-twitter"></i>
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.footer__social_item}>
-                  <Link href="https://www.instagram.com/careerbuddyhq/">
-                    <a>
-                      <i className="fab fa-instagram"></i>
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.footer__social_item}>
-                  <Link href="https://www.linkedin.com/company/thecareerbuddy/?viewAsMember=true">
-                    <a>
-                      <i className="fab fa-linkedin-in"></i>
-                    </a>
-                  </Link>
-                </div>
+
+                <Link href="https://www.facebook.com/careerbuddyafrica">
+                  <a className={styles.footer__social_item}>
+                    <i className="fab fa-facebook-f"></i>
+                  </a>
+                </Link>
+
+
+                <Link href="https://twitter.com/careerbuddyhq">
+                  <a className={styles.footer__social_item}>
+                    <i className="fab fa-twitter"></i>
+                  </a>
+                </Link>
+
+
+                <Link href="https://www.instagram.com/careerbuddyhq/">
+                  <a className={styles.footer__social_item}>
+                    <i className="fab fa-instagram"></i>
+                  </a>
+                </Link>
+
+
+                <Link href="https://www.linkedin.com/company/thecareerbuddy/?viewAsMember=true">
+                  <a className={styles.footer__social_item}>
+                    <i className="fab fa-linkedin-in"></i>
+                  </a>
+                </Link>
+
                 {/* <div className={styles.footer__social_item}>
                   <Link href="/">
                     <a>
