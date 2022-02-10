@@ -4,8 +4,8 @@ import { ScaleLoader } from 'react-spinners';
 import { modalToggle } from '../../../../store/settings/actions';
 import Layout from "../Layout/Layout";
 import { setCountries } from './../../../../store/countries/actions';
-import AddCountry from './AddCountry/AddCountry';
-import UpdateCountry from './UpdateCountry/UpdateCountry';
+// import AddCountry from './AddCountry/AddCountry';
+// import UpdateCountry from './UpdateCountry/UpdateCountry';
 const Countries = () => {
     const dispatch = useDispatch()
     const [trigger, setTrigger] = useState(false)
@@ -34,9 +34,9 @@ const Countries = () => {
     return (
         <Layout>
 
-            {trigger && <AddCountry />}
+            {/* {trigger && <AddCountry />}
 
-            {currentData.isUpdate && <UpdateCountry setCurrentData={setCurrentData} currentData={currentData} />}
+            {currentData.isUpdate && <UpdateCountry setCurrentData={setCurrentData} currentData={currentData} />} */}
 
             <div className="bg-white container p-5">
                 {isLoading && <div className='d-flex justify-content-center'>

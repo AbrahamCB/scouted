@@ -123,11 +123,9 @@ const JobForm = () => {
         formData.append('state_id', handleFormData.state_id)
         formData.append('timezone_id', handleFormData.timezone_id)
 
-
         for (let i = 0; i < selectTags?.length; i++) {
             formData.append('tags[]', selectTags[i].value)
         }
-
         postData('/job', formData, setDisable)
             .then(res => {
                 if (res.success) {
@@ -313,6 +311,100 @@ const JobForm = () => {
                             />
                         </div>
                         {/* {errors.job_vacancy && <span className="text-danger">Job vacancy required</span>} */}
+                    </div>
+                    <div className="mb-3 col-12 col-sm-6">
+                        <label>Join Date <span className='text-danger'>*</span></label>
+                        <div>
+                            <span style={styles}>
+                                <i className="fas fa-users"></i>
+                            </span>
+                            <input
+                                required
+                                name="joining_date"
+                                onChange={handleForm}
+                                type="date"
+                                className="form-control"
+                                style={{ paddingLeft: '30px' }}
+                            />
+                        </div>
+
+                    </div>
+                    <div className="mb-3 col-12 col-sm-6">
+                        <label>Expired Date <span className='text-danger'>*</span></label>
+                        <div>
+                            <span style={styles}>
+                                <i className="fas fa-users"></i>
+                            </span>
+                            <input
+                                required
+                                name="expired_date"
+                                onChange={handleForm}
+                                type="date"
+                                className="form-control"
+                                placeholder=""
+                                style={{ paddingLeft: '30px' }}
+                            />
+                        </div>
+
+                    </div>
+                    <div className="mb-3 col-12 col-sm-6">
+                        <label>Working Hours Weekly <span className='text-danger'>*</span></label>
+                        <div>
+                            <span style={styles}>
+                                <i className="fas fa-users"></i>
+                            </span>
+                            <input
+                                required
+                                name="expired_date"
+                                onChange={handleForm}
+                                type="number"
+                                className="form-control"
+                                placeholder="Working Hours Weekly"
+                                style={{ paddingLeft: '30px' }}
+                            />
+                        </div>
+
+                    </div>
+                    <div className="mb-3 col-12 col-sm-6">
+                        <label>Hourly Rate <span className='text-danger'>*</span></label>
+                        <div>
+                            <span style={styles}>
+                                <i className="fas fa-users"></i>
+                            </span>
+                            <input
+                                required
+                                name="expired_date"
+                                onChange={handleForm}
+                                type="number"
+                                className="form-control"
+                                placeholder="Hourly Rate $"
+                                style={{ paddingLeft: '30px' }}
+                            />
+                        </div>
+
+                    </div>
+                    <div className='"mb-3  col-12 col-sm-6'>
+                        <label>Job type <span className='text-danger'>*</span></label>
+
+                        <div>
+                            <span style={styles}>
+                                <i className="fas fa-flag"></i>
+                            </span>
+                            <select
+
+                                onChange={handleForm}
+                                name='country_id'
+                                type='select'
+                                className="form-control"
+
+                                style={{ paddingLeft: '30px' }}
+                            >
+                                <option defaultValue >Full time </option>
+                                <option value="Part time" >Part time </option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                        </div>
                     </div>
                     <div className='"mb-3  col-12 col-sm-6'>
                         <label>Country <span className='text-danger'>*</span></label>

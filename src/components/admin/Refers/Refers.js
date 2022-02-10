@@ -61,7 +61,6 @@ const Jobs = () => {
                             <a>Add Job</a>
                         </Link>
                         <h1>Empty Job</h1>
-
                     </div>
                 </div>}
             </div>

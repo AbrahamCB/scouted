@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 
-export const ROOT_URL = `http://174.138.43.21/`
-export const APP_URL = `http://174.138.43.21/`
+export const ROOT_URL = `http://admin.joinscouted.com/`
+export const APP_URL = `http://admin.joinscouted.com/`
 export const IMAGE_URL = `${APP_URL}/public/storage`
 export const API_URL = `${APP_URL}api/`
 
