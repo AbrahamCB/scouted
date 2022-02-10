@@ -21,7 +21,7 @@ export const getData = async (endPoint) => {
         const { data } = await api.get(endPoint)
         return data
     } catch (error) {
-        toast.error(error?.response?.data?.message)
+        toast.error(`${error?.response?.data?.message}`)
     }
 }
 
@@ -32,7 +32,7 @@ export const getUserData = async (endPoint, token) => {
         })
         return data
     } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(`${error?.response?.data?.message}`)
         return error;
 
     }
@@ -45,7 +45,7 @@ export const postData = async (endPoint, formData, setDisable) => {
         return data
     } catch (error) {
         setDisable(false)
-        toast.error(error?.response?.data?.message)
+        toast.error(`${error?.response?.data?.message}`)
         return error
     }
 }
@@ -55,7 +55,7 @@ export const postReq = async (endPoint, formData) => {
         const { data } = await api.post(endPoint, formData)
         return data
     } catch (error) {
-        toast.error(error?.response?.data?.message)
+        toast.error(`${error?.response?.data?.message}`)
         return error
     }
 }
@@ -69,7 +69,7 @@ export const authPost = async (endPoint, formData, token) => {
         return data
     } catch (error) {
 
-        toast.error(error?.response?.data?.message)
+        toast.error(`${error?.response?.data?.message}`)
         return error
     }
 }
@@ -82,7 +82,7 @@ export const updateData = async (endPoint, formData, token) => {
         })
         return data
     } catch (error) {
-        toast.error(error?.response?.data?.message)
+        toast.error(`${error?.response?.data?.message}`)
         return error
     }
 }
