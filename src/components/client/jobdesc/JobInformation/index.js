@@ -31,7 +31,7 @@ const JobInformation = ({ jobDetail }) => {
                     <i className="fas fa-map-marker-alt"></i>
                     <div className={styles.box__info}>
                         <h4 className={styles.info__title}>Location</h4>
-                        <p>{state?.state_name}, <span>{country?.country_code}</span></p>
+                        <p>{state?.state_name}, <span className='text-uppercase'>{country?.country_code}</span></p>
                     </div>
                 </div>
                 <div className={styles.information__box}>
