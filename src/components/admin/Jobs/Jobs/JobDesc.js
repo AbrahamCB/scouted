@@ -1,4 +1,5 @@
 
+import parse from 'html-react-parser';
 const JobDesc = ({ job }) => {
 
 
@@ -44,68 +45,14 @@ const JobDesc = ({ job }) => {
                             </tbody>
                         </table>
                     </div>
-                    {/* <div className='p-5 col-sm-3 col-12  text-white'>
-
-
+                    <div className='col-12 col-sm-4 p-5 text-white'>
                         <div className="border rounded my-3">
                             <div className="card-body">
-                                <p>Salary: ${job_salary}</p>
-
-                                <p>Vacancy: {job_vacancy}</p>
-
-                                <p>Referer: {job_referer}</p>
-
-                                <p>Bounty: ${job_bounty}</p>
-
-                                <p>Interviewer: {job_interviewer}</p>
-
-                                <p>Hired: {hired}</p>
-
-                                <p>Condition: {job_condition}</p>
-
-                            </div>
-
-                        </div>
-                        <div className="border rounded my-3">
-                            <div className="card-body">
-
-
+                                <h5>Description here</h5>
+                                {parse(job_description)}
                             </div>
                         </div>
-                        <div className="border rounded my-3">
-                            <div className="card-body">
-
-
-                            </div>
-                        </div>
-                        <div className="border rounded my-3">
-                            <div className="card-body">
-
-                            </div>
-                        </div>
-
-                        <div className="border rounded my-3">
-                            <div className="card-body">
-
-
-                            </div>
-                        </div>
-                        <div className="border rounded my-3">
-                            <div className="card-body">
-
-
-                            </div>
-                        </div>
-                        <div className="border rounded my-3">
-                            <div className="card-body">
-
-
-                            </div>
-                        </div>
-
-
-                    </div> */}
-
+                    </div>
                     <div className="col-12 col-sm-4 p-5 text-white">
                         <div className="border rounded my-3">
                             <div className="card-body">
@@ -117,19 +64,6 @@ const JobDesc = ({ job }) => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-12 col-sm-4 p-5 text-white'>
-                        <div className="border rounded my-3">
-                            <div className="card-body">
-                                <h5>Description here</h5>
-                                <p>{job_description}</p>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
                 </div>
             </div>
         </td>

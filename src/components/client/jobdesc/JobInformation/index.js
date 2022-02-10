@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import ample from '../../../../assets/ample1.png';
 import styles from '../JobDesc.module.css';
 import ContactUs from './ContactUs';
 const JobInformation = ({ jobDetail }) => {
-    const { job_salary, company, country, state, job_title } = jobDetail
+    const { job_salary, company, country, state, job_title, job_slug } = jobDetail
     const { company_name, company_slug } = company
-    console.log(company)
+    const router = useRouter()
     return (
         <aside className=" py-3 py-md-0">
             <div className={styles.job__detail_information}>
@@ -64,7 +65,7 @@ const JobInformation = ({ jobDetail }) => {
                 </div>
             </div>
             <div className={styles.apply__job}>
-                <button type="submit">apply for this job</button>
+                <button onClick={() => router.push(`/r/${company_slug}/${job_slug}/`)} type="submit">Refer for this job</button>
             </div>
             <div className={styles.about__company}>
                 <h4 className={styles.company__subtitle}>About Company</h4>

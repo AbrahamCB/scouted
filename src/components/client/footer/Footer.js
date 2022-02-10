@@ -18,13 +18,9 @@ export default function Footer() {
                   </a>
                 </Link>
               </div>
-              {/* <p className={styles.footer__desc}>
-                There are many variations of passages of Lorem Ipsum available,
-                but themajority have suffered alteration in some form, by
-                injected humour
-              </p> */}
+
               <nav className={styles.footer__menu}>
-                <ul>
+                <ul className='d-flex flex-wrap gap-2'>
                   <li>
                     <Link href="/about-us">
                       <a>our team</a>

@@ -80,7 +80,7 @@ export default function Signup() {
                 type="submit"
                 id="kt_sign_in_submit" className="btn btn-lg btn-primary fw-bolder me-3 my-2">
                 <span className="indicator-label">
-                  {disable ? <BeatLoader color={color} loading={loading} size={12} /> : 'Send Message'}
+                  {disable ? <BeatLoader color={color} loading={loading} size={12} /> : 'Submit'}
 
                 </span>
               </button>

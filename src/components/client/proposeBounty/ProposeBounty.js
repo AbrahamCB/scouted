@@ -50,8 +50,8 @@ const ProposeBounty = () => {
                             </div>
                             <div className="mb-4">
                                 <label>List salary and equity ranges for each role. We need numbers!  <span className="text-danger">*</span></label>
-                                <textarea rows={3} className='form-control ' {...register("numbers", { required: true })} />
-                                {errors.numbers && <span className='text-danger'>This field is required</span>}
+                                <textarea rows={3} className='form-control ' {...register("equity_numbers", { required: true })} />
+                                {errors.equity_numbers && <span className='text-danger'>This field is required</span>}
                             </div>
                             <div className="mb-4">
                                 <label>Where can your candidates to be based?  <span className="text-danger">*</span></label>
@@ -60,8 +60,8 @@ const ProposeBounty = () => {
                             </div>
                             <div className="mb-4">
                                 <label>Do you sponsor employment visas (e.g. H1B)?   <span className="text-danger">*</span></label>
-                                <textarea rows={3} className='form-control ' {...register("visas", { required: true })} />
-                                {errors.visas && <span className='text-danger'>This field is required</span>}
+                                <textarea rows={3} className='form-control ' {...register("sponsor_visas", { required: true })} />
+                                {errors.sponsor_visas && <span className='text-danger'>This field is required</span>}
                             </div>
                             <div className="mb-4">
                                 <label>List bounty prices for each role. Note whether you&apos;d like to pay your bounties in non-USD currencies (incl. cryptocurrency).   <span className="text-danger">*</span></label>

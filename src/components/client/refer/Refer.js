@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useSelector } from 'react-redux';
 import { BeatLoader } from "react-spinners";
 import { getData, postData } from "../../../../__lib__/helpers/HttpService";
@@ -49,6 +49,10 @@ const Refer = () => {
         <>
 
             <Layout>
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                />
                 <div className="mt-5">
                     <div className="text-center py-5">
                         <h1 className={Styles.refer_title}>Refer Candidate</h1>

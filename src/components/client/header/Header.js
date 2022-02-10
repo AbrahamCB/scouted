@@ -133,9 +133,11 @@ const Header = () => {
               <li><a className="" href="#">Hiring of Scouted</a></li>
             </ul>
             <ul className={styles.nav__ul} >
-              <li className={styles.nav__title}>How it works</li>
-              <li><a className="" href="#">Referring of Scouted</a></li>
-              <li><a className="" href="#">Hiring of Scouted</a></li>
+              <li className={styles.nav__title}>Status</li>
+
+              <li><Link href="/user/dashboard">
+                <a >Dashboard</a>
+              </Link></li>
             </ul>
           </nav>}
 
