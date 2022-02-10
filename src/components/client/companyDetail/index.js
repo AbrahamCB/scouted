@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import ample from "../../../assets/ample1.png";
+import CardRow from '../cardrow/CardRow';
 import Layout from '../layout';
 import styles from './CompanyDetail.module.css';
-const CompanyDetail = ({ companyDetail }) => {
+const CompanyDetail = ({ companyDetail, jobs }) => {
     const { company_name, company_description, website_url, founded_date,
-         linkedin_url, facebook_url, twitter_url, instagram_url} = companyDetail[0]
-  
+        linkedin_url, facebook_url, twitter_url, instagram_url } = companyDetail[0]
+
 
     return (
         <>
@@ -25,7 +26,7 @@ const CompanyDetail = ({ companyDetail }) => {
                                         </Link>
                                     </div>
                                     <p className={styles.about__description}>
-                                       {company_description}
+                                        {company_description}
                                     </p>
                                 </div>
                             </div>
@@ -91,7 +92,9 @@ const CompanyDetail = ({ companyDetail }) => {
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-10">
-                                {/* <CardRow /> */}
+
+
+                                {jobs.map((job, i) => <CardRow key={i} job={job} />)}
                             </div>
                         </div>
                     </div>

@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 
-export const ROOT_URL = `http://www.bachelortimes.com/`
-export const APP_URL = `http://www.bachelortimes.com/`
+export const ROOT_URL = `http://174.138.43.21/`
+export const APP_URL = `http://174.138.43.21/`
 export const IMAGE_URL = `${APP_URL}/public/storage`
 export const API_URL = `${APP_URL}api/`
 
@@ -46,7 +46,6 @@ export const postData = async (endPoint, formData, setDisable) => {
     } catch (error) {
         setDisable(false)
         toast.error(error?.response?.data?.message)
-        console.log(error?.response?.data?.message)
         return error
     }
 }

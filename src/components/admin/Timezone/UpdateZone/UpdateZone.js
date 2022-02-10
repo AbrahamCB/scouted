@@ -20,7 +20,7 @@ const UpdateZone = (props) => {
 
     useEffect(() => {
         dispatch(setCountries())
-    }, [])
+    }, [dispatch()])
 
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm()

@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import { setCountries } from '../../../../../store/countries/actions';
 import { modalToggle } from '../../../../../store/settings/actions';
-import { setStates } from '../../../../../store/States/actions';
 import { updateData } from '../../../../../__lib__/helpers/HttpService';
 import Modals from '../../Modal/Modals';
+import { setStates } from './../../../../../store/states/actions';
 
 const UpdateState = (props) => {
     const { state_name, id, country_id } = props.currentData;

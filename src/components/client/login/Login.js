@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
@@ -19,7 +20,7 @@ export default function Login() {
   const router = useRouter()
   const dispatch = useDispatch()
   const onSubmit = data => {
-      
+
     setDisable(true)
 
     postData('/user/login', data, setDisable)
@@ -31,7 +32,7 @@ export default function Login() {
             token: res.token,
             admin: res.admin
           }))
-        router.push("/user/dashboard")
+          router.push("/user/dashboard")
         }
       })
   }
@@ -42,11 +43,12 @@ export default function Login() {
         <div className={styles.login__form_wrapper}>
           <h3 className={styles.form__title}>Login Now</h3>
           <form onSubmit={handleSubmit(onSubmit)} action="" className={styles.login__form}>
-            {/* <input type="email" placeholder="Email" /> */}
             <input {...register("email", { required: true, pattern: /\S+@\S+\.\S+/ })} type="text" placeholder="Email" />
+            
             {errors.email?.type === 'required' && <span className="text-danger">Email is required</span>}
             {errors.email?.type === "pattern" && <span className="text-danger">Valid email required</span>}
-            {/* <input type="password" placeholder="Password" /> */}
+
+
             <input {...register("password", { required: true })} placeholder="Password" type="password" />
             {errors.password && <span className="text-danger">Password is required</span>}
 
@@ -64,6 +66,11 @@ export default function Login() {
             </div>
 
             <button type="reset">Forgot Password?</button>
+            <p className="text-center">
+              <Link href="/signup">
+                <a>Create new account</a>
+              </Link>
+            </p>
           </form>
         </div>
       </div>

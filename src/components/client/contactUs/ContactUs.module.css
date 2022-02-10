@@ -1,0 +1,46 @@
+.toggle__container {
+    max-width: 1190px;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.contact__area {
+    width: 692px;
+}
+
+.contact__area form {
+    padding: 30px;
+    /* border-radius: 10px; */
+    /* border: 1px solid lightgray; */
+}
+
+.contact__area form label {
+    font-size: 17px;
+}
+
+
+
+.contact__area ol li {
+    font-size: 17px;
+    line-height: 40px;
+}
+
+.contact__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1A202C;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 576px) {
+    .contact__area {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .contact__area {
+        width: 100%;
+    }
+}

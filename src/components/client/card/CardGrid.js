@@ -5,7 +5,7 @@ import styles from './Card.module.css';
 import defaultLogo from '/public/images/default-logo.png';
 
 export default function CardGrid({ job }) {
-  const { job_title, job_salary, job_slug, job_bounty, company } = job
+  const { job_title, job_salary, job_slug, job_bounty, company, state } = job
   const { company_logo, company_name, company_slug } = company
   const router = useRouter()
   return (
@@ -15,14 +15,14 @@ export default function CardGrid({ job }) {
           <Image src={defaultLogo} alt="card/img" />
         </div>
         <h3 className={styles.card__title}>
-          <Link href={`/${company_slug}`}>
+          <Link href={`c/${company_slug}`}>
             <a >
               {company_name}
             </a>
           </Link>
         </h3>
         <h4 className={styles.card__subtitle}>
-          <Link href={`/${company_slug}/${job_slug}`}>
+          <Link href={`c/${company_slug}/${job_slug}`}>
             <a > {job_title}</a>
 
           </Link>
@@ -31,13 +31,23 @@ export default function CardGrid({ job }) {
         <p className={styles.card__price}>
           <span>{`$${job_bounty}`}</span> new
         </p>
+        <div className={styles.card__location}>
+          {job.tags.map((tag, i) => (
+
+            <p className={styles.card__tag} key={i}>
+              <Link href={`/tag/${tag.tag_slug}`}>
+                <a>{tag.tag_name}</a>
+              </Link>
+            </p>
+
+          ))}
+          <span><Link href={`/search?location=${state?.state_name}`}><a >📍{state?.state_name}</a></Link></span>
+
+        </div>
       </div>
       <div className={styles.card__footer}>
-        <div className={styles.card__location}>
-          <i className="fas fa-map-marker-alt"></i>
-          <span>San Francisco, CA, USA</span>
-        </div>
-        <button onClick={() => router.push(`/${company.company_slug}/${job_slug}/refer`)} type="submit">refer</button>
+
+        <button onClick={() => router.push(`r/${company.company_slug}/${job_slug}`)} type="submit">refer</button>
       </div>
     </div>
   );

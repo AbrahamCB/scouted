@@ -1,9 +1,6 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { modalToggle } from '../../../../../../store/settings/actions';
-import AddTag from '../../../Tags/AddTag/AddTag';
 
 const Tag = () => {
     const router = useRouter()
@@ -16,7 +13,12 @@ const Tag = () => {
     return (
         <>
             <div data-kt-menu-trigger="click" className={`menu-item menu-accordion ${menuItem ? 'hover show' : ''}`}>
-                <span className="menu-link" onClick={() => setMenuItem(!menuItem)}>
+                <span className="menu-link" onClick={() => router.push('/admin/tags')}>
+
+
+
+
+
                     <span className="menu-icon">
                         <span className="svg-icon svg-icon-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -26,34 +28,9 @@ const Tag = () => {
                         </span>
                     </span>
                     <span className="menu-title">Tags</span>
-                    <span className="menu-arrow" />
+
                 </span>
-                <div className={`menu-sub menu-sub-accordion menu-active-bg ${menuItem && 'show'}`}>
-                    <div className="menu-item">
-                        <Link href='/admin/tags'>
-                            <a className="menu-link">
-                                <span className="menu-bullet">
-                                    <span className="bullet bullet-dot" />
-                                </span>
-                                <span className="menu-title">All Tags</span>
-                            </a>
-                        </Link>
-                    </div>
-                    <div className="menu-item">
-                        <span onClick={() => {
-                            dispatch(modalToggle(settings.modal))
-                            setTrigger(true)
-                        }} className="menu-link">
-                            <span className="menu-bullet">
-                                <span className="bullet bullet-dot" />
-                            </span>
-                            <span className="menu-title">Add Tag</span>
-                        </span>
-                    </div>
-                    {trigger && <AddTag />}
 
-
-                </div>
             </div>
         </>
     );

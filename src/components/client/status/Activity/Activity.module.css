@@ -1,0 +1,60 @@
+.activity__area label {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+
+.activity__area .text__area {
+    background: #fff;
+    border: 1px solid gainsboro;
+    margin-bottom: 10px;
+}
+
+.activity__area .text__area:focus {
+    border: 2px solid #000;
+}
+
+.activity__box {
+    margin-top: 20px;
+}
+
+.activity__area .activity__box {
+    border: 1px solid gainsboro;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.activity__area .activity__box .date {
+    font-size: 16px;
+}
+
+.activity__area .activity__box .title {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.activity__area .activity__box button {
+    outline: none;
+    border: none;
+    padding: 1px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.activity__area .activity__box .pass {
+    background: #FED7D7;
+
+}
+
+.activity__area .activity__box .spam {
+    background: #FEB2B2;
+
+}
+
+.activity__area .activity__box .wating {
+    background: #EDF2F7;
+
+}

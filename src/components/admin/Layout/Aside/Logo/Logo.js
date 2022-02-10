@@ -4,9 +4,9 @@ const Logo = () => {
         <>
             <div className="aside-logo flex-column-auto" id="kt_aside_logo">
                 <Link href="/">
-                    <a>
-                        {/* <img alt="Logo" src="assets/media/logos/logo-1.svg" className="h-15px logo" /> */}
-                        <h2>Talentdrop</h2>
+                    <a className="d-flex gap-3">
+                        <img alt="Logo" src="/images/logo.png" className="h-15px logo" />
+                        <h2>Scouted</h2>
                     </a>
                 </Link>
                 <div id="kt_aside_toggle" className="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="aside-minimize">

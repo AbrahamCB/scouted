@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import company from '../../../assets/company.png';
 import styles from './TrustedCompany.module.css';
+// import company from '../../../assets/company.png';
+import company from '/public/images/partner.png';
 
 export default function TrustedCompany() {
   return (

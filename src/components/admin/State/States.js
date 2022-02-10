@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ScaleLoader } from 'react-spinners';
 import { setCountries } from '../../../../store/countries/actions';
 import { modalToggle } from '../../../../store/settings/actions';
-import { setStates } from '../../../../store/States/actions';
+import { setStates } from '../../../../store/states/actions';
 import Layout from '../Layout/Layout';
 import AddState from './AddState/AddState';
 import UpdateState from './UpdateState/UpdateState';
-
 const States = () => {
+
     const dispatch = useDispatch()
     const [trigger, setTrigger] = useState(false)
+    const [loading, setLoading] = useState(true);
+    const [color, setColor] = useState("#36d7b7");
     const { states, countries, settings } = useSelector(state => state)
     const [currentData, setCurrentData] = useState({ isUpdate: false })
     const [selectCountry, setSelectCountry] = useState(null)
@@ -19,14 +22,12 @@ const States = () => {
         dispatch(setCountries())
     }, [selectCountry])
 
-    const { statesList } = states
+    const { statesList, isLoading } = states
     const { countryList } = countries
     const handleOnChange = (e) => {
-        console.log(e.target.value)
         setSelectCountry(e.target.value)
     }
-
-    console.log(states)
+    console.log(selectCountry)
 
     const courrentUpdate = (data) => {
         setTrigger(false)
@@ -47,11 +48,16 @@ const States = () => {
             {currentData.isUpdate && <UpdateState setCurrentData={setCurrentData} currentData={currentData} />}
 
             <div className="bg-white container p-5">
+
+
+
+
+
                 <div className="d-flex justify-content-between align-items-center py-5 ">
                     <h1 className="mt-3">All States</h1>
                     <div>
                         <select onChange={handleOnChange} className="form-select form-select-sm" aria-label=".form-select-sm example">
-                            <option defaultValue >Select country</option>
+                            <option defaultValue>Select Country</option>
                             {countryList?.map((item, i) => <option key={i} value={item.id}>{item.country_name}</option>)}
                         </select>
                     </div>
@@ -63,7 +69,7 @@ const States = () => {
                         Add
                     </button>
                 </div>
-                <div className="t_table_content-wrapper">
+                {!isLoading && statesList.length > 0 && <div className="t_table_content-wrapper">
                     <div className="table-responsive">
                         <table className="table">
                             <thead className="thead bg-light">
@@ -99,7 +105,15 @@ const States = () => {
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div>}
+                {isLoading && <div className='d-flex justify-content-center'>
+                    <ScaleLoader color={color} loading={loading} size={12} />
+                </div>}
+                {!isLoading && statesList.length === 0 && <div className="d-flex justify-content-center">
+                    <div className="text-center">
+                        <h1 className="mt-4"> Not Found</h1>
+                    </div>
+                </div>}
 
             </div>
         </Layout >

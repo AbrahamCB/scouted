@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ScaleLoader } from 'react-spinners';
 import { setCountries } from '../../../../store/countries/actions';
 import { modalToggle } from '../../../../store/settings/actions';
 import { setTimezones } from '../../../../store/timezones/actions';
@@ -10,6 +11,8 @@ import UpdateState from './UpdateZone/UpdateZone';
 const Timezones = () => {
     const dispatch = useDispatch()
     const [trigger, setTrigger] = useState(false)
+    const [loading, setLoading] = useState(true);
+    const [color, setColor] = useState("#36d7b7");
     const { timezones, countries, settings } = useSelector(state => state)
     const [currentData, setCurrentData] = useState({ isUpdate: false })
     const [selectCountry, setSelectCountry] = useState(null)
@@ -19,10 +22,9 @@ const Timezones = () => {
         dispatch(setCountries())
     }, [selectCountry])
 
-    const { zonesList } = timezones
+    const { zonesList, isLoading } = timezones
     const { countryList } = countries
     const handleOnChange = (e) => {
-        console.log(e.target.value)
         setSelectCountry(e.target.value)
     }
 
@@ -46,6 +48,7 @@ const Timezones = () => {
             {currentData.isUpdate && <UpdateState setCurrentData={setCurrentData} currentData={currentData} />}
 
             <div className="bg-white container p-5">
+
                 <div className="d-flex justify-content-between align-items-center py-5 ">
                     <h1 className="mt-3">All States</h1>
                     <div>
@@ -62,7 +65,7 @@ const Timezones = () => {
                         Add
                     </button>
                 </div>
-                <div className="t_table_content-wrapper">
+                {!isLoading && zonesList.length > 0 && <div className="t_table_content-wrapper">
                     <div className="table-responsive">
                         <table className="table">
                             <thead className="thead bg-light">
@@ -98,8 +101,17 @@ const Timezones = () => {
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div>}
 
+
+                {isLoading && <div className='d-flex justify-content-center'>
+                    <ScaleLoader color={color} loading={loading} size={12} />
+                </div>}
+                {!isLoading && zonesList.length === 0 && <div className="d-flex justify-content-center">
+                    <div className="text-center">
+                        <h1 className="mt-4">Not Found</h1>
+                    </div>
+                </div>}
             </div>
         </Layout >
     );

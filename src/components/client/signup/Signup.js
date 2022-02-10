@@ -1,16 +1,25 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
 import BeatLoader from "react-spinners/BeatLoader";
+import Cookies from 'universal-cookie';
 import * as Yup from 'yup';
 import { postData } from './../../../../__lib__/helpers/HttpService';
 import styles from './Signup.module.css';
+
 export default function Signup() {
 
+  const cookies = new Cookies()
   // form validation rules 
   const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .required('Name required'),
+    email: Yup.string()
+      .required('Email required')
+      .matches(/\S+@\S+\.\S+/, 'Invalid email'),
     password: Yup.string()
       .required('Password is required')
       .matches(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/, 'At least one uppercase letter, one lowercase letter and one number')
@@ -29,20 +38,15 @@ export default function Signup() {
   const [disable, setDisable] = useState(false)
   const router = useRouter()
   const { register, handleSubmit, watch, formState: { errors } } = useForm(formOptions);
-
   const onSubmit = data => {
-
     setDisable(true)
 
     postData('/user/register', data, setDisable)
       .then(res => {
-        console.log(res)
         if (res?.user) {
           cookies.set("user_token", res.token, { path: '/' })
           toast.success(res.message)
           router.push("/login")
-        } else {
-          toast.error('email already taken')
         }
       })
   };
@@ -60,14 +64,16 @@ export default function Signup() {
               <input {...register("name", { required: true })} type="text" placeholder="Name" />
               {errors.name && <span className="text-danger">Name is required</span>}
 
-              <input {...register("email", { required: true, pattern: /\S+@\S+\.\S+/ })} type="text" placeholder="Email" />
-              {errors.email?.type === 'required' && <span className="text-danger">Email is required</span>}
-              {errors.email?.type === "pattern" && <span className="text-danger">Invalid email</span>}
+              <input {...register("email")} type="text" placeholder="Email" />
+              {errors.email?.type === 'required' && <div className="text-danger">{errors.email?.message}</div>}
+              {errors.email?.type === "matches" && <div className="text-danger">{errors.email?.message}</div>}
 
-              <input name="password" type="password" {...register('password')} placeholder='Password' className={` ${errors.password ? 'is-invalid' : ''}`} />
-              <div className="invalid-feedback">{errors.password?.message}</div>
+
+              < input name="password" type="password" {...register('password')} placeholder='Password' className={` ${errors.password ? 'is-invalid' : ''}`} />
+              <div className="text-danger">{errors.password?.message}</div>
+
               <input name="password_confirmation" type="password" {...register('password_confirmation')} placeholder='Confirmation password' className={` ${errors.password_confirmation ? 'is-invalid' : ''}`} />
-              <div className="invalid-feedback">{errors.password_confirmation?.message}</div>
+              <div className="text-danger">{errors.password_confirmation?.message}</div>
 
               <button
                 disabled={disable}
@@ -78,7 +84,9 @@ export default function Signup() {
 
                 </span>
               </button>
+              <p className='text-center'>Already have account? <Link href="/login"><a>Login</a></Link></p>
             </form>
+
           </div>
         </div >
       </section >

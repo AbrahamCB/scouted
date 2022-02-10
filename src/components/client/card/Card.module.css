@@ -3,9 +3,11 @@
   border: 1px solid #eeeeee;
   transition: all 0.3s ease;
 }
+
 .card__wrapper:hover {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
+
 .card__body {
   display: flex;
   flex-direction: column;
@@ -14,6 +16,7 @@
   padding-top: 4.4rem;
   padding-bottom: 19px;
 }
+
 .card__img {
   width: 100px;
   height: 100px;
@@ -21,8 +24,9 @@
   margin: auto;
   overflow: hidden;
 }
+
 .card__title {
-  font-size: 2.4rem;
+  font-size: 1.9rem;
   font-weight: 600;
   line-height: 31.92px;
   text-align: center;
@@ -30,10 +34,11 @@
   margin: 0;
   margin-top: 4.4rem;
 }
+
 .card__subtitle {
   margin: 0;
   color: var(--ligh-blue);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   line-height: 23.94px;
   font-weight: 600;
   text-transform: capitalize;
@@ -41,7 +46,7 @@
 
 .card__schedule {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   line-height: 21.28px;
   color: var(--font-color-1-50);
   font-weight: 400;
@@ -52,7 +57,7 @@
 .card__price span {
   display: block;
   font-weight: 600;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   line-height: 31.92px;
   color: var(--font-color-1);
   margin-top: 10px;
@@ -66,33 +71,49 @@
   text-transform: capitalize;
   color: var(--font-color-2);
 }
+
 .card__footer {
-  padding: 2.2rem 3.1rem;
+  padding: 2.2rem 2rem;
   border-top: 1px solid #eeeeee;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.card__location i {
-  color: var(--ligh-blue);
-  font-size: 1.2rem;
-  padding-right: 0.5rem;
+.card__location {
+  display: flex;
+  gap: 5px;
 }
 
 .card__location span {
   display: inline-block;
   font-weight: 600;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   line-height: 21.28px;
   color: var(--ligh-blue);
 }
+
 .card__footer button {
   border: 1px solid var(--font-color-1);
   background: var(--primary-color);
   border-radius: 8px;
   padding: 0.3rem 1.5rem;
   font-weight: 600;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   text-transform: capitalize;
+}
+
+.card__tag {
+  color: var(--ligh-blue);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  background: #edf2f7;
+  padding: 3px 5px;
+  border-radius: 6px;
+
+}
+
+.card__tag a:hover {
+  text-decoration: underline !important;
 }

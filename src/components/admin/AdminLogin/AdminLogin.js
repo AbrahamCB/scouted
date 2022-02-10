@@ -50,7 +50,7 @@ export default function AdminLogin() {
                         onSubmit={handleSubmit(onSubmit)}
                         className="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" noValidate="novalidate" id="kt_sign_in_form" action="#">
                         <div className="text-center mb-10">
-                            <h1 className="text-dark mb-3">Sign In to Talentdrop</h1>
+                            <h1 className="text-dark mb-3">Sign In to Scouted</h1>
                         </div>
 
                         <div className="fv-row mb-10 fv-plugins-icon-container">

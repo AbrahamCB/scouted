@@ -1,7 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../../../assets/logo.png';
 import styles from './Footer.module.css';
+
 
 export default function Footer() {
   return (
@@ -11,50 +10,53 @@ export default function Footer() {
           <div className="col-12 col-md-7">
             <div className={`${styles.footer__info} text-center`}>
               <div className={styles.footer__logo}>
-                <Image src={logo} alt="talentdrop" />
+
                 <Link href="/">
-                  <a className={styles.header__logo_link}>Talentdrop</a>
+
+                  <a className={styles.header__logo_link}>
+                    <img width="25" src="/images/Scouted.png" alt="scouted" />
+                  </a>
                 </Link>
               </div>
-              <p className={styles.footer__desc}>
+              {/* <p className={styles.footer__desc}>
                 There are many variations of passages of Lorem Ipsum available,
                 but themajority have suffered alteration in some form, by
                 injected humour
-              </p>
+              </p> */}
               <nav className={styles.footer__menu}>
                 <ul>
                   <li>
-                    <Link href="">
+                    <Link href="/about-us">
                       <a>our team</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/terms">
                       <a>terms of use</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/privacy-policy">
                       <a>privacy policy</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/for-referrers">
                       <a>for referrers</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/for-employers">
                       <a>for employers</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/pricing">
                       <a>pricing</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/contact-us">
                       <a>contact us</a>
                     </Link>
                   </li>
@@ -62,43 +64,45 @@ export default function Footer() {
               </nav>
               <div className={styles.footer__social}>
                 <div className={styles.footer__social_item}>
-                  <Link href="">
+                  <Link href="https://www.facebook.com/careerbuddyafrica">
                     <a>
                       <i className="fab fa-facebook-f"></i>
                     </a>
                   </Link>
                 </div>
                 <div className={styles.footer__social_item}>
-                  <Link href="">
+                  <Link href="https://twitter.com/careerbuddyhq">
                     <a>
                       <i className="fab fa-twitter"></i>
                     </a>
                   </Link>
                 </div>
                 <div className={styles.footer__social_item}>
-                  <Link href="">
+                  <Link href="https://www.instagram.com/careerbuddyhq/">
                     <a>
                       <i className="fab fa-instagram"></i>
                     </a>
                   </Link>
                 </div>
                 <div className={styles.footer__social_item}>
-                  <Link href="">
+                  <Link href="https://www.linkedin.com/company/thecareerbuddy/?viewAsMember=true">
                     <a>
                       <i className="fab fa-linkedin-in"></i>
                     </a>
                   </Link>
                 </div>
-                <div className={styles.footer__social_item}>
-                  <Link href="">
+                {/* <div className={styles.footer__social_item}>
+                  <Link href="/">
                     <a>
                       <i className="fab fa-google-plus-g"></i>
                     </a>
                   </Link>
-                </div>
+                </div> */}
               </div>
               <p className={styles.footer__copyright}>
-                2022 &copy; Crypto Market Cap & Pricing Data Provided By Nomics
+
+                Copyright &copy; {new Date().getFullYear()} Scouted Ltd. All rights reserved.
+
               </p>
             </div>
           </div>

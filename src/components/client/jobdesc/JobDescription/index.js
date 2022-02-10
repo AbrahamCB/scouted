@@ -3,7 +3,6 @@ import styles from '../JobDesc.module.css';
 import RelatedJob from './RelatedJob';
 const JobDescription = ({ jobDetail }) => {
     const { job_title, job_bounty, job_description, } = jobDetail
-    console.log()
     return (
         <>
             <div className="job__info">

@@ -7,8 +7,7 @@ const Location = () => {
     const { pathname } = router
     const [menuItem, setMenuItem] = useState(pathname === '/admin/countries' || pathname === '/admin/states' || pathname === '/admin/timezones' ? true : false)
 
-    console.log(menuItem)
-    console.log(pathname)
+
     return (
         <>
             <div data-kt-menu-trigger="click" className={`menu-item menu-accordion ${menuItem ? 'hover show' : ''}`}>

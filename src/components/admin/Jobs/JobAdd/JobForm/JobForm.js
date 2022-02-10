@@ -23,6 +23,12 @@ const JobForm = () => {
     const [handleFormData, setHandleFormData] = useState({})
     const [selectTags, setSelectTags] = useState([])
     const dispatch = useDispatch()
+    const [countries, setCountries] = useState([])
+    const [states, setStates] = useState([])
+    const [timezones, setTimezones] = useState([])
+
+
+
     useEffect(() => {
         dispatch(setTags())
         getData('/companies')
@@ -31,12 +37,54 @@ const JobForm = () => {
                     setCompanies(res)
                 }
             })
-    }, [])
+        allCountry();
+        allState();
+        allTimezone()
+    }, [handleFormData.country_id])
+
+    const handleForm = (e) => {
+
+        const name = e.target.name
+        const value = e.target.value
+        setHandleFormData(values => ({ ...values, [name]: value }))
+
+    }
+
+
+
+
+    const allCountry = () => {
+        getData('/countries')
+            .then(res => {
+                if (res) {
+                    setCountries(res)
+                }
+
+            })
+    }
+    const allState = () => {
+        getData(`/states/${handleFormData.country_id}`)
+            .then(res => {
+                if (res) {
+                    setStates(res)
+                }
+            })
+    }
+    const allTimezone = () => {
+        getData(`/timezones/${handleFormData.country_id}`)
+            .then(res => {
+                if (res) {
+                    setTimezones(res)
+                }
+            })
+    }
+
+
 
     const searchCompanies = (e) => {
         const searchWord = e.target.value
         if (searchWord) {
-            
+
             setTrigger(true)
         } else {
             setTrigger(false)
@@ -46,6 +94,7 @@ const JobForm = () => {
         })
         setFilterData(matched)
     }
+
     const addSearch = (data) => {
         setSearch(data)
         setTrigger(false)
@@ -53,34 +102,29 @@ const JobForm = () => {
     const handleSelectTags = (e) => {
         setSelectTags(e)
     }
-    console.log(selectTags)
-    const handleForm = (e) => {
-        const name = e.target.name
-        const value = e.target.value
-        setHandleFormData(values => ({ ...values, [name]: value }))
-    }
 
-    const handleSubmit =  (e) => {
+
+    const handleSubmit = (e) => {
         e.preventDefault()
         setDisable(true)
         const formData = new FormData()
-
         formData.append('company_id', search.id)
         formData.append('job_title', handleFormData.job_title)
         formData.append('job_salary', handleFormData.job_salary)
         formData.append('job_description', handleFormData.job_description)
         formData.append('job_vacancy', handleFormData.job_vacancy)
         formData.append('job_bounty', handleFormData.job_bounty)
-      
-  
+        formData.append('country_id', handleFormData.country_id)
+        formData.append('state_id', handleFormData.state_id)
+        formData.append('timezone_id', handleFormData.timezone_id)
+
+
         for (let i = 0; i < selectTags?.length; i++) {
             formData.append('tags[]', selectTags[i].value)
-                console.log(selectTags[i].value)
-          }
+        }
 
         postData('/job', formData, setDisable)
             .then(res => {
-                console.log(res)
                 if (res.success) {
                     toast.success(res.message)
                     setDisable(false)
@@ -88,7 +132,7 @@ const JobForm = () => {
             })
     }
 
-   const { tagList } = tags
+    const { tagList } = tags
     const tagOption = tagList?.map(tag => ({
         label: tag.tag_name,
         value: tag.id
@@ -106,24 +150,24 @@ const JobForm = () => {
             <form onSubmit={e => handleSubmit(e)}>
                 <div className="row">
                     <div className='row'>
-                        <div className="mb-3 col-12 col-sm-6 position-relative">
+                        <div className="mb-3 col-12 col-sm-6 col-md-6 position-relative">
                             <div className="row">
                                 <div className='col-6'>
-                                    <label>Company Name</label>
+                                    <label>Company Name <span className='text-danger'>*</span></label>
 
                                     <div>
                                         <span style={styles}>
                                             <i className="fas fa-search"></i>
                                         </span>
                                         <input
-
+                                            required
                                             onChange={searchCompanies}
                                             className="form-control"
                                             placeholder="Search here"
                                             style={{ paddingLeft: '30px' }}
                                         />
                                     </div>
-                                    {/* {errors.company_id && <span className="text-danger">Company name required</span>} */}
+
                                     {trigger &&
                                         <div className={`border rounded px-3 pt-3  position-absolute bg-white col-11 
                                 search-list-area ${stylesClass.search__list__area}`}>
@@ -143,24 +187,28 @@ const JobForm = () => {
 
                                         </span>
                                         <input
+
+                                            required
                                             disabled
                                             className="form-control"
                                             placeholder="Name here"
                                             defaultValue={search.company_name}
                                         />
+
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        <div className="mb-3 col-12 col-sm-6">
-                            <label>Job Title</label>
+                        <div className="mb-3 col-12 col-sm-6 col-md-6">
+                            <label>Job Title <span className='text-danger'>*</span></label>
 
                             <div>
                                 <span style={styles}>
                                     <i className="fas fa-pen"></i>
                                 </span>
                                 <input
+                                    required
                                     name="job_title"
                                     onChange={handleForm}
                                     className="form-control"
@@ -168,18 +216,18 @@ const JobForm = () => {
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {/* {errors.job_title && <span className="text-danger">Job title required</span>} */}
 
                         </div>
                         <div className="col-12 col-sm-6">
                             <div className="mb-3 col-12 col-sm-12">
-                                <label>Job Salary</label>
+                                <label>Job Salary <span className='text-danger'>*</span></label>
                                 <div>
                                     <span style={styles}>
                                         <i className="fas fa-money-check"></i>
                                     </span>
                                     <input
-                                    name="job_salary"
+                                        required
+                                        name="job_salary"
                                         onChange={handleForm}
                                         type="number"
                                         className="form-control"
@@ -187,17 +235,17 @@ const JobForm = () => {
                                         style={{ paddingLeft: '30px' }}
                                     />
                                 </div>
-                                {/* {errors.job_salary && <span className="text-danger">Job Salary required</span>} */}
 
                             </div>
                             <div className="mb-3 col-12 col-sm-12">
-                                <label>Job Vacancy</label>
+                                <label>Job Vacancy <span className='text-danger'>*</span></label>
                                 <div>
                                     <span style={styles}>
                                         <i className="fas fa-users"></i>
                                     </span>
                                     <input
-                                    name="job_vacancy"
+                                        required
+                                        name="job_vacancy"
                                         onChange={handleForm}
                                         type="number"
                                         className="form-control"
@@ -205,16 +253,16 @@ const JobForm = () => {
                                         style={{ paddingLeft: '30px' }}
                                     />
                                 </div>
-                                {/* {errors.job_vacancy && <span className="text-danger">Job vacancy required</span>} */}
 
                             </div>
                             <div className="mb-3 col-12 col-sm-12">
-                                <label>Job Bounty</label>
+                                <label>Job Bounty <span className='text-danger'>*</span></label>
                                 <div>
                                     <span style={styles}>
                                         <i className="fas fa-hand-holding-usd"></i>
                                     </span>
                                     <input
+                                        required
                                         onChange={handleForm}
                                         name="job_bounty"
                                         className="form-control"
@@ -222,12 +270,11 @@ const JobForm = () => {
                                         style={{ paddingLeft: '30px' }}
                                     />
                                 </div>
-                                {/* {errors.job_bounty && <span className="text-danger">Job bounty is required</span>} */}
 
                             </div>
                         </div>
                         <div className="mb-3 col-12 col-sm-6 position-relative" >
-                            <label>Job Description</label>
+                            <label>Job Description <span className='text-danger'>*</span></label>
                             <textarea
                                 // minLength='100'
                                 onChange={handleForm}
@@ -242,16 +289,15 @@ const JobForm = () => {
 
                                 <span className={`${handleFormData.job_description?.length === 250 && 'text-danger'}`}>{handleFormData.job_description?.length || 0}/250</span>
                             </p>
-                            {/* {errors.job_description && <span className="text-danger">Description is required</span>} */}
 
                         </div>
                         <div className="mb-3  col-12 col-sm-6">
-                            <label>Select Tags</label>
+                            <label>Select Tags <span className='text-danger'>*</span></label>
                             <div>
 
                                 <Select
                                     onChange={handleSelectTags}
-                                   
+
                                     isMulti
                                     name="colors"
                                     options={tagOption}
@@ -261,7 +307,81 @@ const JobForm = () => {
                             </div>
                             {/* {errors.job_vacancy && <span className="text-danger">Job vacancy required</span>} */}
                         </div>
+                        <div className='"mb-3  col-12 col-sm-6'>
+                            <label>Country <span className='text-danger'>*</span></label>
 
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-flag"></i>
+                                </span>
+                                <select
+
+                                    onChange={handleForm}
+                                    name='country_id'
+                                    type='select'
+                                    className="form-control"
+
+                                    style={{ paddingLeft: '30px' }}
+                                >
+                                    <option defaultValue >Select Country</option>
+                                    {
+                                        countries?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div className='mb-3 col-12 col-sm-6'>
+                            <label>State <span className='text-danger'>*</span></label>
+
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-map-marker"></i>
+                                </span>
+                                <select
+                                    disabled={states.length > 0 ? false : true}
+                                    required
+                                    name='state_id'
+                                    type='select'
+                                    className="form-control"
+                                    onChange={handleForm}
+                                    style={{ paddingLeft: '30px' }}
+                                >
+                                    <option defaultValue>Select State</option>
+                                    {
+                                        states?.map((item, index) => <option key={index} value={item.id}>{item.state_name}</option>)
+                                    }
+
+                                </select>
+                            </div>
+
+                        </div>
+                        <div className='mb-3 col-12 col-sm-6'>
+
+                            <label>Time Zone <span className='text-danger'>*</span></label>
+
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-globe"></i>
+                                </span>
+                                <select
+                                    disabled={timezones.length > 0 ? false : true}
+                                    name='timezone_id'
+                                    type='select'
+                                    className="form-control"
+                                    onChange={handleForm}
+                                    style={{ paddingLeft: '30px' }}
+                                >
+                                    <option defaultValue >Select time zone</option>
+                                    {
+                                        timezones?.map((item, index) => <option key={index} value={item.id}>{item._zone_name_}</option>)
+                                    }
+
+                                </select>
+                            </div>
+
+                        </div>
 
                     </div>
 

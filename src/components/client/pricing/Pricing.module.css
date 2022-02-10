@@ -1,0 +1,44 @@
+.toggle__container {
+    max-width: 1190px;
+    margin-top: 4rem;
+    margin-bottom: 10rem;
+}
+
+.pricing__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1A202C;
+    text-align: center;
+}
+
+.card__body {
+    border: 1px solid lightgray;
+    border-radius: 7px;
+    padding: 30px;
+}
+
+.card__body p {
+    font-size: 16px;
+}
+
+.card__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.pricing__area {
+    width: 850px;
+}
+
+@media screen and (max-width: 576px) {
+    .pricing__area {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .pricing__area {
+        width: 100%;
+    }
+}

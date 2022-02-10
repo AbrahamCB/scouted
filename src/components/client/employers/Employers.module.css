@@ -1,0 +1,38 @@
+.toggle__container {
+    max-width: 1190px;
+    margin-top: 4rem;
+    margin-bottom: 10rem;
+}
+
+.employer__area {
+    width: 850px;
+}
+
+.employer__area p {
+    font-size: 17px;
+}
+
+.employer__area ol li {
+    font-size: 17px;
+    line-height: 35px;
+}
+
+.employer__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1A202C;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 576px) {
+    .employer__area {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .employer__area {
+        width: 100%;
+    }
+}

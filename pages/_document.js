@@ -15,12 +15,12 @@ class MyDocument extends Document {
             rel="icon"
             href="/assets/images/brand/favicon.ico"
             type="image/x-icon"
-          />
+          /> */}
           <link
             rel="shortcut icon"
             type="image/x-icon"
-            href="/assets/images/brand/favicon.ico"
-          /> */}
+            href="/images/logo.png"
+          />
           {/* ==================== google font ================  */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link

@@ -1,0 +1,23 @@
+.toggle__container {
+    max-width: 1190px;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.tag_title {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 50px;
+
+}
+
+.tag_text {
+    font-size: 16px;
+    line-height: 40px;
+}
+
+.tag_text span {
+    background-color: #edf2f7;
+    padding: 0px 5px;
+    border-radius: 5px;
+}

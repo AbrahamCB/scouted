@@ -2,51 +2,49 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogout } from '../../../../store/users/actions';
 import avatar from '../../../assets/avatar.png';
 import styles from './Header.module.css';
-
 const Header = () => {
   const [start, setStart] = useState(false)
   const [status, setStatus] = useState(false)
-  const router = useRouter()
+  const [smallDevice, setSmallDevice] = useState(false)
+  const router = useRouter();
+  const { users } = useSelector(state => state)
+  const dispatch = useDispatch()
+
+
   const handleDashboard = () => {
-    router.push('/login')
+    if (!users?.token)
+      router.push('/login')
   }
 
-  // useEffect(() => {
-  //   const handleWindowClick = () => {
-  //     setStatus(false)
-  //     setStart(false)
-  //   }
-  //   if (status || start) {
-  //     window.addEventListener('click', handleWindowClick);
-  //   } else {
-  //     window.removeEventListener('click', handleWindowClick);
-  //   }
-  //   return () => window.removeEventListener('click', handleWindowClick);
-  // }, [start, setStart, status, setStatus])
-
+  const handleLogOut = () => {
+    dispatch(userLogout())
+    router.push('/')
+  }
 
   return (
     <header className={`${styles.header} navbar-expand-lg`}>
+
       <div className="container">
         <div className="row align-items-center">
           <div className="col-4">
             <div className={styles.header__logo}>
               <Link href="/">
-                <a className={styles.header__logo_link}>Talentdrop</a>
+                <a >
+                  <img src="/images/Scouted.png" className='' alt="logo" />
+                </a>
               </Link>
             </div>
           </div>
           <nav className="col-4">
             <ul className={styles.header__menu}>
               <li className={styles.header__menu_li}>
-                <Link href="#">
+                <Link href="/">
                   <a
-                    onClick={() => {
-                      setStart(!start)
-                      setStatus(false)
-                    }}
+                    id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                   >
                     Start Here
                     {start ?
@@ -61,20 +59,16 @@ const Header = () => {
                     }
                   </a>
                 </Link>
-                <ul className={`${start ? 'show' : ''} dropdown-menu`}>
+                <ul className="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
                   <li className={styles.dropdown__title}>How it works</li>
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                  <li><a className="dropdown-item" href="#">Something else here</a></li>
+                  <li><a className="dropdown-item" href="#">Referring of Scouted</a></li>
+                  <li><a className="dropdown-item" href="#">Hiring of Scouted</a></li>
                 </ul>
               </li>
 
               <li className={`${styles.header__menu_li} ''`}>
-                <Link href="#">
-                  <a onClick={() => {
-                    setStatus(!status)
-                    setStart(false)
-                  }}>
+                <Link href="/">
+                  <a id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Status
                     {status ?
                       <span>
@@ -88,10 +82,14 @@ const Header = () => {
                     }
                   </a>
                 </Link>
-                <ul className={`${status ? 'show' : ''} dropdown-menu`}>
+                <ul className="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
 
                   <li className={styles.dropdown__title}>Referrer</li>
-                  <li><a className="dropdown-item" href="#">Dashboard</a></li>
+                  <li>
+                    <Link href="/user/dashboard">
+                      <a className="dropdown-item">Dashboard</a>
+                    </Link>
+                  </li>
 
                 </ul>
 
@@ -100,19 +98,47 @@ const Header = () => {
           </nav>
           <div className="col-4">
             <div className={styles.user}>
-              <button className={`${styles.user__cta_button} primary__button`}>
+              <button onClick={() => router.push('/r/scouted/general-referral/refer')} className={`${styles.user__cta_button} primary__button`}>
                 General Referral
               </button>
               <div className={styles.user__avatar}>
-                <div onClick={handleDashboard} className={styles.user__avatar_img}>
+                <div onClick={handleDashboard} className={styles.user__avatar_img}
+                  id={users.token && "navbarDarkDropdownMenuLink"}
+                  role={users.token && "button"}
+                  data-bs-toggle={users.token && "dropdown"}
+                  aria-expanded={users.token && "false"} >
                   <Image src={avatar} alt="img/png" />
                 </div>
+                {users.token &&
+                  <ul className="dropdown-menu mt-5" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li><a className="dropdown-item" href="#">Proflile</a></li>
+                    <li className={styles.user__logout}>
+                      <button className='dropdown-item btn' onClick={handleLogOut}>Logout</button>
+                    </li>
+                  </ul>
+                }
               </div>
               <div className={styles.mobile__menu}>
-                <i className="fas fa-bars"></i>
+                <i onClick={() => setSmallDevice(!smallDevice)} className="fas fa-bars"></i>
               </div>
             </div>
           </div>
+
+          {/* small devices nav */}
+
+          {smallDevice && <nav className={styles.mobile__nav}>
+            <ul className={styles.nav__ul} >
+              <li className={styles.nav__title}>How it works</li>
+              <li><a className="" href="#">Referring of Scouted</a></li>
+              <li><a className="" href="#">Hiring of Scouted</a></li>
+            </ul>
+            <ul className={styles.nav__ul} >
+              <li className={styles.nav__title}>How it works</li>
+              <li><a className="" href="#">Referring of Scouted</a></li>
+              <li><a className="" href="#">Hiring of Scouted</a></li>
+            </ul>
+          </nav>}
+
         </div>
       </div>
     </header >

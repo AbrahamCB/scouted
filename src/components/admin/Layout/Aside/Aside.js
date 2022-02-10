@@ -3,6 +3,7 @@ import Company from './Company/Company';
 import Jobs from './Jobs/Jobs';
 import Location from './Location/Location';
 import Logo from './Logo/Logo';
+import Message from './Message/Message';
 import Tag from './Tag/Tag';
 
 
@@ -35,10 +36,11 @@ const Aside = () => {
                                 <span className="menu-section text-muted text-uppercase fs-8">Crafted</span>
                             </div>
                         </div>
-                        <Company></Company>
-                        <Jobs></Jobs>
-                        <Tag></Tag>
+                        <Company />
+                        <Jobs />
+                        <Tag />
                         <Location />
+                        <Message />
                     </div>
                 </div>
             </div>

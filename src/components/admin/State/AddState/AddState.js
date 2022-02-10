@@ -23,7 +23,6 @@ const AddState = () => {
     }, [])
 
     const onSubmit = async data => {
-        console.log(data);
         setDisable(true)
         if (data) {
             authPost('/state', data, admins.token)

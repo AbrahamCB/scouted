@@ -21,11 +21,11 @@ const Header = () => {
                     </div>
                     <div className="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
                         <a href="index.html" className="d-lg-none">
-                            <img alt="Logo" src="assets/media/logos/logo-1-dark.svg" className="h-15px" />
+                            <img alt="Logo" src="/images/Scouted.png" className="h-15px" />
                         </a>
                     </div>
                     <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
-                        <div className="d-flex align-items-stretch" id="kt_header_nav">
+                        <div className="d-flex align-items-stretch " id="kt_header_nav" >
                             <div className="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: , lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-place="true" data-kt-place-mode="prepend" data-kt-place-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
                                 {/* <MenuItem /> */}
                             </div>

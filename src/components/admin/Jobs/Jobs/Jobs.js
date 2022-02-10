@@ -1,88 +1,72 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ScaleLoader } from 'react-spinners';
 import { setJobs } from '../../../../../store/jobs/actions';
-import { modalToggle } from '../../../../../store/settings/actions';
 import Layout from '../../Layout/Layout';
-import UpdateJobs from './../UpdateJobs/UpdateJobs';
+import JobList from './JobList';
 
 const Jobs = () => {
-    const [trigger, setTrigger] = useState(false)
+    const [loading, setLoading] = useState(true);
+    const [color, setColor] = useState("#36d7b7");
     const dispatch = useDispatch()
     const { jobs, settings } = useSelector(state => state)
-    const [currentData, setCurrentData] = useState({ isUpdate: false })
 
     useEffect(() => {
         dispatch(setJobs())
     }, [])
 
-    const { jobList } = jobs;
-
-
-    const currentUpdate = (data) => {
-        setTrigger(true)
-        // setTrigger(false)
-        dispatch(modalToggle(settings.modal))
-        // const updateData = { ...currentData }
-        // updateData.isUpdate = true;
-        // updateData.tag_name = data.tag_name
-        // updateData.id = data.id
-        // setCurrentData(updateData)
-    }
-
+    const { jobList, isLoading } = jobs;
     return (
         <Layout>
-            {/* {trigger && <AddTag></AddTag>} */}
-            {trigger && <UpdateJobs setCurrentData={setCurrentData} currentData={currentData} />}
+
             <div className="bg-white container p-5">
-                <div className="d-flex justify-content-between py-5 ">
-                    <h1 className="mt-3">All Jobs</h1>
-                    <Link href="/admin/jobs/add-job">
-                        <a>
-                            <button onClick={() => {
-
-                            }}
-                                className="btn btn-primary">
-                                Add Job
-                            </button>
-                        </a>
-                    </Link>
-                </div>
-                <div className="t_table_content-wrapper">
-                    <div className="table-responsive">
-                        <table className="table">
-                            <thead className="thead bg-light">
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Job Name</th>
-                                    <th scope="col">Company Name</th>
-                                    <th className="text-center">Action</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    jobList?.map((item, index) => {
-                                        return (
-                                            <tr key={index}>
-                                                <th scope="row" className="row-scope-line">{item.id}</th>
-                                                <td>{item.job_title}</td>
-                                                <td>{item.company.company_name}</td>
-                                                <td className="text-center">
-                                                    <i onClick={() => currentUpdate(item)}
-
-                                                        style={{ cursor: 'pointer' }} className="fas fa-edit"></i>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-
-                            </tbody>
-                        </table>
+                {isLoading && <div className='d-flex justify-content-center'>
+                    <ScaleLoader color={color} loading={loading} size={12} />
+                </div>}
+                {!isLoading && jobList?.length > 0 && <div>
+                    <div className="d-flex justify-content-between py-5 ">
+                        <h1 className="mt-3">Jobs: {jobList.length}</h1>
+                        <Link href="/admin/add-company">
+                            <a>
+                                <button onClick={() => {
+                                }}
+                                    className="btn btn-primary">
+                                    Add Jobs
+                                </button>
+                            </a>
+                        </Link>
                     </div>
-                </div>
+                    <div id="kt_referrals_1" className="card-body p-0 tab-pane fade show active" role="tabpanel">
+                        <div className="table-responsive">
 
+                            <table className="table table-flush align-middle table-row-bordered table-row-solid gy-4 gs-9">
+                                <thead className="border-gray-200 fs-5 fw-bold bg-lighten">
+                                    <tr>
+                                        <th className="min-w-175px ps-9"></th>
+                                        <th className="min-w-150px px-0">Title</th>
+                                        <th className="min-w-350px">Company</th>
+                                        <th colSpan={2} className="min-w-125px text-end">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="fs-6 fw-bold text-gray-600">
+
+                                    {jobList?.map((job, i) => <JobList key={i} job={job} />)}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>}
+                {!isLoading && jobList.length === 0 && <div className="d-flex justify-content-center">
+                    <div className='text-center'>
+                        <Link href="/admin/add-company">
+                            <a>Add Job</a>
+                        </Link>
+                        <h1>Empty Job</h1>
+
+                    </div>
+                </div>}
             </div>
         </Layout >
     );

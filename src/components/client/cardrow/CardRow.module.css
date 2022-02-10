@@ -1,11 +1,11 @@
 .card__row_wrapper {
   position: relative;
-  padding: 30px;
+  padding: 25px 30px;
   z-index: 0;
   border-radius: 8px;
   border: 1px solid #eeeeee;
   transition: all 0.3s ease;
-  margin: 15px 0px;
+  margin: 17px 0px;
 }
 
 .card__row_wrapper:hover {
@@ -28,7 +28,7 @@
 }
 
 .card__title {
-  font-size: 2.4rem;
+  font-size: 1.9rem;
   font-weight: 600;
   line-height: 31.92px;
   color: var(--font-color-1);
@@ -38,7 +38,7 @@
 
 .card__schedule {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   line-height: 21.28px;
   color: var(--font-color-1-50);
   font-weight: 400;
@@ -57,7 +57,7 @@
 .card__subtitle {
   margin: 0;
   color: var(--ligh-blue);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   line-height: 23.94px;
   font-weight: 600;
   text-transform: capitalize;
@@ -65,14 +65,32 @@
 
 .card__location {
   color: var(--ligh-blue);
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: 600;
   margin: 0;
+  background: #edf2f7;
+  padding: 3px 5px;
+  border-radius: 6px;
+}
+
+.card__tag {
+  color: var(--ligh-blue);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  background: #edf2f7;
+  padding: 3px 5px;
+  border-radius: 6px;
+
+}
+
+.card__tag a:hover {
+  text-decoration: underline !important;
 }
 
 .card__condition {
   font-weight: 600;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   line-height: 21.28px;
   color: var(--font-color-2);
   margin: 0;
@@ -93,7 +111,7 @@
   border-radius: 8px;
   padding: 0.3rem 1.5rem;
   font-weight: 600;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   text-transform: capitalize;
   transition: all 0.3s ease;
 }
