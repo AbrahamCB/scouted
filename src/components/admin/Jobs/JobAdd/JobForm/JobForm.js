@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { BeatLoader } from 'react-spinners';
 import 'suneditor/dist/css/suneditor.min.css';
+import { setCountries } from '../../../../../../store/countries/actions';
 import { setTags } from '../../../../../../store/tags/actions';
 import { getData, postData } from './../../../../../../__lib__/helpers/HttpService';
 import stylesClass from './JobForm.module.css';
@@ -20,7 +21,7 @@ const JobForm = () => {
     const [disable, setDisable] = useState(false)
     const [loading, setLoading] = useState(true);
     const [color, setColor] = useState("#ffffff");
-    const { admins, tags } = useSelector(state => state)
+    const { admins, countries, tags } = useSelector(state => state)
     const [companies, setCompanies] = useState([])
     const [filterData, setFilterData] = useState([])
     const [search, setSearch] = useState({})
@@ -28,24 +29,33 @@ const JobForm = () => {
     const [handleFormData, setHandleFormData] = useState({})
     const [selectTags, setSelectTags] = useState([])
     const dispatch = useDispatch()
-    const [countries, setCountries] = useState([])
     const [states, setStates] = useState([])
+    const { countryList, isLoading } = countries;
     const [timezones, setTimezones] = useState([])
-    console.log(details)
 
 
     useEffect(() => {
+        if (countryList.length > 0) {
+            const zones = countryList.find((country, i) => country.id == handleFormData.country_id && country)
+            setTimezones(JSON.parse(zones?.timezones))
+        }
         dispatch(setTags())
+        dispatch(setCountries())
         getData('/companies')
             .then(res => {
                 if (res) {
                     setCompanies(res)
                 }
             })
-        allCountry();
-        allState();
-        allTimezone()
+
+        getData(`/states/${handleFormData.country_id}`)
+            .then(res => {
+                if (res) {
+                    setStates(res)
+                }
+            })
     }, [handleFormData.country_id])
+
 
     const handleForm = (e) => {
 
@@ -58,31 +68,31 @@ const JobForm = () => {
 
 
 
-    const allCountry = () => {
-        getData('/countries')
-            .then(res => {
-                if (res) {
-                    setCountries(res)
-                }
+    // const allCountry = () => {
+    //     getData('/countries')
+    //         .then(res => {
+    //             if (res) {
+    //                 setCountries(res)
+    //             }
 
-            })
-    }
-    const allState = () => {
-        getData(`/states/${handleFormData.country_id}`)
-            .then(res => {
-                if (res) {
-                    setStates(res)
-                }
-            })
-    }
-    const allTimezone = () => {
-        getData(`/timezones/${handleFormData.country_id}`)
-            .then(res => {
-                if (res) {
-                    setTimezones(res)
-                }
-            })
-    }
+    //         })
+    // }
+    // const allState = () => {
+    //     getData(`/states/${handleFormData.country_id}`)
+    //         .then(res => {
+    //             if (res) {
+    //                 setStates(res)
+    //             }
+    //         })
+    // }
+    // const allTimezone = () => {
+    //     getData(`/timezones/${handleFormData.country_id}`)
+    //         .then(res => {
+    //             if (res) {
+    //                 setTimezones(res)
+    //             }
+    //         })
+    // }
 
 
 
@@ -383,7 +393,7 @@ const JobForm = () => {
                         </div>
 
                     </div>
-                    <div className='"mb-3  col-12 col-sm-6'>
+                    <div className='mb-3  col-12 col-sm-6'>
                         <label>Job type <span className='text-danger'>*</span></label>
 
                         <div>
@@ -406,7 +416,7 @@ const JobForm = () => {
 
                         </div>
                     </div>
-                    <div className='"mb-3  col-12 col-sm-6'>
+                    <div className='mb-3  col-12 col-sm-6'>
                         <label>Country <span className='text-danger'>*</span></label>
 
                         <div>
@@ -424,7 +434,7 @@ const JobForm = () => {
                             >
                                 <option defaultValue >Select Country</option>
                                 {
-                                    countries?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
+                                    countryList?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
                                 }
                             </select>
 
@@ -465,7 +475,7 @@ const JobForm = () => {
                                 <i className="fas fa-globe"></i>
                             </span>
                             <select
-                                disabled={timezones.length > 0 ? false : true}
+                                // disabled={timezones.length > 0 ? false : true}
                                 name='timezone_id'
                                 type='select'
                                 className="form-control"
@@ -474,7 +484,7 @@ const JobForm = () => {
                             >
                                 <option defaultValue >Select time zone</option>
                                 {
-                                    timezones?.map((item, index) => <option key={index} value={item.id}>{item._zone_name_}</option>)
+                                    timezones?.map((item, index) => <option key={index} value={item.id}>{item.zoneName}</option>)
                                 }
 
                             </select>

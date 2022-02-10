@@ -3,9 +3,10 @@ import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BeatLoader } from 'react-spinners';
 import 'suneditor/dist/css/suneditor.min.css';
+import { setCountries } from '../../../../../../store/countries/actions';
 import { getData, postData } from './../../../../../../__lib__/helpers/HttpService';
 
 const SunEditor = dynamic(() => import("suneditor-react"), {
@@ -16,48 +17,29 @@ const CompanyForm = () => {
     const [disable, setDisable] = useState(false)
     const [loading, setLoading] = useState(true);
     const [color, setColor] = useState("#ffffff");
-    const [countries, setCountries] = useState([])
     const [states, setStates] = useState([])
     const [timezones, setTimezones] = useState([])
-    const { admins } = useSelector(state => state)
+    const { admins, countries } = useSelector(state => state)
+    const dispatch = useDispatch()
     const { register, watch, handleSubmit, formState: { errors }, reset } = useForm()
-    console.log(details)
 
+    const { countryList, isLoading } = countries
     useEffect(() => {
-        allCountry()
-        if (watch('country_id')) {
-            allState()
-            allTimezone()
+        if (countryList.length > 0) {
+            const zones = countryList.find((country, i) => country.id == watch('country_id') && country)
+            setTimezones(JSON.parse(zones?.timezones))
         }
 
-
-    }, [watch('country_id')])
-
-    const allCountry = () => {
-        getData('/countries')
-            .then(res => {
-                if (res) {
-                    setCountries(res)
-                }
-
-            })
-    }
-    const allState = () => {
+        dispatch(setCountries())
         getData(`/states/${watch('country_id')}`)
+
             .then(res => {
                 if (res) {
                     setStates(res)
                 }
             })
-    }
-    const allTimezone = () => {
-        getData(`/timezones/${watch('country_id')}`)
-            .then(res => {
-                if (res) {
-                    setTimezones(res)
-                }
-            })
-    }
+    }, [watch('country_id')])
+
     const onSubmit = async data => {
 
         setDisable(true)
@@ -259,7 +241,7 @@ const CompanyForm = () => {
                             >
                                 <option defaultValue >Select Country</option>
                                 {
-                                    countries?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
+                                    countryList?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
                                 }
                             </select>
 
@@ -319,7 +301,7 @@ const CompanyForm = () => {
                             >
                                 <option defaultValue >Select time zone</option>
                                 {
-                                    timezones?.map((item, index) => <option key={index} value={item.id}>{item._zone_name_}</option>)
+                                    timezones?.map((item, index) => <option key={index} value={item.id}>{item.zoneName}</option>)
                                 }
 
                             </select>
