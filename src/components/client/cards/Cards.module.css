@@ -1,0 +1,62 @@
+.toggle__container {
+  max-width: 1190px;
+}
+
+.card__row {
+  margin-top: 9px;
+}
+
+.card__view_toggler {
+  border-radius: 5px;
+  width: 100px;
+  height: 50px;
+  border: 1px solid #eeeeee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__view_toggler input[type='checkbox'] {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* .card__view_toggler input:checked[type='checkbox'] {
+  background: var(--ligh-blue);
+} */
+
+.toggler__list,
+.toggler__grid {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.toggler__grid i, .toggler__list i {
+
+  font-size: 2.5rem;
+}
+
+.active {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--light-green);
+  transition: 0.4s;
+
+}
+
+.active i {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+}

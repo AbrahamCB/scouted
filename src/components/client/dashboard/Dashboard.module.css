@@ -1,0 +1,19 @@
+.dashboard__nav {
+    /* max-width: 900px; */
+    margin: auto;
+    padding-top: 10px;
+    border-bottom: 1px solid #EDF2F7;
+    margin-bottom: 10px;
+}
+
+.dashboard__nav ul {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+.dashboard__nav ul li {
+    cursor: pointer;
+}

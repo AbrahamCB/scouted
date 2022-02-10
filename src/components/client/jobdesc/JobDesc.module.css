@@ -1,0 +1,245 @@
+.job__description {
+  padding: 3rem 0;
+}
+
+.job__title {
+  margin-bottom: 7rem;
+}
+
+.title {
+  font-size: 3.6rem;
+  line-height: 47.88px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--font-color-1);
+}
+
+.details p {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin: 0;
+}
+
+.schedule {
+  border-radius: 50px;
+  background: var(--light-green);
+  border: 1px solid var(--primary-color);
+  padding: 1rem 2rem;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  text-transform: capitalize;
+  display: block;
+}
+
+.rate {
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 23.94px;
+  color: var(--font-color-1);
+  display: block;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.location i {
+  color: var(--ligh-blue);
+  font-size: 1.2rem;
+}
+
+.location {
+  font-weight: 600;
+  color: var(--ligh-blue);
+  font-size: 1.6rem;
+  line-height: 21.28px;
+}
+
+.description__title,
+.key__title,
+.skill__title {
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 2.6px;
+  color: var(--font-color-1);
+  margin-bottom: 4rem;
+}
+
+.job__descriptions,
+.key__responsibilites {
+  margin-bottom: 7rem;
+}
+
+.job__descriptions p {
+  font-weight: 400;
+  font-size: 1.7rem;
+  line-height: 2.6rem;
+  color: #8f97a8;
+}
+
+.key__responsibilites ul li,
+.skill__experience ul li {
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 26px;
+  color: #8f97a8;
+}
+
+.skill__experience {
+  margin-bottom: 2rem;
+}
+
+.related__job_title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 39.9px;
+  color: var(--font-color-1);
+  margin-bottom: 1rem;
+}
+
+.job__detail_information {
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.08);
+  padding: 3rem 4rem;
+}
+
+.information__title {
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 26px;
+  color: var(--font-color-1);
+  margin-bottom: 2rem;
+}
+
+.information__box {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  height: 100px;
+}
+
+.information__box i {
+  color: var(--light-green);
+}
+
+.box__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.info__title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: var(--font-color-1);
+}
+
+.box__info p {
+  margin: 0;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #8f97a8;
+}
+
+.apply__job {
+  margin: 3rem 0;
+}
+
+.apply__job button {
+  border-radius: 5px;
+  background: var(--light-green);
+  padding: 1rem 1rem;
+  width: 100%;
+  border: none;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.about__company {
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.08);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.company__subtitle {
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 2.6rem;
+  color: var(--font-color-1);
+  text-transform: capitalize;
+}
+
+.company__title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.company__title img {
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50% !important;
+  object-fit: contain !important;
+}
+
+.company__title span {
+  display: block;
+  font-weight: 700;
+  color: var(--font-color-2);
+  font-size: 2.4rem;
+  line-height: 31.92px;
+  margin: 0;
+}
+
+.company__link {
+  color: var(--light-green);
+  font-size: 1.6rem;
+  line-height: 21.28px;
+  font-weight: 600;
+}
+
+.contact__form {
+  padding: 3rem;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.08);
+  margin-top: 3rem;
+}
+
+.form__title {
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 2.6rem;
+  color: var(--font-color-1);
+  margin-bottom: 3rem;
+}
+
+.contact__form form>button {
+  width: 100%;
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+  background: var(--light-green);
+  color: var(--primary-color);
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 1.4rem;
+}
+
+@media screen and (min-width: 992px) {
+  .job__description {
+    padding: 6rem 0;
+  }
+
+  .apply__job button {
+    padding: 2rem 1rem;
+  }
+}

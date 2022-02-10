@@ -1,0 +1,71 @@
+.toggle__container {
+    max-width: 1190px;
+    margin-top: 4rem;
+    margin-bottom: 10rem;
+}
+
+.refer_title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 50px;
+
+}
+
+.refer_text {
+    line-height: 15px;
+    font-size: 15px;
+    margin-bottom: 7px;
+
+}
+
+.refer_area {
+    width: 761px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+}
+
+.refer_area h2 {
+    font-size: 1.5rem;
+}
+
+.refer_form {
+    border: 1px solid #e2e8f0;
+    padding: 30px;
+}
+
+.refer_form_title {
+    border-bottom: 1px solid #e2e8f0;
+    text-align: center;
+    padding-bottom: 8px;
+    color: #6b6f76;
+    margin-bottom: 25px;
+}
+
+.refer_form input {
+    outline: gainsboro;
+    border: 1px solid #e2e8f0;
+}
+
+.refer_form label {
+    font-size: 1.5rem;
+}
+
+.form_button {
+    background: #EDF2F7;
+    padding: 6px 13px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+}
+
+.refer_form p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.form_candidate, .form_tell {
+    margin-top: 60px;
+}
