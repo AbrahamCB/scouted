@@ -4,7 +4,7 @@ import ample from '../../../../assets/ample1.png';
 import styles from '../JobDesc.module.css';
 import ContactUs from './ContactUs';
 const JobInformation = ({ jobDetail }) => {
-    const { job_salary, company } = jobDetail
+    const { job_salary, company, country, state, job_title } = jobDetail
     const { company_name, company_slug } = company
     console.log(company)
     return (
@@ -31,14 +31,14 @@ const JobInformation = ({ jobDetail }) => {
                     <i className="fas fa-map-marker-alt"></i>
                     <div className={styles.box__info}>
                         <h4 className={styles.info__title}>Location</h4>
-                        <p>San Francisco, USA</p>
+                        <p>{state?.state_name}, <span>{country?.country_code}</span></p>
                     </div>
                 </div>
                 <div className={styles.information__box}>
                     <i className="far fa-user-circle"></i>
                     <div className={styles.box__info}>
                         <h4 className={styles.info__title}>Job Role</h4>
-                        <p>Lead Product Designer</p>
+                        <p>{job_title}</p>
                     </div>
                 </div>
                 <div className={styles.information__box}>

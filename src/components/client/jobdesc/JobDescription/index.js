@@ -1,3 +1,4 @@
+import parse from 'html-react-parser';
 import React from 'react';
 import styles from '../JobDesc.module.css';
 import RelatedJob from './RelatedJob';
@@ -23,11 +24,9 @@ const JobDescription = ({ jobDetail }) => {
                 </div>
                 <div className={styles.job__descriptions}>
                     <h3 className={styles.description__title}>Job Description</h3>
-                    <p>
-                        {job_description}
-                    </p>
+                    {parse(job_description)}
                 </div>
-                <div className={styles.key__responsibilites}>
+                {/* <div className={styles.key__responsibilites}>
                     <h3 className={styles.key__title}>Key Responsibilites</h3>
                     <ul>
                         <li>
@@ -76,7 +75,7 @@ const JobDescription = ({ jobDetail }) => {
                             discovery to developer handoff and user acceptance.
                         </li>
                     </ul>
-                </div>
+                </div> */}
                 <RelatedJob />
             </div>
         </>
