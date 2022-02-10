@@ -6,7 +6,7 @@ import ContactUs from './ContactUs';
 const JobInformation = ({ jobDetail }) => {
     const { job_salary, company } = jobDetail
     const { company_name, company_slug } = company
-
+    console.log(company)
     return (
         <aside className=" py-3 py-md-0">
             <div className={styles.job__detail_information}>

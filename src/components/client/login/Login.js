@@ -44,7 +44,7 @@ export default function Login() {
           <h3 className={styles.form__title}>Login Now</h3>
           <form onSubmit={handleSubmit(onSubmit)} action="" className={styles.login__form}>
             <input {...register("email", { required: true, pattern: /\S+@\S+\.\S+/ })} type="text" placeholder="Email" />
-            
+
             {errors.email?.type === 'required' && <span className="text-danger">Email is required</span>}
             {errors.email?.type === "pattern" && <span className="text-danger">Valid email required</span>}
 
@@ -59,7 +59,7 @@ export default function Login() {
                 type="submit"
                 id="kt_sign_in_submit" className="btn btn-lg btn-primary fw-bolder me-3 my-2">
                 <span className="indicator-label">
-                  {disable ? <BeatLoader color={color} loading={loading} size={12} /> : 'Send Message'}
+                  {disable ? <BeatLoader color={color} loading={loading} size={12} /> : 'Submit'}
 
                 </span>
               </button>

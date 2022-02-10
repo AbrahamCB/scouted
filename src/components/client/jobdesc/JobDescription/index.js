@@ -2,7 +2,9 @@ import React from 'react';
 import styles from '../JobDesc.module.css';
 import RelatedJob from './RelatedJob';
 const JobDescription = ({ jobDetail }) => {
-    const { job_title, job_bounty, job_description, } = jobDetail
+    const { job_title, job_bounty, job_description, country, state, timezone } = jobDetail
+
+
     return (
         <>
             <div className="job__info">
@@ -14,7 +16,7 @@ const JobDescription = ({ jobDetail }) => {
                             <span className={styles.rate}>{`$${job_bounty}`}</span>
                             <span className={styles.location}>
                                 <i className="fas fa-map-marker-alt"></i>
-                                San Fransisco, CA,USA
+                                {state?.state_name}, <span className='text-uppercase'>{country?.country_code}</span>
                             </span>
                         </p>
                     </div>

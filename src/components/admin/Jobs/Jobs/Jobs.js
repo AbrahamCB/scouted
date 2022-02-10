@@ -27,7 +27,7 @@ const Jobs = () => {
                 {!isLoading && jobList?.length > 0 && <div>
                     <div className="d-flex justify-content-between py-5 ">
                         <h1 className="mt-3">Jobs: {jobList.length}</h1>
-                        <Link href="/admin/add-company">
+                        <Link href="/admin/jobs/add-job">
                             <a>
                                 <button onClick={() => {
                                 }}
@@ -60,7 +60,7 @@ const Jobs = () => {
                 </div>}
                 {!isLoading && jobList.length === 0 && <div className="d-flex justify-content-center">
                     <div className='text-center'>
-                        <Link href="/admin/add-company">
+                        <Link href="/admin/jobs/add-job">
                             <a>Add Job</a>
                         </Link>
                         <h1>Empty Job</h1>

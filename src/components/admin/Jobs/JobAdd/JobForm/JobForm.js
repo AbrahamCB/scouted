@@ -6,6 +6,7 @@ import Select from 'react-select';
 import { BeatLoader } from 'react-spinners';
 import { setTags } from '../../../../../../store/tags/actions';
 import { getData, postData } from './../../../../../../__lib__/helpers/HttpService';
+import JobDescriptionBox from './JobDescriptionBox';
 import stylesClass from './JobForm.module.css';
 
 
@@ -273,7 +274,8 @@ const JobForm = () => {
 
                             </div>
                         </div>
-                        <div className="mb-3 col-12 col-sm-6 position-relative" >
+
+                        {/* <div className="mb-3 col-12 col-sm-6 position-relative" >
                             <label>Job Description <span className='text-danger'>*</span></label>
                             <textarea
                                 // minLength='100'
@@ -290,7 +292,7 @@ const JobForm = () => {
                                 <span className={`${handleFormData.job_description?.length === 250 && 'text-danger'}`}>{handleFormData.job_description?.length || 0}/250</span>
                             </p>
 
-                        </div>
+                        </div> */}
                         <div className="mb-3  col-12 col-sm-6">
                             <label>Select Tags <span className='text-danger'>*</span></label>
                             <div>
@@ -382,7 +384,7 @@ const JobForm = () => {
                             </div>
 
                         </div>
-
+                        <JobDescriptionBox />
                     </div>
 
                     <div>
