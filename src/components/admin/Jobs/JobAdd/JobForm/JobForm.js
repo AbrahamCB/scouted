@@ -37,7 +37,9 @@ const JobForm = () => {
     useEffect(() => {
         if (countryList.length > 0) {
             const zones = countryList.find((country, i) => country.id == handleFormData.country_id && country)
-            setTimezones(JSON.parse(zones?.timezones))
+            if (zones) {
+                setTimezones(JSON.parse(zones?.timezones))
+            }
         }
         dispatch(setTags())
         dispatch(setCountries())

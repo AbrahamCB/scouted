@@ -45,10 +45,12 @@ const Tags = () => {
 
                 {!isLoading && tagList.length === 0 && <div className="d-flex justify-content-center">
                     <div>
-                        <button onClick={() => {
-                            dispatch(modalToggle(settings.modal))
-                            setTrigger(true)
-                        }}>Add Tag</button>
+                        <button
+                            className="btn btn-light"
+                            onClick={() => {
+                                dispatch(modalToggle(settings.modal))
+                                setTrigger(true)
+                            }}>Add Tag</button>
 
                         <h1 className='mt-4'>Empty Tag</h1>
 
