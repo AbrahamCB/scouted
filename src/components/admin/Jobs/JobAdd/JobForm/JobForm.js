@@ -32,10 +32,10 @@ const JobForm = () => {
     const [states, setStates] = useState([])
     const { countryList, isLoading } = countries;
     const [timezones, setTimezones] = useState([])
-
+    const [hourly, setHourly] = useState(false)
 
     useEffect(() => {
-        if (countryList.length > 0) {
+        if (countryList?.length > 0) {
             const zones = countryList.find((country, i) => country.id == handleFormData.country_id && country)
             if (zones) {
                 setTimezones(JSON.parse(zones?.timezones))
@@ -214,289 +214,276 @@ const JobForm = () => {
                             </div>
                         </div>
 
-                    </div>
-                    <div className="mb-3 col-12 col-sm-6 col-md-6">
-                        <label>Job Title <span className='text-danger'>*</span></label>
-
-                        <div>
-                            <span style={styles}>
-                                <i className="fas fa-pen"></i>
-                            </span>
-                            <input
-                                required
-                                name="job_title"
-                                onChange={handleForm}
-                                className="form-control"
-                                placeholder="Job title here"
-                                style={{ paddingLeft: '30px' }}
-                            />
-                        </div>
-
-                    </div>
-                    <div className="col-12 col-sm-6">
-                        <div className="mb-3 col-12 col-sm-12">
-                            <label>Job Salary <span className='text-danger'>*</span></label>
+                        <div className="mb-3 col-12">
+                            <label>Job Vacancy <span className='text-danger'>*</span></label>
                             <div>
                                 <span style={styles}>
-                                    <i className="fas fa-money-check"></i>
+                                    <i className="fas fa-users"></i>
                                 </span>
                                 <input
                                     required
-                                    name="job_salary"
+                                    name="job_vacancy"
                                     onChange={handleForm}
                                     type="number"
                                     className="form-control"
-                                    placeholder="Job salary"
+                                    placeholder="Job vacancy"
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
 
                         </div>
+                        <div className="mb-3 col-12">
+                            <label>Job Bounty <span className='text-danger'>*</span></label>
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-hand-holding-usd"></i>
+                                </span>
+                                <input
+                                    required
+                                    onChange={handleForm}
+                                    name="job_bounty"
+                                    className="form-control"
+                                    placeholder="Job bounty"
+                                    style={{ paddingLeft: '30px' }}
+                                />
+                            </div>
 
+                        </div>
+                        <div className="mb-3 col-12">
+                            <label>Join Date <span className='text-danger'>*</span></label>
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-users"></i>
+                                </span>
+                                <input
+                                    required
+                                    name="joining_date"
+                                    onChange={handleForm}
+                                    type="date"
+                                    className="form-control"
+                                    style={{ paddingLeft: '30px' }}
+                                />
+                            </div>
 
+                        </div>
+                        <div className="mb-3 col-12">
+                            <label>Expired Date <span className='text-danger'>*</span></label>
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-users"></i>
+                                </span>
+                                <input
+                                    required
+                                    name="expired_date"
+                                    onChange={handleForm}
+                                    type="date"
+                                    className="form-control"
+                                    placeholder=""
+                                    style={{ paddingLeft: '30px' }}
+                                />
+                            </div>
+
+                        </div>
+                        <div className="mb-3  col-12">
+                            <label>Select Tags <span className='text-danger'>*</span></label>
+                            <div>
+
+                                <Select
+                                    onChange={handleSelectTags}
+
+                                    isMulti
+                                    name="colors"
+                                    options={tagOption}
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {/* {errors.job_vacancy && <span className="text-danger">Job vacancy required</span>} */}
+                        </div>
+                        <div className='mb-3 col-12'>
+
+                            <label>Time Zone <span className='text-danger'>*</span></label>
+
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-globe"></i>
+                                </span>
+                                <select
+                                    // disabled={timezones.length > 0 ? false : true}
+                                    name='timezone_id'
+                                    type='select'
+                                    className="form-control"
+                                    onChange={handleForm}
+                                    style={{ paddingLeft: '30px' }}
+                                >
+                                    <option defaultValue >Select time zone</option>
+                                    {
+                                        timezones?.map((item, index) => <option key={index} value={item.id}>{item.zoneName}</option>)
+                                    }
+
+                                </select>
+                            </div>
+
+                        </div>
                     </div>
-                    <div className="mb-3 col-12 col-sm-6">
-                        <label>Job Bounty <span className='text-danger'>*</span></label>
-                        <div>
-                            <span style={styles}>
-                                <i className="fas fa-hand-holding-usd"></i>
+                    <div className='mb-3 col-12 col-sm-6 col-md-6 position-relative'>
+                        <div className="mb-3 col-12">
+                            <label>Job Title <span className='text-danger'>*</span></label>
+
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-pen"></i>
+                                </span>
+                                <input
+                                    required
+                                    name="job_title"
+                                    onChange={handleForm}
+                                    className="form-control"
+                                    placeholder="Job title here"
+                                    style={{ paddingLeft: '30px' }}
+                                />
+                            </div>
+
+                        </div>
+                        <div className="mb-3 col-12">
+
+                            <span className="d-flex gap-2 align-items-center">
+                                <input onClick={(e) => setHourly(e.target.checked)} type="checkbox" name="" id="" />
+                                <span className='pt-1'>Hourly Rate? </span>
                             </span>
-                            <input
-                                required
-                                onChange={handleForm}
-                                name="job_bounty"
-                                className="form-control"
-                                placeholder="Job bounty"
-                                style={{ paddingLeft: '30px' }}
-                            />
+                            <div className="mb-3 col-12 col-sm-12">
+
+                                {hourly ? <>
+                                    <label>Hourly Rate <span className='text-danger'>*</span></label>
+                                    <div>
+                                        <span style={styles}>
+                                            <i className="fas fa-money-check"></i>
+                                        </span>
+                                        <input
+                                            required
+                                            name="hourly_rate"
+                                            onChange={handleForm}
+                                            type="number"
+                                            className="form-control"
+                                            placeholder="Hourly Rate"
+                                            style={{ paddingLeft: '30px' }}
+                                        />
+                                    </div>
+                                </> : <>
+                                    <label>Job Salary <span className='text-danger'>*</span></label>
+                                    <div>
+                                        <span style={styles}>
+                                            <i className="fas fa-money-check"></i>
+                                        </span>
+                                        <input
+                                            required
+                                            name="job_salary"
+                                            onChange={handleForm}
+                                            type="number"
+                                            className="form-control"
+                                            placeholder="Job salary"
+                                            style={{ paddingLeft: '30px' }}
+                                        />
+                                    </div>
+                                </>}
+
+                            </div>
                         </div>
-
-                    </div>
-                    <div className="mb-3 col-12 col-sm-6">
-                        <label>Job Vacancy <span className='text-danger'>*</span></label>
-                        <div>
-                            <span style={styles}>
-                                <i className="fas fa-users"></i>
-                            </span>
-                            <input
-                                required
-                                name="job_vacancy"
-                                onChange={handleForm}
-                                type="number"
-                                className="form-control"
-                                placeholder="Job vacancy"
-                                style={{ paddingLeft: '30px' }}
-                            />
-                        </div>
-
-                    </div>
-                    {/* <div className="mb-3 col-12 col-sm-6 position-relative" >
-                            <label>Job Description <span className='text-danger'>*</span></label>
-                            <textarea
-                                // minLength='100'
-                                onChange={handleForm}
-                                name="job_description"
-                                maxLength="250"
-                                required
-                                className="form-control"
-                                placeholder="Description"
-                                style={{ resize: 'none', height: '187px' }}
-                            />
-                            <p style={{ position: 'absolute', top: '76%', left: '89.5%' }}>
-
-                                <span className={`${handleFormData.job_description?.length === 250 && 'text-danger'}`}>{handleFormData.job_description?.length || 0}/250</span>
-                            </p>
-
-                        </div> */}
-                    <div className="mb-3  col-12 col-sm-6">
-                        <label>Select Tags <span className='text-danger'>*</span></label>
-                        <div>
-
-                            <Select
-                                onChange={handleSelectTags}
-
-                                isMulti
-                                name="colors"
-                                options={tagOption}
-                                className="basic-multi-select"
-                                classNamePrefix="select"
-                            />
-                        </div>
-                        {/* {errors.job_vacancy && <span className="text-danger">Job vacancy required</span>} */}
-                    </div>
-                    <div className="mb-3 col-12 col-sm-6">
-                        <label>Join Date <span className='text-danger'>*</span></label>
-                        <div>
-                            <span style={styles}>
-                                <i className="fas fa-users"></i>
-                            </span>
-                            <input
-                                required
-                                name="joining_date"
-                                onChange={handleForm}
-                                type="date"
-                                className="form-control"
-                                style={{ paddingLeft: '30px' }}
-                            />
-                        </div>
-
-                    </div>
-                    <div className="mb-3 col-12 col-sm-6">
-                        <label>Expired Date <span className='text-danger'>*</span></label>
-                        <div>
-                            <span style={styles}>
-                                <i className="fas fa-users"></i>
-                            </span>
-                            <input
-                                required
-                                name="expired_date"
-                                onChange={handleForm}
-                                type="date"
-                                className="form-control"
-                                placeholder=""
-                                style={{ paddingLeft: '30px' }}
-                            />
-                        </div>
-
-                    </div>
-                    <div className="mb-3 col-12 col-sm-6">
-                        <label>Working Hours Weekly <span className='text-danger'>*</span></label>
-                        <div>
-                            <span style={styles}>
-                                <i className="fas fa-users"></i>
-                            </span>
-                            <input
-                                required
-                                name="expired_date"
-                                onChange={handleForm}
-                                type="number"
-                                className="form-control"
-                                placeholder="Working Hours Weekly"
-                                style={{ paddingLeft: '30px' }}
-                            />
-                        </div>
-
-                    </div>
-                    <div className="mb-3 col-12 col-sm-6">
-                        <label>Hourly Rate <span className='text-danger'>*</span></label>
-                        <div>
-                            <span style={styles}>
-                                <i className="fas fa-users"></i>
-                            </span>
-                            <input
-                                required
-                                name="expired_date"
-                                onChange={handleForm}
-                                type="number"
-                                className="form-control"
-                                placeholder="Hourly Rate $"
-                                style={{ paddingLeft: '30px' }}
-                            />
-                        </div>
-
-                    </div>
-                    <div className='mb-3  col-12 col-sm-6'>
-                        <label>Job type <span className='text-danger'>*</span></label>
-
-                        <div>
-                            <span style={styles}>
-                                <i className="fas fa-flag"></i>
-                            </span>
-                            <select
-
-                                onChange={handleForm}
-                                name='country_id'
-                                type='select'
-                                className="form-control"
-
-                                style={{ paddingLeft: '30px' }}
-                            >
-                                <option defaultValue >Full time </option>
-                                <option value="Part time" >Part time </option>
-                                <option value="Other">Other</option>
-                            </select>
+                        <div className="mb-3 col-12">
+                            <label>Working Hours Weekly <span className='text-danger'>*</span></label>
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-users"></i>
+                                </span>
+                                <input
+                                    required
+                                    name="expired_date"
+                                    onChange={handleForm}
+                                    type="number"
+                                    className="form-control"
+                                    placeholder="Working Hours Weekly"
+                                    style={{ paddingLeft: '30px' }}
+                                />
+                            </div>
 
                         </div>
-                    </div>
-                    <div className='mb-3  col-12 col-sm-6'>
-                        <label>Country <span className='text-danger'>*</span></label>
+                        <div className='mb-3  col-12'>
+                            <label>Job type <span className='text-danger'>*</span></label>
 
-                        <div>
-                            <span style={styles}>
-                                <i className="fas fa-flag"></i>
-                            </span>
-                            <select
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-flag"></i>
+                                </span>
+                                <select
 
-                                onChange={handleForm}
-                                name='country_id'
-                                type='select'
-                                className="form-control"
+                                    onChange={handleForm}
+                                    name='country_id'
+                                    type='select'
+                                    className="form-control"
 
-                                style={{ paddingLeft: '30px' }}
-                            >
-                                <option defaultValue >Select Country</option>
-                                {
-                                    countryList?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
-                                }
-                            </select>
+                                    style={{ paddingLeft: '30px' }}
+                                >
+                                    <option defaultValue >Full time </option>
+                                    <option value="Part time" >Part time </option>
+                                    <option value="Other">Other</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div className='mb-3  col-12'>
+                            <label>Country <span className='text-danger'>*</span></label>
+
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-flag"></i>
+                                </span>
+                                <select
+
+                                    onChange={handleForm}
+                                    name='country_id'
+                                    type='select'
+                                    className="form-control"
+
+                                    style={{ paddingLeft: '30px' }}
+                                >
+                                    <option defaultValue >Select Country</option>
+                                    {
+                                        countryList?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+                        <div className='mb-3 col-12'>
+                            <label>State <span className='text-danger'>*</span></label>
+
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-map-marker"></i>
+                                </span>
+                                <select
+                                    disabled={states.length > 0 ? false : true}
+                                    required
+                                    name='state_id'
+                                    type='select'
+                                    className="form-control"
+                                    onChange={handleForm}
+                                    style={{ paddingLeft: '30px' }}
+                                >
+                                    <option defaultValue>Select State</option>
+                                    {
+                                        states?.map((item, index) => <option key={index} value={item.id}>{item.state_name}</option>)
+                                    }
+
+                                </select>
+                            </div>
 
                         </div>
-                    </div>
-
-                    <div className='mb-3 col-12 col-sm-6'>
-                        <label>State <span className='text-danger'>*</span></label>
-
-                        <div>
-                            <span style={styles}>
-                                <i className="fas fa-map-marker"></i>
-                            </span>
-                            <select
-                                disabled={states.length > 0 ? false : true}
-                                required
-                                name='state_id'
-                                type='select'
-                                className="form-control"
-                                onChange={handleForm}
-                                style={{ paddingLeft: '30px' }}
-                            >
-                                <option defaultValue>Select State</option>
-                                {
-                                    states?.map((item, index) => <option key={index} value={item.id}>{item.state_name}</option>)
-                                }
-
-                            </select>
-                        </div>
-
-                    </div>
-                    <div className='mb-3 col-12 col-sm-6'>
-
-                        <label>Time Zone <span className='text-danger'>*</span></label>
-
-                        <div>
-                            <span style={styles}>
-                                <i className="fas fa-globe"></i>
-                            </span>
-                            <select
-                                // disabled={timezones.length > 0 ? false : true}
-                                name='timezone_id'
-                                type='select'
-                                className="form-control"
-                                onChange={handleForm}
-                                style={{ paddingLeft: '30px' }}
-                            >
-                                <option defaultValue >Select time zone</option>
-                                {
-                                    timezones?.map((item, index) => <option key={index} value={item.id}>{item.zoneName}</option>)
-                                }
-
-                            </select>
-                        </div>
-
                     </div>
 
                 </div>
                 <div>
-                    <h1 className="my-5">Job Description</h1>
+                    <h3 className="my-5">Job Description</h3>
                     <SunEditor
                         height='300px'
                         onChange={
