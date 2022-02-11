@@ -5,7 +5,7 @@ import TimeAgo from 'react-timeago';
 const JobDesc = ({ job }) => {
 
 
-    const { job_title, job_description, job_salary, joining_date, expiry_date, created_at, hourly_rate, tags, job_condition, job_type, job_vacancy, working_hours, job_referer, job_interviewer, hired, job_bounty, company, referars, country, state, _timezone } = job
+    const { job_title, job_description, job_salary, joining_date, expiry_date, created_at, hourly_rate, tags, job_type, job_vacancy, working_hours, job_referer, job_interviewer, hired, job_bounty, company, referars, country, state, _timezone } = job
 
     return (
         <td className="bg-light-info rounded-2" colSpan={5} >
@@ -182,13 +182,52 @@ const JobDesc = ({ job }) => {
 
                         </div>
 
-                        <div className=" rounded bg-light-warning my-3">
-                            <div className="card-body p-5">
-                                <h5>Description here</h5>
-                                {parse(job_description)}
+                        <div className="rounded bg-white my-3">
+                            <div className="card-body">
+                                <div className="bg-light-info p-5">
+                                    <h5>Description here</h5>
+                                    {parse(job_description)}
+                                </div>
                             </div>
                         </div>
+                        <div className=' col-12 p-5'>
+                            <div className='bg-white rounded my-3'>
+                                <div className='card-body p-5'>
+                                    <div className='row'>
+                                        {referars?.map((refer, i) => <div key={i} className='col-md-6 col-sm-12 col-lg-4'>
 
+                                            <div className='bg-light-info rounded p-5 my-3'>
+                                                <span className="text-warning  d-flex justify-content-end">
+                                                    <small><TimeAgo date={refer.created_at} />
+                                                    </small>
+                                                </span>
+                                                <div className="d-flex align-items-center ">
+
+                                                    <div className="flex-grow-1 me-2 border-end">
+                                                        <h4>Referrer</h4>
+                                                        <span className="fw-bolder text-gray-800  fs-6">
+                                                            {refer.referrer_name}
+                                                        </span>
+                                                        <span className="text-muted fw-bold d-block">{refer.referrer_email}</span>
+                                                        <span className="text-muted fw-bold d-block">{refer._referrerurl}</span>
+                                                    </div>
+                                                    <div className="flex-grow-1 me-2">
+                                                        <h4>Candidate</h4>
+                                                        <span className="fw-bolder text-gray-800  fs-6">
+                                                            {refer.candidate_name}
+                                                        </span>
+                                                        <span className="text-muted fw-bold d-block">{refer.candidate_email}</span>
+                                                        <span className="text-muted fw-bold d-block">{refer._candidateurl}</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>)}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                         <div className="rounded my-3 bg-white">
                             <div className="card-body">
                                 <div className="d-flex align-items-center bg-light-info rounded p-5 my-3">
@@ -213,7 +252,7 @@ const JobDesc = ({ job }) => {
                     </div>
                 </div>
             </div>
-        </td>
+        </td >
     );
 };
 

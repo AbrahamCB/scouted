@@ -5,8 +5,9 @@ import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useSelector } from 'react-redux';
 import { BeatLoader } from "react-spinners";
-import { getData, postData } from "../../../../__lib__/helpers/HttpService";
+import { getData } from "../../../../__lib__/helpers/HttpService";
 import Layout from "../layout";
+import { authPost } from './../../../../__lib__/helpers/HttpService';
 import Styles from './Refer.module.css';
 
 const Refer = () => {
@@ -33,14 +34,16 @@ const Refer = () => {
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         setDisable(true)
-        postData(`/refer/${job.id}`, data, setDisable)
+        authPost(`/refer/${job.id}`, data, users.token)
             .then(res => {
+                console.log(res)
                 if (res.success) {
                     toast.success(res.message)
                     setDisable(false)
                     reset()
                 } else {
                     toast.error(res.message)
+                    setDisable(false)
                 }
             })
     };

@@ -23,16 +23,7 @@ const Jobs = () => {
                 </div>}
                 {!isLoading && jobList?.length > 0 && <div>
                     <div className="d-flex justify-content-between py-5 ">
-                        <h1 className="mt-3">Jobs: {jobList.length}</h1>
-                        <Link href="/admin/jobs/add-job">
-                            <a>
-                                <button onClick={() => {
-                                }}
-                                    className="btn btn-primary">
-                                    Add Jobs
-                                </button>
-                            </a>
-                        </Link>
+                        <h1 className="mt-3">Refers: {jobList.length}</h1>
                     </div>
                     <div id="kt_referrals_1" className="card-body p-0 tab-pane fade show active" role="tabpanel">
                         <div className="table-responsive">
