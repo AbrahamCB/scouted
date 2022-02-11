@@ -1,3 +1,4 @@
+import dateFormat from "dateformat";
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -5,7 +6,7 @@ import ample from '../../../../assets/ample1.png';
 import styles from '../JobDesc.module.css';
 import ContactUs from './ContactUs';
 const JobInformation = ({ jobDetail }) => {
-    const { job_salary, company, country, state, job_title, job_slug } = jobDetail
+    const { job_salary, company, country, state, joining_date, working_hours, expiry_date, _hourly, hourly_rate, job_title, job_slug } = jobDetail
     const { company_name, company_slug } = company
     const router = useRouter()
     return (
@@ -17,15 +18,15 @@ const JobInformation = ({ jobDetail }) => {
                 <div className={styles.information__box}>
                     <i className="far fa-calendar-alt"></i>
                     <div className={styles.box__info}>
-                        <h4 className={styles.info__title}>Job Position Data</h4>
-                        <p>05 January 2022</p>
+                        <h4 className={styles.info__title}>Job Joining Date</h4>
+                        <p>{dateFormat(joining_date, "longDate")}</p>
                     </div>
                 </div>
                 <div className={styles.information__box}>
                     <i className="far fa-calendar-alt"></i>
                     <div className={styles.box__info}>
-                        <h4 className={styles.info__title}>Expiration Data</h4>
-                        <p>05 January 2022</p>
+                        <h4 className={styles.info__title}>Expiration Date</h4>
+                        <p>{dateFormat(expiry_date, "longDate")}</p>
                     </div>
                 </div>
                 <div className={styles.information__box}>
@@ -46,16 +47,16 @@ const JobInformation = ({ jobDetail }) => {
                     <i className="far fa-clock"></i>
                     <div className={styles.box__info}>
                         <h4 className={styles.info__title}>Working Hours</h4>
-                        <p>40h/weekly</p>
+                        <p>{working_hours}h/weekly</p>
                     </div>
                 </div>
-                <div className={styles.information__box}>
+                {_hourly === 1 && <div className={styles.information__box}>
                     <i className="fas fa-dollar-sign"></i>
                     <div className={styles.box__info}>
                         <h4 className={styles.info__title}>Rate</h4>
-                        <p>$15/hour</p>
+                        <p>${hourly_rate}/hour</p>
                     </div>
-                </div>
+                </div>}
                 <div className={styles.information__box}>
                     <i className="fas fa-dollar-sign"></i>
                     <div className={styles.box__info}>

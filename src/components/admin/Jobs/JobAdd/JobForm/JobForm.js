@@ -34,6 +34,7 @@ const JobForm = () => {
     const [timezones, setTimezones] = useState([])
     const [hourly, setHourly] = useState(false)
 
+    console.log(hourly)
     useEffect(() => {
         if (countryList?.length > 0) {
             const zones = countryList.find((country, i) => country.id == handleFormData.country_id && country)
@@ -57,47 +58,12 @@ const JobForm = () => {
                 }
             })
     }, [handleFormData.country_id])
-
-
     const handleForm = (e) => {
-
         const name = e.target.name
         const value = e.target.value
         setHandleFormData(values => ({ ...values, [name]: value }))
 
     }
-
-
-
-
-    // const allCountry = () => {
-    //     getData('/countries')
-    //         .then(res => {
-    //             if (res) {
-    //                 setCountries(res)
-    //             }
-
-    //         })
-    // }
-    // const allState = () => {
-    //     getData(`/states/${handleFormData.country_id}`)
-    //         .then(res => {
-    //             if (res) {
-    //                 setStates(res)
-    //             }
-    //         })
-    // }
-    // const allTimezone = () => {
-    //     getData(`/timezones/${handleFormData.country_id}`)
-    //         .then(res => {
-    //             if (res) {
-    //                 setTimezones(res)
-    //             }
-    //         })
-    // }
-
-
-
     const searchCompanies = (e) => {
         const searchWord = e.target.value
         if (searchWord) {
@@ -122,7 +88,7 @@ const JobForm = () => {
 
 
     const handleSubmit = (e) => {
-        console.log(handleForm)
+
         e.preventDefault()
         setDisable(true)
         const formData = new FormData()
@@ -134,7 +100,13 @@ const JobForm = () => {
         formData.append('job_bounty', handleFormData.job_bounty)
         formData.append('country_id', handleFormData.country_id)
         formData.append('state_id', handleFormData.state_id)
-        formData.append('timezone_id', handleFormData.timezone_id)
+        formData.append('_timezone', handleFormData.timezone_name)
+        formData.append('joining_date', handleFormData.joining_date)
+        formData.append('job_type', handleFormData.job_type)
+        formData.append('expiry_date', handleFormData.expiry_date)
+        formData.append('working_hours', handleFormData.working_hours)
+        formData.append('hourly_rate', handleFormData.hourly_rate)
+        formData.append('_hourly', hourly ? 1 : 0)
 
         for (let i = 0; i < selectTags?.length; i++) {
             formData.append('tags[]', selectTags[i].value)
@@ -166,8 +138,8 @@ const JobForm = () => {
             <form onSubmit={e => handleSubmit(e)}>
 
                 <div className='row'>
-                    <div className="mb-3 col-12 col-sm-6 col-md-6 position-relative">
-                        <div className="row">
+                    <div className="col-12 col-sm-6 col-md-6 position-relative">
+                        <div className="row mb-3">
                             <div className='col-6'>
                                 <label>Company Name <span className='text-danger'>*</span></label>
 
@@ -203,7 +175,6 @@ const JobForm = () => {
 
                                     </span>
                                     <input
-
                                         required
                                         disabled
                                         className="form-control"
@@ -275,7 +246,7 @@ const JobForm = () => {
                                 </span>
                                 <input
                                     required
-                                    name="expired_date"
+                                    name="expiry_date"
                                     onChange={handleForm}
                                     type="date"
                                     className="form-control"
@@ -310,8 +281,8 @@ const JobForm = () => {
                                     <i className="fas fa-globe"></i>
                                 </span>
                                 <select
-                                    // disabled={timezones.length > 0 ? false : true}
-                                    name='timezone_id'
+                                    disabled={timezones.length > 0 ? false : true}
+                                    name='timezone_name'
                                     type='select'
                                     className="form-control"
                                     onChange={handleForm}
@@ -319,7 +290,7 @@ const JobForm = () => {
                                 >
                                     <option defaultValue >Select time zone</option>
                                     {
-                                        timezones?.map((item, index) => <option key={index} value={item.id}>{item.zoneName}</option>)
+                                        timezones?.map((item, index) => <option key={index} value={item.zoneName}>{item.zoneName}</option>)
                                     }
 
                                 </select>
@@ -348,10 +319,12 @@ const JobForm = () => {
                         </div>
                         <div className="mb-3 col-12">
 
+                            <br />
                             <span className="d-flex gap-2 align-items-center">
                                 <input onClick={(e) => setHourly(e.target.checked)} type="checkbox" name="" id="" />
                                 <span className='pt-1'>Hourly Rate? </span>
                             </span>
+                            <br />
                             <div className="mb-3 col-12 col-sm-12">
 
                                 {hourly ? <>
@@ -398,7 +371,7 @@ const JobForm = () => {
                                 </span>
                                 <input
                                     required
-                                    name="expired_date"
+                                    name="working_hours"
                                     onChange={handleForm}
                                     type="number"
                                     className="form-control"
@@ -418,15 +391,15 @@ const JobForm = () => {
                                 <select
 
                                     onChange={handleForm}
-                                    name='country_id'
+                                    name='job_type'
                                     type='select'
                                     className="form-control"
 
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option defaultValue >Full time </option>
-                                    <option value="Part time" >Part time </option>
-                                    <option value="Other">Other</option>
+                                    <option value="full" >Full time </option>
+                                    <option value="part" >Part time </option>
+                                    <option value="any">Other</option>
                                 </select>
 
                             </div>
@@ -498,7 +471,7 @@ const JobForm = () => {
                         type="submit"
                         className="btn btn-primary">
 
-                        {disable ? <BeatLoader color={color} loading={loading} size={12} /> : 'Add Company'}
+                        {disable ? <BeatLoader color={color} loading={loading} size={12} /> : 'Add Job'}
                     </button>
                 </div>
 

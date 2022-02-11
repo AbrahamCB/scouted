@@ -3,7 +3,7 @@ import React from 'react';
 import styles from '../JobDesc.module.css';
 import RelatedJob from './RelatedJob';
 const JobDescription = ({ jobDetail }) => {
-    const { job_title, job_bounty, job_description, country, state, timezone } = jobDetail
+    const { job_title, job_bounty, job_type, job_description, country, state, timezone } = jobDetail
 
     // console.log(job_description)
 
@@ -14,7 +14,7 @@ const JobDescription = ({ jobDetail }) => {
                     <h2 className={styles.title}>{job_title}</h2>
                     <div className={styles.details}>
                         <p>
-                            <span className={styles.schedule}>full time</span>
+                            <span className={styles.schedule}>{job_type === 'full' && 'Full Time' || job_type === 'part' && 'Part Time' || job_type === 'any' && 'Others'}</span>
                             <span className={styles.rate}>{`$${job_bounty}`}</span>
                             <span className={styles.location}>
                                 <i className="fas fa-map-marker-alt"></i>
