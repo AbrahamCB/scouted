@@ -122,6 +122,7 @@ const JobForm = () => {
 
 
     const handleSubmit = (e) => {
+        console.log(handleForm)
         e.preventDefault()
         setDisable(true)
         const formData = new FormData()

@@ -13,7 +13,6 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
     ssr: false,
 })
 const CompanyForm = () => {
-    const [details, setDetails] = useState()
     const [disable, setDisable] = useState(false)
     const [loading, setLoading] = useState(true);
     const [color, setColor] = useState("#ffffff");
@@ -27,7 +26,6 @@ const CompanyForm = () => {
 
     useEffect(() => {
         dispatch(setCountries())
-
         if (watch('country_id')) {
             const zones = countryList.find((country, i) => country.id == watch('country_id') && country)
             if (zones) {
@@ -44,22 +42,23 @@ const CompanyForm = () => {
     }, [watch('country_id')])
 
 
-    const onSubmit = async data => {
 
-        setDisable(true)
+    const onSubmit = async data => {
+        console.log(data.linkedin_url)
+
         const formData = new FormData()
 
         formData.append('company_name', data.company_name)
         formData.append('company_description', data.company_description)
         formData.append('website_url', data.website_url)
         formData.append('employee_number', data.employee_number)
-        formData.append('timezone_id', data.timezone_id)
+        formData.append('_timezone', data.timezone_name)
         formData.append('founded_date', data.founded_date)
         formData.append('country_id', data.country_id)
         formData.append('state_id', data.state_id)
         formData.append('facebook_url', data.facebook_url)
         formData.append('twitter_url', data.twitter_url)
-        formData.append('linkdin_url', data.linkdin_url)
+        formData.append('linkedin_url', data.linkedin_url)
         formData.append('instagram_url', data.instagram_url)
         formData.append('image', data.company_logo[0])
         await submitData(formData)
@@ -296,7 +295,7 @@ const CompanyForm = () => {
                                 <select
                                     disabled={timezones.length > 0 ? false : true}
                                     required
-                                    {...register("timezone_id",
+                                    {...register("timezone_name",
                                         {
                                             required: true
                                         }
@@ -308,7 +307,7 @@ const CompanyForm = () => {
                                 >
                                     <option defaultValue >Select time zone</option>
                                     {
-                                        timezones?.map((item, index) => <option key={index} value={index}>{item.zoneName}</option>)
+                                        timezones?.map((item, index) => <option key={index} value={item.zoneName}>{item.zoneName}</option>)
                                     }
 
                                 </select>

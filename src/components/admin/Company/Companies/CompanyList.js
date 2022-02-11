@@ -10,14 +10,12 @@ const CompanyList = ({ company }) => {
     const router = useRouter()
 
 
-
     const newQuery = queryString.stringify({
 
         nested: JSON.stringify({
             company: company,
             country: country,
             state: state,
-            timezone: timezone,
         })
     });
     // const parsed = queryString.parse(newSystem)

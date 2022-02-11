@@ -1,6 +1,8 @@
 
 const CompanyDesc = ({ company }) => {
-    const { company_name, company_description, company_logo, website_url, employee_number, founded_date, facebook_url, twitter_url, linkedin_url, instagram_url, country, state, timezone, status, created_at } = company
+    const { company_name, company_description, company_logo, website_url, employee_number, founded_date, facebook_url, twitter_url, linkedin_url, instagram_url, country, state, _timezone, status, created_at } = company
+
+
     return (
         <td className="bg-light-info " colSpan={5}>
             <div className="" style={{ paddingLeft: '15px' }}>
@@ -78,7 +80,7 @@ const CompanyDesc = ({ company }) => {
                         </div>
                         <div className="border my-3">
                             <div className="card-body">
-                                <p>Timezone: {timezone?._zone_name_}</p>
+                                <p>Timezone: {_timezone}</p>
 
                             </div>
                         </div>
