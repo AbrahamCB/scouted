@@ -1,18 +1,17 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { IMAGE_URL } from '../../../../__lib__/helpers/HttpService';
 import styles from './Card.module.css';
-import defaultLogo from '/public/images/default-logo.png';
 
 export default function CardGrid({ job }) {
-  const { job_title, job_salary, job_slug, job_bounty, company, state } = job
+  const { job_title, job_salary, job_slug, job_bounty, job_type, company, state } = job
   const { company_logo, company_name, company_slug } = company
   const router = useRouter()
   return (
     <div className={`${styles.card__wrapper}`}>
       <div className={`${styles.card__body} text-center`}>
         <div className={styles.card__img}>
-          <Image src={defaultLogo} alt="card/img" />
+          <img src={`${IMAGE_URL}/${company_logo}`} alt="card/img" />
         </div>
         <h3 className={styles.card__title}>
           <Link href={`c/${company_slug}`}>
@@ -27,7 +26,7 @@ export default function CardGrid({ job }) {
 
           </Link>
         </h4>
-        <p className={styles.card__schedule}>remote/fulltime</p>
+        <p className={styles.card__schedule}>{job_type === 'full' && 'Full Time' || job_type === 'part' && 'Part Time' || job_type === 'any' && 'Others'}</p>
         <p className={styles.card__price}>
           <span>{`$${job_bounty}`}</span> new
         </p>

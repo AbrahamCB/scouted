@@ -1,7 +1,7 @@
+import { IMAGE_URL } from "../../../../../__lib__/helpers/HttpService";
 
 const CompanyDesc = ({ company }) => {
     const { company_name, company_description, company_logo, website_url, employee_number, founded_date, facebook_url, twitter_url, linkedin_url, instagram_url, country, state, _timezone, status, created_at } = company
-
 
     return (
         <td className="bg-light-info " colSpan={5}>
@@ -10,7 +10,8 @@ const CompanyDesc = ({ company }) => {
                     <div className='p-5 d-flex gap-5 justify-content-between'>
                         <div className=' d-flex justify-content-center'>
                             <div className='d-flex gap-4 align-items-center'>
-                                <img style={{ width: '50px', borderRadius: '50%', height: '40px' }} src="https://www.seekpng.com/png/detail/267-2675194_00106-3d-company-logos-design-free-logo-online.png" />
+                                <img style={{ width: '50px', borderRadius: '50%', height: '40px' }}
+                                    src={`${IMAGE_URL}/${company_logo}`} />
                                 <h2> {company_name}</h2>
                             </div>
                         </div>

@@ -2,6 +2,7 @@
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import TimeAgo from 'react-timeago';
+import { IMAGE_URL } from '../../../../../__lib__/helpers/HttpService';
 const JobDesc = ({ job }) => {
 
 
@@ -14,7 +15,8 @@ const JobDesc = ({ job }) => {
                     <div className='p-5 d-flex gap-5 justify-content-between'>
                         <div className=' d-flex justify-content-center'>
                             <div className='d-flex gap-4 align-items-center'>
-                                <img style={{ width: '40px', borderRadius: '50%', height: '40px' }} src="https://www.seekpng.com/png/detail/267-2675194_00106-3d-company-logos-design-free-logo-online.png" />
+                                <img style={{ width: '40px', borderRadius: '50%', height: '40px' }}
+                                    src={`${IMAGE_URL}/${company?.company_logo}`} />
                                 <h2> {company?.company_name}</h2>
                             </div>
                         </div>
@@ -60,7 +62,7 @@ const JobDesc = ({ job }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <dvi className="col-12 col-sm-4">
+                                    <div className="col-12 col-sm-4">
                                         <div className="d-flex align-items-center bg-light-info rounded p-5 my-3">
                                             <span className="svg-icon svg-icon-info me-5">
                                                 <span className="svg-icon svg-icon-1">
@@ -75,7 +77,7 @@ const JobDesc = ({ job }) => {
                                                 <span className="text-muted fw-bold d-block">${job_salary}/month</span>
                                             </div>
                                         </div>
-                                    </dvi>
+                                    </div>
                                     <div className='col-12 col-sm-4'>
                                         <div className="d-flex align-items-center bg-light-info rounded p-5 my-3">
                                             <span className="svg-icon svg-icon-info me-5">

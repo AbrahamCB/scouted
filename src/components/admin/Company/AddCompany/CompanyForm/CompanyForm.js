@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BeatLoader } from 'react-spinners';
 import 'suneditor/dist/css/suneditor.min.css';
 import { setCountries } from '../../../../../../store/countries/actions';
-import { getData, postData } from './../../../../../../__lib__/helpers/HttpService';
+import { authPost, getData } from './../../../../../../__lib__/helpers/HttpService';
 
 const SunEditor = dynamic(() => import("suneditor-react"), {
     ssr: false,
@@ -27,7 +27,7 @@ const CompanyForm = () => {
     useEffect(() => {
         dispatch(setCountries())
         if (watch('country_id')) {
-            const zones = countryList.find((country, i) => country.id == watch('country_id') && country)
+            const zones = countryList?.find((country, i) => country.id == watch('country_id') && country)
             if (zones) {
                 setTimezones(JSON.parse(zones?.timezones))
             }
@@ -67,14 +67,14 @@ const CompanyForm = () => {
 
     const submitData = async data => {
         setDisable(true)
-        postData('/company', data, setDisable)
-
+        authPost('/company', data, admins.token)
             .then(res => {
-
                 if (res.success) {
                     toast.success(res.message)
                     setDisable(false)
                     reset()
+                } else {
+                    setDisable(false)
                 }
             })
 

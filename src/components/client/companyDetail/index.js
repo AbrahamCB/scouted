@@ -1,11 +1,10 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import ample from "../../../assets/ample1.png";
+import { IMAGE_URL } from '../../../../__lib__/helpers/HttpService';
 import CardRow from '../cardrow/CardRow';
 import Layout from '../layout';
 import styles from './CompanyDetail.module.css';
 const CompanyDetail = ({ companyDetail, jobs }) => {
-    const { company_name, company_description, website_url, founded_date,
+    const { company_name, company_logo, company_description, website_url, founded_date,
         linkedin_url, facebook_url, twitter_url, instagram_url } = companyDetail[0]
 
     console.log(company_description)
@@ -18,7 +17,7 @@ const CompanyDetail = ({ companyDetail, jobs }) => {
                             <div className="col-md-7">
                                 <div className={`${styles.about__company_info} text-center`}>
                                     <div className={styles.site__logo}>
-                                        <Image src={ample} alt="ample ink" />
+                                        <img src={`${IMAGE_URL}/${company_logo}`} alt="ample ink" />
                                         <Link href="/">
                                             <a>
                                                 <h2 className={styles.site__title}>{company_name}</h2>

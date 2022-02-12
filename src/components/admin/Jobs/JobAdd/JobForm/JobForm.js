@@ -399,6 +399,7 @@ const JobForm = () => {
 
                                     style={{ paddingLeft: '30px' }}
                                 >
+                                    <option defaultValue >Select </option>
                                     <option value="full" >Full time </option>
                                     <option value="part" >Part time </option>
                                     <option value="any">Other</option>

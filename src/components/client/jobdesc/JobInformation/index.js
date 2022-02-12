@@ -1,13 +1,12 @@
 import dateFormat from "dateformat";
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import ample from '../../../../assets/ample1.png';
+import { IMAGE_URL } from "../../../../../__lib__/helpers/HttpService";
 import styles from '../JobDesc.module.css';
 import ContactUs from './ContactUs';
 const JobInformation = ({ jobDetail }) => {
     const { job_salary, company, country, state, joining_date, working_hours, expiry_date, _hourly, hourly_rate, job_title, job_slug } = jobDetail
-    const { company_name, company_slug } = company
+    const { company_name, company_slug, company_logo } = company
     const router = useRouter()
     return (
         <aside className=" py-3 py-md-0">
@@ -71,7 +70,7 @@ const JobInformation = ({ jobDetail }) => {
             <div className={styles.about__company}>
                 <h4 className={styles.company__subtitle}>About Company</h4>
                 <div className={styles.company__title}>
-                    <Image src={ample} alt="Ample" />
+                    <img src={`${IMAGE_URL}/${company_logo}`} alt="Ample" />
                     <span>{company_name}</span>
                 </div>
                 <Link href={`/c/${company_slug}`}>
