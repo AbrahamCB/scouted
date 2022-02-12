@@ -5,7 +5,7 @@ import styles from './Cards.module.css';
 
 export default function Cards({ jobs, generalJob }) {
   const [toggle, setToggle] = useState({ isGrid: false, isRow: true })
-  const filterJob = jobs.filter(job => job.id !== generalJob.id)
+  // const filterJob = jobs.filter(job => job.id !== generalJob.id)
 
   return (
     <section className={styles.cards__section}>
