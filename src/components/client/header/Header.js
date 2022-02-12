@@ -98,7 +98,7 @@ const Header = () => {
           </nav>
           <div className="col-4">
             <div className={styles.user}>
-              <button onClick={() => router.push('/r/scouted/general-referral/refer')} className={`btn btn-warning text-black fw-bold fs-4`}>
+              <button onClick={() => router.push('/r/scouted/general-referral')} className={`btn btn-warning text-black fw-bold fs-4`}>
                 General Referral
               </button>
               <div className={styles.user__avatar}>

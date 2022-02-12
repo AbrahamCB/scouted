@@ -29,7 +29,7 @@ export default index
 
 export async function getStaticProps() {
   const res = await getData('/jobs')
-  const general = await getData('/job/6')
+  const general = await getData('/job/1')
   const tags = await getData('/tags')
   return {
     props: {
