@@ -61,8 +61,8 @@ const Header = () => {
                 </Link>
                 <ul className="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
                   <li className={styles.dropdown__title}>How it works</li>
-                  <li><a className="dropdown-item" href="#">Referring of Scouted</a></li>
-                  <li><a className="dropdown-item" href="#">Hiring of Scouted</a></li>
+                  <li><Link href="/for-referrers"><a className="dropdown-item" >Referring on Scouted</a></Link></li>
+                  <li><Link href="/hiring"><a className="dropdown-item" >Hiring on Scouted</a></Link></li>
                 </ul>
               </li>
 
@@ -98,7 +98,7 @@ const Header = () => {
           </nav>
           <div className="col-4">
             <div className={styles.user}>
-              <button onClick={() => router.push('/r/scouted/general-referral/refer')} className={`${styles.user__cta_button} primary__button`}>
+              <button onClick={() => router.push('/r/scouted/general-referral/refer')} className={`${styles.user__cta_button} btn btn-warning`}>
                 General Referral
               </button>
               <div className={styles.user__avatar}>
@@ -129,7 +129,7 @@ const Header = () => {
           {smallDevice && <nav className={styles.mobile__nav}>
             <ul className={styles.nav__ul} >
               <li className={styles.nav__title}>How it works</li>
-              <li><a className="" href="#">Referring of Scouted</a></li>
+              <li><a className="" href="#">Referring on Scouted</a></li>
               <li><a className="" href="#">Hiring of Scouted</a></li>
             </ul>
             <ul className={styles.nav__ul} >

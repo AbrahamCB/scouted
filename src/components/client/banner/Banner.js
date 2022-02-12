@@ -46,7 +46,7 @@ const Banner = ({ tags }) => {
         <div className={styles.banner__row}>
           <div className={styles.banner__info}>
             <h2 className={styles.banner__info_title}>
-              There are 93.178 postings here for you!
+              Refer Your Friends, Colleagues, or yourself for top opportunities in Africa.
             </h2>
             <form onSubmit={handleSubmit}>
               <div className={styles.banner__findJob}>
@@ -71,7 +71,7 @@ const Banner = ({ tags }) => {
                   <input
                     disabled={disable}
                     type="submit"
-                    className="primary__button"
+                    className="btn btn-warning"
                     value="Find Job"
                   />
                 </div>

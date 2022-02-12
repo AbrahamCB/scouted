@@ -1,8 +1,6 @@
 import { Link } from 'next/link';
-import React from 'react';
-import Styles from '../Dashboard.module.css';
-
-const TableData = () => {
+import Styles from './Dashboard.module.css';
+const TableList = () => {
     return (
         <>
             <tr>
@@ -49,4 +47,4 @@ const TableData = () => {
     );
 };
 
-export default TableData;
+export default TableList;

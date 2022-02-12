@@ -42,8 +42,8 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/for-employers">
-                      <a>for employers</a>
+                    <Link href="https://thecareerbuddy.com/employers/" >
+                      <a target="_blank">for employers</a>
                     </Link>
                   </li>
                   <li>

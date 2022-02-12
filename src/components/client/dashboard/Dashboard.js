@@ -1,16 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from '../../../../__lib__/helpers/HttpService';
 import Layout from '../layout';
 import Styles from './Dashboard.module.css';
+
 const Dashboard = () => {
     const dispatch = useDispatch()
     const { users } = useSelector(state => state)
+    const [jobs, setJobs] = useState([])
 
     useEffect(() => {
         getUserData('/refer/jobs', users.token)
             .then(res => {
-                console.log(res)
+                setJobs(res)
             })
     }, [])
     return (
@@ -33,8 +35,7 @@ const Dashboard = () => {
                                     </tr>
                                 </thead>
                                 <tbody className='text-center'>
-
-
+                                    {/* <TableList /> */}
                                 </tbody>
                             </table>
 
