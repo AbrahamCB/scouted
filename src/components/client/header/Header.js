@@ -34,7 +34,7 @@ const Header = () => {
             <div className={styles.header__logo}>
               <Link href="/">
                 <a >
-                  <img src="/images/Scouted.png" className='' alt="logo" />
+                  <img src="/images/scouted1.png" className='w-50' alt="logo" />
                 </a>
               </Link>
             </div>
@@ -98,7 +98,7 @@ const Header = () => {
           </nav>
           <div className="col-4">
             <div className={styles.user}>
-              <button onClick={() => router.push('/r/scouted/general-referral/refer')} className={`${styles.user__cta_button} btn btn-warning`}>
+              <button onClick={() => router.push('/r/scouted/general-referral/refer')} className={`btn btn-warning text-black fw-bold fs-4`}>
                 General Referral
               </button>
               <div className={styles.user__avatar}>

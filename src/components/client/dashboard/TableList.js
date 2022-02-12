@@ -1,7 +1,9 @@
 const TableList = () => {
     return (
         <>
-            <h1>Hello world</h1>
+            <tr>
+                <td className="d-flex align-items-center justify-content-between">Hello</td>
+            </tr>
             {/* <tr>
                 <td className="d-flex align-items-center justify-content-center">hello</td>
                 <td className={Styles.tbody__data}>

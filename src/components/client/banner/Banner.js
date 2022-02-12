@@ -29,7 +29,7 @@ const Banner = ({ tags }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (changeValue.title) {
+    if (changeValue?.title) {
       router.push(`/s/${changeValue.title}`)
     } else {
       router.push({
@@ -71,7 +71,7 @@ const Banner = ({ tags }) => {
                   <input
                     disabled={disable}
                     type="submit"
-                    className="btn btn-warning"
+                    className="btn btn-warning text-black fw-bold fs-4"
                     value="Find Job"
                   />
                 </div>
