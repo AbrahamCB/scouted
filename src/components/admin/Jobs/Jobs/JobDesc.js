@@ -48,7 +48,7 @@ const JobDesc = ({ job }) => {
                                         <div className="d-flex align-items-center bg-light-info rounded p-5 my-3">
                                             <span className="svg-icon svg-icon-info me-5">
                                                 <span className="svg-icon svg-icon-1">
-                                                    <i class="fas fa-dollar-sign text-info"></i>
+                                                    <i className="fas fa-dollar-sign text-info"></i>
                                                 </span>
 
                                             </span>
@@ -64,7 +64,7 @@ const JobDesc = ({ job }) => {
                                         <div className="d-flex align-items-center bg-light-info rounded p-5 my-3">
                                             <span className="svg-icon svg-icon-info me-5">
                                                 <span className="svg-icon svg-icon-1">
-                                                    <i class="fas fa-dollar-sign text-info"></i>
+                                                    <i className="fas fa-dollar-sign text-info"></i>
                                                 </span>
 
                                             </span>
@@ -169,7 +169,7 @@ const JobDesc = ({ job }) => {
                                                     Tags
                                                 </span>
                                                 <span className='d-flex gap-2'>
-                                                    {tags.map((tag, i) => <Link href="/admin/tags"><a key={i} className="text-muted fw-bold d-block text-hover-primary">{tag.tag_name}</a></Link>)}
+                                                    {tags.map((tag, i) => <Link key={i} href="/admin/tags"><a className="text-muted fw-bold d-block text-hover-primary">{tag.tag_name}</a></Link>)}
                                                 </span>
                                             </div>
                                         </div>
