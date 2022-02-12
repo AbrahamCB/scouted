@@ -1,4 +1,3 @@
-import parse from 'html-react-parser';
 import Image from 'next/image';
 import Link from 'next/link';
 import ample from "../../../assets/ample1.png";
@@ -27,7 +26,7 @@ const CompanyDetail = ({ companyDetail, jobs }) => {
                                         </Link>
                                     </div>
 
-                                    {parse(company_description)}
+                                    <p className={styles.about__description}>{company_description}</p>
                                 </div>
                             </div>
                         </div>
