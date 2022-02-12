@@ -49,6 +49,7 @@ const Refer = () => {
                 })
         } else {
             toast.error('Must be login')
+            setDisable(false)
         }
     };
 
