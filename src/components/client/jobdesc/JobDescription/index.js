@@ -1,7 +1,6 @@
 import parse from 'html-react-parser';
 import React from 'react';
 import styles from '../JobDesc.module.css';
-import RelatedJob from './RelatedJob';
 const JobDescription = ({ jobDetail }) => {
     const { job_title, job_bounty, job_type, job_description, country, state, timezone } = jobDetail
 
@@ -77,7 +76,7 @@ const JobDescription = ({ jobDetail }) => {
                         </li>
                     </ul>
                 </div> */}
-                <RelatedJob />
+                {/* <RelatedJob /> */}
             </div>
         </>
     );
