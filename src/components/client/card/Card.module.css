@@ -77,12 +77,14 @@
   border-top: 1px solid #eeeeee;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .card__location {
   display: flex;
   gap: 5px;
+  justify-content: center;
+  align-items: center;
 }
 
 .card__location span {
@@ -101,6 +103,7 @@
   font-weight: 600;
   font-size: 1.3rem;
   text-transform: capitalize;
+
 }
 
 .card__tag {

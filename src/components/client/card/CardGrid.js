@@ -30,17 +30,19 @@ export default function CardGrid({ job }) {
         <p className={styles.card__price}>
           <span>{`$${job_bounty}`}</span> new
         </p>
-        <div className={styles.card__location}>
-          {job.tags.map((tag, i) => (
+        <div >
+          <div className={styles.card__location}>
+            {job.tags.map((tag, i) => (
 
-            <p className={styles.card__tag} key={i}>
-              <Link href={`/tag/${tag.tag_slug}`}>
-                <a>{tag.tag_name}</a>
-              </Link>
-            </p>
+              <p className={`${styles.card__tag} d-flex flex-warp`} key={i}>
+                <Link href={`/tag/${tag.tag_slug}`}>
+                  <a>{tag.tag_name}</a>
+                </Link>
+              </p>
 
-          ))}
-          <span><Link href={`/search?location=${state?.state_name}`}><a >📍{state?.state_name}</a></Link></span>
+            ))}
+          </div>
+          <p className='mt-3'><Link href={`/search?location=${state?.state_name}`}><a >📍{state?.state_name}</a></Link></p>
 
         </div>
       </div>
