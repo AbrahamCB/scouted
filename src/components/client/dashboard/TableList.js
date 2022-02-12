@@ -1,9 +1,8 @@
-import { Link } from 'next/link';
-import Styles from './Dashboard.module.css';
 const TableList = () => {
     return (
         <>
-            <tr>
+            <h1>Hello world</h1>
+            {/* <tr>
                 <td className="d-flex align-items-center justify-content-center">hello</td>
                 <td className={Styles.tbody__data}>
                     <p className={Styles.table__rec}>Spam</p>
@@ -42,7 +41,7 @@ const TableList = () => {
                     </div>
 
                 </td>
-            </tr>
+            </tr> */}
         </>
     );
 };

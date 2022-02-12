@@ -15,7 +15,7 @@ export default function ErrorPage() {
                     <rect fill="#D9D9D9" fillrule="nonzero" x={23} width="121.542" height="142.791" rx={5} />
                     <ellipse fill="#414141" cx={70} cy="50.5" rx={13} ry="12.5" />
                     <circle fill="#727272" cx="105.5" cy="54.5" r="6.5" />
-                    <path d="M108.915 71.474c-8.415-1.442-13.157 1.432-15.852 7.324" stroke="#727272" strokewidth="3.5" strokelinecap="round" strokelinejoin="round" />
+                    <path d="M108.915 71.474c-8.415-1.442-13.157 1.432-15.852 7.324" stroke="#727272" strokewidth="3.5" strokelinecap="round" strokeLinejoin="round" />
                     <path d="M23 103.848h121.542v33.943a5 5 0 0 1-5 5H28a5 5 0 0 1-5-5v-33.943z" fill="#FFF" fillrule="nonzero" />
                     <path d="M23 103.848h121.542v33.943a5 5 0 0 1-5 5H28a5 5 0 0 1-5-5v-33.943z" fill="#FFF" fillrule="nonzero" />
                     <path d="M37.75 117.42h48.381M37.75 127.745h34.22" stroke="#D9D9D9" strokewidth="3.75" strokelinecap="round" />

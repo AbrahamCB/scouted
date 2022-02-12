@@ -34,18 +34,22 @@ const Refer = () => {
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         setDisable(true)
-        authPost(`/refer/${job.id}`, data, users.token)
-            .then(res => {
-                console.log(res)
-                if (res.success) {
-                    toast.success(res.message)
-                    setDisable(false)
-                    reset()
-                } else {
-                    toast.error(res.message)
-                    setDisable(false)
-                }
-            })
+        if (users.isUser) {
+            authPost(`/refer/${job.id}`, data, users.token)
+                .then(res => {
+                    console.log(res)
+                    if (res.success) {
+                        toast.success(res.message)
+                        setDisable(false)
+                        reset()
+                    } else {
+                        toast.error(res.message)
+                        setDisable(false)
+                    }
+                })
+        } else {
+            toast.error('Must be login')
+        }
     };
 
     return (
@@ -234,7 +238,7 @@ const Refer = () => {
                                 <p>You agree to the <Link href="/"><a>Terms of Use</a></Link> and the <Link href="/"><a>Privacy Policy.</a></Link></p>
                             </div>
                             <div className="d-flex justify-content-end">
-                                <button className={Styles.form_button} disabled={disable}  >
+                                <button className={Styles.form_button} disabled={disable} >
                                     {disable ? <BeatLoader color={color} loading={loading} size={12} /> : 'Submit'}
                                 </button>
                             </div>

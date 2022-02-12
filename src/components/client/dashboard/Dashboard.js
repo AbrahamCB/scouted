@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from '../../../../__lib__/helpers/HttpService';
 import Layout from '../layout';
 import Styles from './Dashboard.module.css';
+import TableList from './TableList';
 
 const Dashboard = () => {
     const dispatch = useDispatch()
@@ -35,7 +36,9 @@ const Dashboard = () => {
                                     </tr>
                                 </thead>
                                 <tbody className='text-center'>
-                                    {/* <TableList /> */}
+
+                                    <TableList />
+
                                 </tbody>
                             </table>
 

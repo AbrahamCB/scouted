@@ -35,7 +35,7 @@ const Employers = () => {
                             </span>
                         </div>
                         <div className="text-center mt-5">
-                            <button onClick={() => router.push('/propose-bounty')} className="btn btn-primary">Propose a Bounty</button>
+                            {/* <button onClick={() => router.push('/propose-bounty')} className="btn btn-primary">Propose a Bounty</button> */}
 
                         </div>
                     </div>
