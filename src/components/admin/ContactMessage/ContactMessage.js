@@ -15,7 +15,6 @@ const ContactMessage = () => {
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         dispatch(setMessages(admins.token))
-
         setIsLoading(false)
     }, [])
     // console.log(messages.isLoading === messages.messageList !== null)

@@ -34,7 +34,6 @@ const JobForm = () => {
     const [timezones, setTimezones] = useState([])
     const [hourly, setHourly] = useState(false)
 
-    console.log(hourly)
     useEffect(() => {
         if (countryList?.length > 0) {
             const zones = countryList.find((country, i) => country.id == handleFormData.country_id && country)
@@ -86,7 +85,7 @@ const JobForm = () => {
         setSelectTags(e)
     }
 
-
+    console.log(details)
     const handleSubmit = (e) => {
 
         e.preventDefault()
@@ -107,17 +106,20 @@ const JobForm = () => {
         formData.append('working_hours', handleFormData.working_hours)
         formData.append('hourly_rate', handleFormData.hourly_rate)
         formData.append('_hourly', hourly ? 1 : 0)
-
         for (let i = 0; i < selectTags?.length; i++) {
             formData.append('tags[]', selectTags[i].value)
         }
-        postData('/job', formData, setDisable)
-            .then(res => {
-                if (res.success) {
-                    toast.success(res.message)
-                    setDisable(false)
-                }
-            })
+        if (details.length <= 10000) {
+            postData('/job', formData, setDisable)
+                .then(res => {
+                    if (res.success) {
+                        toast.success(res.message)
+                        setDisable(false)
+                    }
+                })
+        } else {
+            toast.error("Job description maximum chart 10000")
+        }
     }
 
     const { tagList } = tags
@@ -459,11 +461,18 @@ const JobForm = () => {
                 <div>
                     <h3 className="my-5">Job Description</h3>
                     <SunEditor
+
+                        maxCharCount="100"
+                        charCounter={true}
                         height='300px'
                         onChange={
                             e => setDetails(e)
                         }
                     />
+                    <div className='text-end'>
+                        <span className={`${details?.length >= 10000 && 'text-danger'}`}>{details?.length || 0}/10000</span>
+                        {/* <span >{details.length}/10000</span> */}
+                    </div>
                 </div>
                 <div className="mt-3 text-center">
                     <button
