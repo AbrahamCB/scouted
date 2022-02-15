@@ -18,8 +18,6 @@ const CompanyList = ({ company }) => {
             state: state,
         })
     });
-    // const parsed = queryString.parse(newSystem)
-    // console.log(JSON.parse(parsed.nested))
 
     return (
         <>

@@ -17,8 +17,6 @@ const ContactMessage = () => {
         dispatch(setMessages(admins.token))
         setIsLoading(false)
     }, [])
-    // console.log(messages.isLoading === messages.messageList !== null)
-    console.log(messages)
     return (
         <>
             <Layout>

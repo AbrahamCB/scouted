@@ -27,7 +27,6 @@ const States = () => {
     const handleOnChange = (e) => {
         setSelectCountry(e.target.value)
     }
-    console.log(selectCountry)
 
     const courrentUpdate = (data) => {
         setTrigger(false)

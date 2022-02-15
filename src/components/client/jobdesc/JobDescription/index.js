@@ -4,7 +4,6 @@ import styles from '../JobDesc.module.css';
 const JobDescription = ({ jobDetail }) => {
     const { job_title, job_bounty, job_type, job_description, country, state, timezone } = jobDetail
 
-    // console.log(job_description)
 
     return (
         <>

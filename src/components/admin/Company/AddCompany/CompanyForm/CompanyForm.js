@@ -44,7 +44,6 @@ const CompanyForm = () => {
 
 
     const onSubmit = async data => {
-        console.log(data.linkedin_url)
 
         const formData = new FormData()
 

@@ -85,7 +85,6 @@ const JobForm = () => {
         setSelectTags(e)
     }
 
-    console.log(details)
     const handleSubmit = (e) => {
 
         e.preventDefault()

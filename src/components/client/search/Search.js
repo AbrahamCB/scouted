@@ -8,8 +8,6 @@ const Search = ({ jobs }) => {
     const [color, setColor] = useState("#36d7b7");
     const router = useRouter();
     const { title, location } = router.query;
-    // console.log(router.query)
-    console.log(jobs)
 
     return (
         <>

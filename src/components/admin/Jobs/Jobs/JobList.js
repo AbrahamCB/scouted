@@ -20,12 +20,10 @@ const JobList = ({ job }) => {
             country: country,
             state: state,
             timezone: timezone,
-            
+
         })
     });
 
-    // const parsed = queryString.parse(newQuery)
-    // console.log(JSON.parse(parsed.nested))
     return (
         <>
             <tr className=''>

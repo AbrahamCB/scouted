@@ -19,6 +19,19 @@
   text-transform: capitalize;
   white-space: nowrap;
   margin-top: 18px;
+  text-align: center;
+}
+
+.company_logo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.company_logo img {
+  width: 140px !important;
+  height: 50px !important;
+
 }
 
 @media screen and (min-width: 768px) {

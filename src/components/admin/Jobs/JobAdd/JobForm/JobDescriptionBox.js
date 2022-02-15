@@ -6,10 +6,7 @@ export default function App() {
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
 
 
-    console.log(editorState)
-    // useEffect(() => {
-    //     console.log(editorState);
-    // }, [editorState]);
+
     return (
         <div>
 

@@ -14,7 +14,6 @@ const Dashboard = () => {
         //         setJobs(res)
         //     })
     }, [])
-    // console.log(jobs)
     return (
         <>
             <Layout>

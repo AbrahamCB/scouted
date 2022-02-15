@@ -16,7 +16,6 @@ const ContactUs = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data)
         setDisable(true)
         postData('/contact', data, setDisable)
             .then(res => {

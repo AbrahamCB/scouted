@@ -37,7 +37,6 @@ const Refer = () => {
         if (users.isUser) {
             authPost(`/refer/${job.id}`, data, users.token)
                 .then(res => {
-                    console.log(res)
                     if (res.success) {
                         toast.success(res.message)
                         setDisable(false)
@@ -48,7 +47,7 @@ const Refer = () => {
                     }
                 })
         } else {
-            toast.error('Must be login')
+            router.push('/login')
             setDisable(false)
         }
     };

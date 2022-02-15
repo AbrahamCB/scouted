@@ -23,7 +23,6 @@ export async function getServerSideProps(context) {
     const { tag_slug } = context.params
 
     const res = await getData(`jobs/tag/${tag_slug}`)
-    console.log(tag_slug)
     return {
         props: {
             jobs: res,

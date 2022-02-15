@@ -1,7 +1,12 @@
 import Image from 'next/image';
 import styles from './TrustedCompany.module.css';
-// import company from '../../../assets/company.png';
-import company from '/public/images/partner.png';
+import first from '/public/images/company/1.png';
+import second from '/public/images/company/2.png';
+import third from '/public/images/company/3.jpeg';
+import four from '/public/images/company/4.png';
+import five from '/public/images/company/5.png';
+import six from '/public/images/company/6.png';
+import seven from '/public/images/company/7.jpeg';
 
 export default function TrustedCompany() {
   return (
@@ -9,9 +14,23 @@ export default function TrustedCompany() {
       <div className="container">
         <div className="row align-items-center justify-content-center">
           <div className="col-12 col-md-8">
-            <div className={styles.trusted__company_info}>
-              <h3 className={styles.info__title}>Trusted Companies</h3>
-              <Image src={company} alt="company" />
+            <h3 className={styles.info__title}>Trusted Companies</h3>
+            <div className='d-flex justify-content-center'>
+              <div className={styles.company_logo}>
+                <Image src={first} alt="company" />
+
+                <Image src={second} alt="company" />
+
+                <Image src={third} alt="company" />
+
+                <Image src={four} alt="company" />
+
+                <Image src={five} alt="company" />
+
+                <Image src={six} alt="company" />
+                <Image src={seven} alt="company" />
+
+              </div>
             </div>
           </div>
         </div>

@@ -7,7 +7,6 @@ const CompanyDetail = ({ companyDetail, jobs }) => {
     const { company_name, company_logo, company_description, website_url, founded_date,
         linkedin_url, facebook_url, twitter_url, instagram_url } = companyDetail[0]
 
-    console.log(company_description)
     return (
         <>
             <Layout>
