@@ -27,7 +27,7 @@ function index({ jobs, generalJob, tags }) {
 }
 export default index
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await getData('/jobs')
   const general = await getData('/job/1')
   const tags = await getData('/tags')

@@ -14,7 +14,7 @@ export default function Footer() {
                 <Link href="/">
 
                   <a className={styles.header__logo_link}>
-                    <img width="25" src="/images/scouted1.png" alt="scouted" />
+                    <img className="w-75" src="/images/Scouted.png" alt="scouted" />
                   </a>
                 </Link>
               </div>
