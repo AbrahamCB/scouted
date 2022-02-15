@@ -15,22 +15,25 @@ export default function TrustedCompany() {
         <div className="row align-items-center justify-content-center">
           <div className="col-12 col-md-8">
             <h3 className={styles.info__title}>Trusted Companies</h3>
-            <div className='d-flex justify-content-center'>
-              <div className={styles.company_logo}>
-                <Image src={first} alt="company" />
 
-                <Image src={second} alt="company" />
+            <div className={styles.company_logo} style={{ paddingTop: '40px' }}>
+              <Image src={first} alt="company" />
 
-                <Image src={third} alt="company" />
+              <Image src={second} alt="company" />
 
-                <Image src={four} alt="company" />
+              <Image src={third} alt="company" />
 
-                <Image src={five} alt="company" />
+              <Image src={four} alt="company" />
 
-                <Image src={six} alt="company" />
-                <Image src={seven} alt="company" />
 
-              </div>
+            </div>
+
+            <div className={styles.company_logo} style={{ padding: '40px 0px' }}>
+              <Image src={five} alt="company" />
+
+              <Image src={six} alt="company" />
+              <Image src={seven} alt="company" />
+
             </div>
           </div>
         </div>

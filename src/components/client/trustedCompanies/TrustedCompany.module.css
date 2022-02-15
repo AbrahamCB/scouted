@@ -24,12 +24,11 @@
 
 .company_logo {
   display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
+  justify-content: space-between;
 }
 
 .company_logo img {
-  width: 140px !important;
+  width: 75% !important;
   height: 50px !important;
 
 }
