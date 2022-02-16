@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CardRow from '../cardrow/CardRow';
+import TrustedCompany from '../trustedCompanies/TrustedCompany';
 import CardGrid from './../card/CardGrid';
 import styles from './Cards.module.css';
 
@@ -10,7 +11,7 @@ export default function Cards({ jobs, generalJob }) {
   return (
     <section className={styles.cards__section}>
       <div className={`${styles.toggle__container} container`}>
-
+        <TrustedCompany />
         <div className="container">
           <div className="row justify-content-end">
             <div className="col-6 d-flex justify-content-end">

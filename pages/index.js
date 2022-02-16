@@ -4,7 +4,6 @@ import { getData } from '../__lib__/helpers/HttpService';
 import Banner from './../src/components/client/banner/Banner';
 import Cards from './../src/components/client/cards/Cards';
 import Layout from './../src/components/client/layout/index';
-import TrustedCompany from './../src/components/client/trustedCompanies/TrustedCompany';
 
 
 function index({ jobs, generalJob, tags }) {
@@ -19,7 +18,7 @@ function index({ jobs, generalJob, tags }) {
       </Head>
       <Layout>
         <Banner tags={tags} />
-        <TrustedCompany />
+        {/* <TrustedCompany /> */}
         <Cards jobs={jobs} generalJob={generalJob} />
       </Layout>
     </>
