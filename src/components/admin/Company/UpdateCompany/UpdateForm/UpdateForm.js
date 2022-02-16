@@ -5,7 +5,8 @@ import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { BeatLoader } from 'react-spinners';
-import { getData, postData } from '../../../../../../__lib__/helpers/HttpService';
+import { getData } from '../../../../../../__lib__/helpers/HttpService';
+import { authPost } from './../../../../../../__lib__/helpers/HttpService';
 const UpdateForm = () => {
     const queryString = require('query-string');
     const [disable, setDisable] = useState(false)
@@ -18,11 +19,11 @@ const UpdateForm = () => {
 
     const { register, watch, handleSubmit, formState: { errors }, reset } = useForm()
     const router = useRouter()
-    // const { id, company_name, company_description, facebook_url, twitter_url, website_url, employee_number, timezone_id, country_id, state_id, linkedin_url, image, instagram_url, founded_date } = router.query
+    // const { id, company_name, company_description, facebook_url, twitter_url, website_url, employee_number, _timezone, country_id, state_id, linkedin_url, image, instagram_url, founded_date } = router.query
 
 
- const {country, company, state, timezone} = JSON.parse(router.query.nested)
-    
+    const { country, company, state, } = JSON.parse(router.query.nested)
+
     useEffect(() => {
         allCountry()
         if (watch('country_id')) {
@@ -64,33 +65,36 @@ const UpdateForm = () => {
         setDisable(true)
         const formData = new FormData()
 
-        formData.append('company_name', data.company_name)
-        formData.append('company_description', data.company_description)
-        formData.append('website_url', data.website_url)
-        formData.append('employee_number', data.employee_number)
-        formData.append('timezone_id', data.timezone_id)
-        formData.append('founded_date', data.founded_date)
-        formData.append('country_id', data.country_id)
-        formData.append('state_id', data.state_id)
-        formData.append('facebook_url', data.facebook_url)
-        formData.append('twitter_url', data.twitter_url)
-        formData.append('linkedin_url', data.linkedin_url)
-        formData.append('instagram_url', data.instagram_url)
-        formData.append('image', data.company_logo[0])
-        await submitData(formData)
-    }
+        formData.append('company_name', data.company_name || company.company_name)
+        formData.append('company_description', data.company_description || company.company_description)
+        formData.append('website_url', data.website_url || company.website_url)
+        formData.append('employee_number', data.employee_number || company.employee_number)
+        formData.append('_timezone', data._timezone || company._timezone)
+        formData.append('founded_date', data.founded_date || company.founded_date)
+        formData.append('country_id', data.country_id || company.country_id)
+        formData.append('state_id', data.state_id || company.state_id)
+        formData.append('facebook_url', data.facebook_url || company.facebook_url)
+        formData.append('twitter_url', data.twitter_url || company.twitter_url)
+        formData.append('linkedin_url', data.linkedin_url || company.linkedin_url)
+        formData.append('instagram_url', data.instagram_url || company.instagram_url)
+        formData.append(data.company_logo.length > 0 && 'image', data.company_logo[0] || company.company_logo)
 
+        await submitData(formData)
+        console.log(data.company_logo.length)
+
+    }
 
     const submitData = async data => {
         setDisable(true)
-        postData('/company', data, setDisable)
+        authPost(`/company/u/${company.id}`, data, admins.token)
 
             .then(res => {
-
                 if (res.success) {
                     toast.success(res.message)
                     setDisable(false)
                     reset()
+                } else {
+                    setDisable(false)
                 }
             })
 
@@ -122,7 +126,7 @@ const UpdateForm = () => {
                                         defaultValue={company?.company_name}
                                         {...register("company_name",
                                             {
-                                                required: true
+                                                required: false
                                             }
                                         )}
                                         className="form-control"
@@ -136,11 +140,10 @@ const UpdateForm = () => {
                             <div className="mb-3 col-12">
                                 <label>Company logo</label>
                                 <input
-                                    required
-                                    accept=".png, .jpg"
+                                    accept=".png, .jpg, .jpeg, .svg, .gif"
                                     {...register("company_logo",
                                         {
-                                            required: true
+                                            required: false
                                         }
                                     )}
                                     type='file'
@@ -162,7 +165,7 @@ const UpdateForm = () => {
                                 rows="4"
                                 {...register("company_description",
                                     {
-                                        required: true,
+                                        required: false,
                                     }
                                 )}
                                 className="form-control"
@@ -187,7 +190,7 @@ const UpdateForm = () => {
                                     defaultValue={company?.website_url}
                                     {...register("website_url",
                                         {
-                                            required: true, pattern: /^(ftp|http|https):\/\/[^ "]+$/
+                                            required: false, pattern: /^(ftp|http|https):\/\/[^ "]+$/
                                         }
                                     )}
                                     className="form-control"
@@ -209,7 +212,7 @@ const UpdateForm = () => {
                                     defaultValue={company?.employee_number}
                                     {...register("employee_number",
                                         {
-                                            required: true
+                                            required: false
                                         }
                                     )}
                                     type='number'
@@ -230,11 +233,11 @@ const UpdateForm = () => {
                                     <i className="fas fa-calendar-alt"></i>
                                 </span>
                                 <input
-                                    // defaultValue={founded_date}
+                                    defaultValue={company.founded_date}
 
                                     {...register("founded_date",
                                         {
-                                            required: true
+                                            required: false
                                         }
                                     )}
                                     type='date'
@@ -258,7 +261,7 @@ const UpdateForm = () => {
                                     required
                                     {...register("country_id",
                                         {
-                                            required: true
+                                            required: false
                                         }
                                     )}
                                     type='select'
@@ -266,7 +269,7 @@ const UpdateForm = () => {
 
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option defaultValue >Select Country</option>
+                                    <option value={company.country_id} >Select Country</option>
                                     {
                                         countries?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
                                     }
@@ -289,7 +292,7 @@ const UpdateForm = () => {
                                     required
                                     {...register("state_id",
                                         {
-                                            required: true
+                                            required: false
                                         }
                                     )}
                                     type='select'
@@ -309,8 +312,8 @@ const UpdateForm = () => {
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Time Zone</label>
-                            <br/>
-                            <label>Previous: {timezone?._zone_name_}</label>
+                            <br />
+                            <label>Previous: {company._timezone}</label>
                             <div>
                                 <span style={styles}>
                                     <i className="fas fa-globe"></i>
@@ -318,9 +321,9 @@ const UpdateForm = () => {
                                 <select
                                     disabled={timezones.length > 0 ? false : true}
                                     required
-                                    {...register("timezone_id",
+                                    {...register("_timezone",
                                         {
-                                            required: true
+                                            required: false
                                         }
                                     )}
                                     type='select'
@@ -335,7 +338,7 @@ const UpdateForm = () => {
 
                                 </select>
                             </div>
-                            {errors.timezone_id && <span className="text-danger">Time zone required</span>}
+                            {errors._timezone && <span className="text-danger">Time zone required</span>}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -348,7 +351,7 @@ const UpdateForm = () => {
                                     defaultValue={company?.facebook_url}
                                     {...register("facebook_url",
                                         {
-                                            required: true, pattern: /^(ftp|http|https):\/\/[^ "]+$/
+                                            required: false, pattern: /^(ftp|http|https):\/\/[^ "]+$/
                                         }
                                     )}
 
@@ -370,7 +373,7 @@ const UpdateForm = () => {
                                     defaultValue={company?.twitter_url}
                                     {...register("twitter_url",
                                         {
-                                            required: true, pattern: /^(ftp|http|https):\/\/[^ "]+$/
+                                            required: false, pattern: /^(ftp|http|https):\/\/[^ "]+$/
                                         }
                                     )}
 
@@ -392,7 +395,7 @@ const UpdateForm = () => {
                                     defaultValue={company?.linkedin_url}
                                     {...register("linkedin_url",
                                         {
-                                            required: true, pattern: /^(ftp|http|https):\/\/[^ "]+$/
+                                            required: false, pattern: /^(ftp|http|https):\/\/[^ "]+$/
                                         }
                                     )}
 
@@ -440,7 +443,7 @@ const UpdateForm = () => {
                         type="submit"
                         className="btn btn-primary">
 
-                        {disable ? <BeatLoader color={color} loading={loading} size={12} /> : 'Add Company'}
+                        {disable ? <BeatLoader color={color} loading={loading} size={12} /> : 'Update Company'}
                     </button>
                 </div>
 

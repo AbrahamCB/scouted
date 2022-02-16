@@ -8,7 +8,7 @@ import { BeatLoader } from 'react-spinners';
 import 'suneditor/dist/css/suneditor.min.css';
 import { setCountries } from '../../../../../../store/countries/actions';
 import { setTags } from '../../../../../../store/tags/actions';
-import { getData, postData } from './../../../../../../__lib__/helpers/HttpService';
+import { authPost, getData } from './../../../../../../__lib__/helpers/HttpService';
 import stylesClass from './JobForm.module.css';
 
 
@@ -98,21 +98,26 @@ const JobForm = () => {
         formData.append('job_bounty', handleFormData.job_bounty)
         formData.append('country_id', handleFormData.country_id)
         formData.append('state_id', handleFormData.state_id)
-        formData.append('_timezone', handleFormData.timezone_name)
+        formData.append('_timezone', handleFormData.timezone_name || '')
         formData.append('joining_date', handleFormData.joining_date)
         formData.append('job_type', handleFormData.job_type)
         formData.append('expiry_date', handleFormData.expiry_date)
         formData.append('working_hours', handleFormData.working_hours)
+        formData.append('min_salary', handleFormData.max_salary)
+        formData.append('max_salary', handleFormData.min_salary)
+        formData.append('salary_currency', handleFormData.salary_currency)
         formData.append('hourly_rate', handleFormData.hourly_rate)
         formData.append('_hourly', hourly ? 1 : 0)
         for (let i = 0; i < selectTags?.length; i++) {
             formData.append('tags[]', selectTags[i].value)
         }
         if (details.length <= 10000) {
-            postData('/job', formData, setDisable)
+            authPost('/job', formData, admins.token)
                 .then(res => {
                     if (res.success) {
                         toast.success(res.message)
+                        setDisable(false)
+                    } else {
                         setDisable(false)
                     }
                 })
@@ -222,6 +227,42 @@ const JobForm = () => {
                             </div>
 
                         </div>
+                        <div className="row mb-3">
+                            <div className='col-6 mb-3'>
+                                <label>Maximum Salary<span className='text-danger'>*</span></label>
+
+                                <div>
+                                    <span style={styles}>
+                                        <i className="fas fa-money-check"></i>
+                                    </span>
+                                    <input
+                                        required
+                                        name="max_salary"
+                                        onChange={handleForm}
+                                        className="form-control"
+                                        placeholder="Job title here"
+                                        style={{ paddingLeft: '30px' }}
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-6 mb-3">
+                                <label>Minimum Salary</label>
+                                <div>
+                                    <span style={styles}>
+                                        <i className="fas fa-money-check"></i>
+                                    </span>
+                                    <input
+                                        required
+                                        name="min_salary"
+                                        onChange={handleForm}
+                                        className="form-control"
+                                        placeholder="Job title here"
+                                        style={{ paddingLeft: '30px' }}
+                                    />
+
+                                </div>
+                            </div>
+                        </div>
                         <div className="mb-3 col-12">
                             <label>Join Date <span className='text-danger'>*</span></label>
                             <div>
@@ -275,7 +316,7 @@ const JobForm = () => {
                         </div>
                         <div className='mb-3 col-12'>
 
-                            <label>Time Zone <span className='text-danger'>*</span></label>
+                            <label>Time Zone (optional)<span className='text-danger'></span></label>
 
                             <div>
                                 <span style={styles}>
@@ -328,7 +369,7 @@ const JobForm = () => {
                             <br />
                             <div className="mb-3 col-12 col-sm-12">
 
-                                {hourly ? <>
+                                {hourly && <>
                                     <label>Hourly Rate <span className='text-danger'>*</span></label>
                                     <div>
                                         <span style={styles}>
@@ -344,25 +385,21 @@ const JobForm = () => {
                                             style={{ paddingLeft: '30px' }}
                                         />
                                     </div>
-                                </> : <>
-                                    <label>Job Salary <span className='text-danger'>*</span></label>
-                                    <div>
-                                        <span style={styles}>
-                                            <i className="fas fa-money-check"></i>
-                                        </span>
-                                        <input
-                                            required
-                                            name="job_salary"
-                                            onChange={handleForm}
-                                            type="number"
-                                            className="form-control"
-                                            placeholder="Job salary"
-                                            style={{ paddingLeft: '30px' }}
-                                        />
-                                    </div>
                                 </>}
 
                             </div>
+                        </div>
+                        <div className="mb-3 col-12">
+                            <label>Salary Currency <span className='text-danger'>*</span></label>
+                            <div>
+                                <select onChange={handleForm} className="form-control" name="salary_currency" id="">
+                                    <option defaultValue>Select currency</option>
+                                    <option value="USD">USD</option>
+                                    <option value="BDT">BDT</option>
+                                    <option value="INR">INR</option>
+                                </select>
+                            </div>
+
                         </div>
                         <div className="mb-3 col-12">
                             <label>Working Hours Weekly <span className='text-danger'>*</span></label>

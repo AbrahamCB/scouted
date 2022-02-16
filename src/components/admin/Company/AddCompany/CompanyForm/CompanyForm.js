@@ -202,7 +202,7 @@ const CompanyForm = () => {
                         </div>
 
                         <div className="mb-3 col-12 col-sm-6">
-                            <label>Founded Date</label>
+                            <label>Founded Date (optional)</label>
 
                             <div>
                                 <span style={styles}>
@@ -211,7 +211,7 @@ const CompanyForm = () => {
                                 <input
                                     {...register("founded_date",
                                         {
-                                            required: true
+                                            required: false
                                         }
                                     )}
                                     type='date'
@@ -220,7 +220,7 @@ const CompanyForm = () => {
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.founded_date && <span className="text-danger">Founded date required</span>}
+                            {/* {errors.founded_date && <span className="text-danger">Founded date required</span>} */}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -285,7 +285,7 @@ const CompanyForm = () => {
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
-                            <label>Time Zone</label>
+                            <label>Time Zone (optional)</label>
 
                             <div>
                                 <span style={styles}>
@@ -296,7 +296,7 @@ const CompanyForm = () => {
                                     required
                                     {...register("timezone_name",
                                         {
-                                            required: true
+                                            required: false
                                         }
                                     )}
                                     type='select'
@@ -305,13 +305,13 @@ const CompanyForm = () => {
                                     style={{ paddingLeft: '30px' }}
                                 >
                                     <option defaultValue >Select time zone</option>
-                                    {
-                                        timezones?.map((item, index) => <option key={index} value={item.zoneName}>{item.zoneName}</option>)
-                                    }
+
+                                    {timezones?.map((item, index) => <option key={index} value={item.zoneName}>{item.zoneName}</option>)}
+
 
                                 </select>
                             </div>
-                            {errors.timezone_id && <span className="text-danger">Time zone required</span>}
+                            {/* {errors.timezone_id && <span className="text-danger">Time zone required</span>} */}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -378,7 +378,7 @@ const CompanyForm = () => {
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
-                            <label>Instagram</label>
+                            <label>Instagram (optional)</label>
                             <div>
                                 <span style={styles}>
                                     <i className="fab fa-instagram-square"></i>
