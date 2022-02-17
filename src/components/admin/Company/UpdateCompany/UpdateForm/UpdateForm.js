@@ -59,8 +59,8 @@ const UpdateForm = () => {
                 }
             })
     }
-
     const onSubmit = async data => {
+        console.log(data.company_logo.length > 0)
 
         setDisable(true)
         const formData = new FormData()
@@ -77,10 +77,10 @@ const UpdateForm = () => {
         formData.append('twitter_url', data.twitter_url || company.twitter_url)
         formData.append('linkedin_url', data.linkedin_url || company.linkedin_url)
         formData.append('instagram_url', data.instagram_url || company.instagram_url)
-        formData.append(data.company_logo.length > 0 && 'image', data.company_logo[0] || company.company_logo)
+        formData.append(data.company_logo.length > 0 && 'image', data.company_logo[0])
 
         await submitData(formData)
-        console.log(data.company_logo.length)
+        // console.log(data.company_logo.length)
 
     }
 
@@ -95,6 +95,7 @@ const UpdateForm = () => {
                     reset()
                 } else {
                     setDisable(false)
+                    toast.error(res)
                 }
             })
 

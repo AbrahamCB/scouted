@@ -1,6 +1,7 @@
 
 import parse from 'html-react-parser';
 import Link from 'next/link';
+import { useState } from 'react';
 import TimeAgo from 'react-timeago';
 import { IMAGE_URL } from '../../../../../__lib__/helpers/HttpService';
 const JobDesc = ({ job }) => {
@@ -8,6 +9,7 @@ const JobDesc = ({ job }) => {
 
     const { job_title, job_description, min_salary, salary_currency, max_salary, joining_date, expiry_date, created_at, hourly_rate, tags, job_type, job_vacancy, working_hours, job_referer, job_interviewer, hired, job_bounty, company, referars, country, state, _timezone } = job
 
+    const [showRefer, setShowRefer] = useState(false)
     return (
         <td className="bg-light-info rounded-2" colSpan={5} >
             <div className="" style={{ paddingLeft: '15px' }}>
@@ -257,7 +259,17 @@ const JobDesc = ({ job }) => {
 
                         <div className='bg-white rounded my-3'>
                             <div className='card-body p-5'>
-                                {referars?.map((refer, i) => <div key={i} className=''>
+
+                                <div onClick={() => setShowRefer(!showRefer)} style={{ width: '90px', cursor: 'pointer' }} className='d-flex gap-3 align-items-center'>
+                                    <h2>Referars</h2>
+                                    {showRefer ? <span > <i className="fas fa-angle-up fs-2"></i></span>
+                                        :
+                                        <span ><i className="fa fa-angle-down  fs-2"></i></span>}
+
+
+                                </div>
+
+                                {showRefer && referars?.map((refer, i) => <div key={i} className=''>
 
                                     <div className='bg-light-info rounded p-5 my-3'>
                                         <span className="text-warning  d-flex justify-content-end">
