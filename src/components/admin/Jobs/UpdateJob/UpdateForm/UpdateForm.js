@@ -87,45 +87,42 @@ const UpdateForm = () => {
         setSelectTags(e)
     }
 
+    console.log(search.company_name)
     const handleSubmit = (e) => {
 
         e.preventDefault()
         setDisable(true)
         const formData = new FormData()
-        formData.append('company_id', search.id)
-        formData.append('job_title', handleFormData.job_title)
-        formData.append('job_salary', handleFormData.job_salary)
-        formData.append('job_description', details)
-        formData.append('job_vacancy', handleFormData.job_vacancy)
-        formData.append('job_bounty', handleFormData.job_bounty)
-        formData.append('country_id', handleFormData.country_id)
-        formData.append('state_id', handleFormData.state_id)
-        formData.append('_timezone', handleFormData.timezone_name || '')
-        formData.append('joining_date', handleFormData.joining_date)
-        formData.append('job_type', handleFormData.job_type)
-        formData.append('expiry_date', handleFormData.expiry_date)
-        formData.append('working_hours', handleFormData.working_hours)
-        formData.append('min_salary', handleFormData.max_salary)
-        formData.append('max_salary', handleFormData.min_salary)
-        formData.append('salary_currency', handleFormData.salary_currency)
-        formData.append('hourly_rate', handleFormData.hourly_rate)
+        formData.append('company_id', search.id || company.id)
+        formData.append('job_title', handleFormData.job_title || job.job_title)
+        formData.append('job_description', details || job.job_description)
+        formData.append('job_vacancy', handleFormData.job_vacancy || job.job_vacancy)
+        formData.append('job_bounty', handleFormData.job_bounty || job.job_bounty)
+        formData.append('country_id', handleFormData.country_id || country.id)
+        formData.append('state_id', handleFormData.state_id || state.id)
+        formData.append('_timezone', handleFormData.timezone_name || job._timezone)
+        formData.append('joining_date', handleFormData.joining_date || job.joining_date)
+        formData.append('job_type', handleFormData.job_type || job.job_type)
+        formData.append('expiry_date', handleFormData.expiry_date || job.expiry_date)
+        formData.append('working_hours', handleFormData.working_hours || job.working_hours)
+        formData.append('min_salary', handleFormData.max_salary || job.min_salary)
+        formData.append('max_salary', handleFormData.min_salary || job.max_salary)
+        formData.append('salary_currency', handleFormData.salary_currency || job.salary_currency)
+        formData.append('hourly_rate', handleFormData.hourly_rate || job.hourly_rate)
         formData.append('_hourly', hourly ? 1 : 0)
         for (let i = 0; i < selectTags?.length; i++) {
-            formData.append('tags[]', selectTags[i].value)
+            formData.append('tags[]', selectTags[i].value || tags)
         }
-        if (details.length <= 10000) {
-            authPost('/job', formData, admins.token)
-                .then(res => {
-                    if (res.success) {
-                        toast.success(res.message)
-                        setDisable(false)
-                    } else {
-                        setDisable(false)
-                    }
-                })
-        } else {
-            toast.error("Job description maximum chart 10000")
-        }
+        authPost(`/job/u/${job.id}`, formData, admins.token)
+            .then(res => {
+                if (res.success) {
+                    console.log(res)
+                    toast.success(res.message)
+                    setDisable(false)
+                } else {
+                    setDisable(false)
+                }
+            })
     }
 
     const { tagList } = tags
@@ -156,7 +153,6 @@ const UpdateForm = () => {
                                         <i className="fas fa-search"></i>
                                     </span>
                                     <input
-                                        required
                                         onChange={searchCompanies}
                                         className="form-control"
                                         placeholder="Search here"
@@ -183,11 +179,11 @@ const UpdateForm = () => {
 
                                     </span>
                                     <input
-                                        required
                                         disabled
+                                        // readOnly
                                         className="form-control"
                                         placeholder="Name here"
-                                        defaultValue={search.company_name || company.company_name}
+                                        value={search.company_name !== undefined ? search.company_name : company.company_name}
                                     />
 
                                 </div>
@@ -201,7 +197,6 @@ const UpdateForm = () => {
                                     <i className="fas fa-users"></i>
                                 </span>
                                 <input
-                                    required
                                     name="job_vacancy"
                                     onChange={handleForm}
                                     defaultValue={job.job_vacancy}
@@ -220,7 +215,6 @@ const UpdateForm = () => {
                                     <i className="fas fa-hand-holding-usd"></i>
                                 </span>
                                 <input
-                                    required
                                     onChange={handleForm}
                                     defaultValue={job.job_bounty}
                                     name="job_bounty"
@@ -240,7 +234,6 @@ const UpdateForm = () => {
                                         <i className="fas fa-money-check"></i>
                                     </span>
                                     <input
-                                        required
                                         defaultValue={job.max_salary}
                                         name="max_salary"
                                         onChange={handleForm}
@@ -257,7 +250,6 @@ const UpdateForm = () => {
                                         <i className="fas fa-money-check"></i>
                                     </span>
                                     <input
-                                        required
                                         defaultValue={job.min_salary}
                                         name="min_salary"
                                         onChange={handleForm}
@@ -277,7 +269,6 @@ const UpdateForm = () => {
                                 </span>
                                 <input
                                     defaultValue={job.joining_date}
-                                    required
                                     name="joining_date"
                                     onChange={handleForm}
                                     type="date"
@@ -295,7 +286,6 @@ const UpdateForm = () => {
                                 </span>
                                 <input
                                     defaultValue={job.expiry_date}
-                                    required
                                     name="expiry_date"
                                     onChange={handleForm}
                                     type="date"
@@ -320,7 +310,6 @@ const UpdateForm = () => {
 
                                 <Select
                                     onChange={handleSelectTags}
-
                                     isMulti
                                     name="colors"
                                     options={tagOption}
@@ -370,7 +359,6 @@ const UpdateForm = () => {
                                 </span>
                                 <input
                                     defaultValue={job.job_title}
-                                    required
                                     name="job_title"
                                     onChange={handleForm}
                                     className="form-control"
@@ -398,7 +386,6 @@ const UpdateForm = () => {
                                         </span>
                                         <input
                                             defaultValue={job.hourly_rate}
-                                            required
                                             name="hourly_rate"
                                             onChange={handleForm}
                                             type="number"
@@ -432,7 +419,6 @@ const UpdateForm = () => {
                                     <i className="fas fa-users"></i>
                                 </span>
                                 <input
-                                    required
                                     defaultValue={job.working_hours}
                                     name="working_hours"
                                     onChange={handleForm}
@@ -504,7 +490,6 @@ const UpdateForm = () => {
                                 </span>
                                 <select
                                     disabled={states.length > 0 ? false : true}
-                                    required
                                     name='state_id'
                                     type='select'
                                     className="form-control"
