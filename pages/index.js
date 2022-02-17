@@ -32,9 +32,9 @@ export async function getServerSideProps() {
   const tags = await getData('/tags')
   return {
     props: {
-      jobs: res,
+      jobs: res || [],
       generalJob: general,
-      tags: tags
+      tags: tags || []
     }
   }
 }

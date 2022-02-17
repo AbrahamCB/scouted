@@ -2,11 +2,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
+import Cookies from 'universal-cookie';
 import { userLogout } from '../../../../store/users/actions';
 import avatar from '../../../assets/avatar.png';
 import styles from './Header.module.css';
 const Header = () => {
+  const cookies = new Cookies();
   const [start, setStart] = useState(false)
   const [status, setStatus] = useState(false)
   const [smallDevice, setSmallDevice] = useState(false)
@@ -21,8 +24,12 @@ const Header = () => {
   }
 
   const handleLogOut = () => {
-    dispatch(userLogout())
-    router.push('/')
+    cookies.remove('user_token', { path: '/' });
+    if (!cookies.get('user_token')) {
+      toast.success('Logout success')
+      dispatch(userLogout())
+      router.push('/login')
+    }
   }
 
   return (

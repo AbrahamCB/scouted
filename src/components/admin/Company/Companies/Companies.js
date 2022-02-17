@@ -40,7 +40,7 @@ const Companies = () => {
 
                 {!isLoading && companyList.length > 0 && <>
                     <div className="d-flex justify-content-between py-5 ">
-                        <h1 className="mt-3">Companies: {companyList?.length}</h1>
+                        <h1 className="mt-3">Companies ({companyList?.length})</h1>
                         <Link href="/admin/add-company">
                             <a>
                                 <button onClick={() => { }}

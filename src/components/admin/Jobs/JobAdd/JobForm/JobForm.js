@@ -83,6 +83,7 @@ const JobForm = () => {
     }
     const handleSelectTags = (e) => {
         setSelectTags(e)
+        console.log(e)
     }
 
     const handleSubmit = (e) => {

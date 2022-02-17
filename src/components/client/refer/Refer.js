@@ -42,7 +42,7 @@ const Refer = () => {
                         setDisable(false)
                         reset()
                     } else {
-                        toast.error(res.message)
+                        // toast.error(res.message)
                         setDisable(false)
                     }
                 })

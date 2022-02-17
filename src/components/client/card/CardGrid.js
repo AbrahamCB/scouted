@@ -26,7 +26,13 @@ export default function CardGrid({ job }) {
 
           </Link>
         </h4>
-        <p className={styles.card__schedule}>{job_type === 'full' && 'Full Time' || job_type === 'part' && 'Part Time' || job_type === 'any' && 'Others'}</p>
+        <div className="d-flex justify-content-center ">
+          <div className=" d-flex gap-5">
+            <p className={styles.card__schedule}>{job_type === 'full' && 'Full Time' || job_type === 'part' && 'Part Time' || job_type === 'any' && 'Others'}</p>
+            <p className={styles.card__schedule}>${min_salary + "-" + max_salary}/Monthly</p>
+          </div>
+
+        </div>
         <p className={styles.card__price}>
           <span>{`$${job_bounty}`}</span> new
         </p>

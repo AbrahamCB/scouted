@@ -17,6 +17,9 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
 
 })
 
+
+const jobType = [{ id: 1, value: 'full', label: 'Full time' }, { id: 2, value: 'part', label: 'Part time' }, { id: 3, value: 'any', label: 'Others' }]
+
 const UpdateForm = () => {
     const [details, setDetails] = useState()
     const [disable, setDisable] = useState(false)
@@ -35,14 +38,16 @@ const UpdateForm = () => {
     const [timezones, setTimezones] = useState([])
     const [hourly, setHourly] = useState(false)
     const router = useRouter()
-    const { job, referars, country, company, state, previousTags } = JSON.parse(router.query.nested)
+    const { job, referars, country, company, state, previousTags } = JSON.parse(router.query.nested);
+    // console.log(country)
+
+    const tagDefault = previousTags?.map(tag => ({
+        label: tag.tag_name,
+        value: tag.id
+    }));
     useEffect(() => {
-        if (countryList?.length > 0) {
-            const zones = countryList.find((country, i) => country.id == handleFormData.country_id && country)
-            if (zones) {
-                setTimezones(JSON.parse(zones?.timezones))
-            }
-        }
+
+
         dispatch(setTags())
         dispatch(setCountries())
         getData('/companies')
@@ -52,13 +57,21 @@ const UpdateForm = () => {
                 }
             })
 
-        getData(`/states/${handleFormData.country_id}`)
+        getData(`/states/${handleFormData.country_id || country.id}`)
             .then(res => {
                 if (res) {
                     setStates(res)
                 }
             })
+        if (countryList?.length > 0) {
+            const zones = countryList.find((item, i) => item.id == handleFormData.country_id && item)
+            if (zones) {
+                console.log(zones)
+                setTimezones(JSON.parse(zones?.timezones))
+            }
+        }
     }, [handleFormData.country_id])
+
     const handleForm = (e) => {
         const name = e.target.name
         const value = e.target.value
@@ -173,7 +186,6 @@ const UpdateForm = () => {
                             </div>
                             <div className="col-6">
                                 <label></label>
-
                                 <div>
                                     <span style={styles}>
 
@@ -297,18 +309,19 @@ const UpdateForm = () => {
 
                         </div>
                         <div className="mb-3  col-12">
-                            <div className='d-flex gap-5'>
-                                <label>Select Tags</label>
-                                ||
-                                <span>Previous: {previousTags?.map((tag, i) => (
+
+                            <label>Select Tags</label>
+
+                            {/* <span>Previous: {previousTags?.map((tag, i) => (
 
                                     <span key={i} className={styles.banner_tag_names}>{tag.tag_name}{previousTags.length - 1 === i ? '' : ','}</span>
 
-                                ))}</span>
-                            </div>
+                                ))}</span> */}
+
                             <div>
 
                                 <Select
+                                    defaultValue={tagDefault}
                                     onChange={handleSelectTags}
                                     isMulti
                                     name="colors"
@@ -323,8 +336,8 @@ const UpdateForm = () => {
 
                             <div className='d-flex gap-5'>
                                 <label>Time Zone</label>
-                                ||
-                                <span>Previous: {job._timezone}</span>
+                                <br />
+                                <span>{job._timezone}</span>
                             </div>
                             <div>
                                 <span style={styles}>
@@ -338,9 +351,8 @@ const UpdateForm = () => {
                                     onChange={handleForm}
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option defaultValue >Select time zone</option>
                                     {
-                                        timezones?.map((item, index) => <option key={index} value={item.zoneName}>{item.zoneName}</option>)
+                                        timezones?.map((item, index) => <option key={index} selected={item.zoneName == job._timezone} value={item.zoneName}>{item.zoneName}</option>)
                                     }
 
                                 </select>
@@ -400,17 +412,14 @@ const UpdateForm = () => {
                         </div>
                         <div className="mb-3 col-12">
                             <label>Salary Currency</label>
-                            <br />
-                            <span>Previous: {job.salary_currency}</span>
-                            <div>
-                                <select onChange={handleForm} className="form-control" name="salary_currency" id="">
-                                    <option defaultValue>Select currency</option>
-                                    <option value="USD">USD</option>
-                                    <option value="BDT">BDT</option>
-                                    <option value="INR">INR</option>
-                                </select>
-                            </div>
+                            <input
+                                defaultValue={job.salary_currency}
+                                onChange={handleForm}
+                                className="form-control text-uppercase"
+                                name="salary_currency"
+                                placeholder="currency"
 
+                            />
                         </div>
                         <div className="mb-3 col-12">
                             <label>Working Hours Weekly</label>
@@ -432,8 +441,6 @@ const UpdateForm = () => {
                         </div>
                         <div className='mb-3  col-12'>
                             <label>Job type</label>
-                            <br />
-                            <span>Previous: {job.job_type}</span>
                             <div>
                                 <span style={styles}>
                                     <i className="fas fa-flag"></i>
@@ -447,18 +454,14 @@ const UpdateForm = () => {
 
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option defaultValue >Select </option>
-                                    <option value="full" >Full time </option>
-                                    <option value="part" >Part time </option>
-                                    <option value="any">Other</option>
+                                    {jobType.map((item, i) => <option key={i} selected={item.value == job.job_type} value={item.value} >{item.label}</option>)}
+
                                 </select>
 
                             </div>
                         </div>
                         <div className='mb-3  col-12'>
                             <label>Country</label>
-                            <br />
-                            <span>Previous: {country.country_name}</span>
                             <div>
                                 <span style={styles}>
                                     <i className="fas fa-flag"></i>
@@ -472,9 +475,8 @@ const UpdateForm = () => {
 
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option defaultValue >Select Country</option>
                                     {
-                                        countryList?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
+                                        countryList?.map((item, index) => <option key={index} selected={item.id == country.id} value={item.id}>{item.country_name}</option>)
                                     }
                                 </select>
 
@@ -482,8 +484,6 @@ const UpdateForm = () => {
                         </div>
                         <div className='mb-3 col-12'>
                             <label>State</label>
-                            <br />
-                            <span>Previous: {state.state_name}</span>
                             <div>
                                 <span style={styles}>
                                     <i className="fas fa-map-marker"></i>
@@ -496,9 +496,8 @@ const UpdateForm = () => {
                                     onChange={handleForm}
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option defaultValue>Select State</option>
                                     {
-                                        states?.map((item, index) => <option key={index} value={item.id}>{item.state_name}</option>)
+                                        states?.map((item, index) => <option key={index} selected={item.id == state.id} value={item.id}>{item.state_name}</option>)
                                     }
 
                                 </select>

@@ -4,7 +4,7 @@ import { IMAGE_URL } from '../../../../__lib__/helpers/HttpService';
 import styles from './CardRow.module.css';
 
 export default function CardRow({ job }) {
-  const { job_title, job_type, job_bounty, job_slug, company, state } = job
+  const { job_title, min_salary, max_salary, job_type, job_bounty, job_slug, company, state } = job
   const { company_logo, company_name, company_slug } = company
   const router = useRouter()
   return (
@@ -44,7 +44,10 @@ export default function CardRow({ job }) {
           <p className={styles.card__price}>{`$${job_bounty}`}</p>
           <button onClick={() => router.push(`/r/${company.company_slug}/${job_slug}/`)} type="submit">refer now</button>
         </div>
-        <p className={styles.card__schedule}>{job_type === 'full' && 'Full Time' || job_type === 'part' && 'Part Time' || job_type === 'any' && 'Others'}</p>
+        <div className='d-flex gap-10'>
+          <p className={styles.card__schedule}>{job_type === 'full' && 'Full Time' || job_type === 'part' && 'Part Time' || job_type === 'any' && 'Others'}</p>
+          <p className={`${styles.card__schedule} fs-6 fw-bold text-black`}>${min_salary + "-" + max_salary}/Monthly</p>
+        </div>
       </div>
     </div >
   );

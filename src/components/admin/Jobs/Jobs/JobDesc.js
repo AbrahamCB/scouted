@@ -6,7 +6,7 @@ import { IMAGE_URL } from '../../../../../__lib__/helpers/HttpService';
 const JobDesc = ({ job }) => {
 
 
-    const { job_title, job_description, min_salary, max_salary, joining_date, expiry_date, created_at, hourly_rate, tags, job_type, job_vacancy, working_hours, job_referer, job_interviewer, hired, job_bounty, company, referars, country, state, _timezone } = job
+    const { job_title, job_description, min_salary, salary_currency, max_salary, joining_date, expiry_date, created_at, hourly_rate, tags, job_type, job_vacancy, working_hours, job_referer, job_interviewer, hired, job_bounty, company, referars, country, state, _timezone } = job
 
     return (
         <td className="bg-light-info rounded-2" colSpan={5} >
@@ -72,11 +72,49 @@ const JobDesc = ({ job }) => {
                                             </span>
                                             <div className="flex-grow-1 me-2">
                                                 <span className="fw-bolder text-gray-800  fs-6">
-                                                    Job Salary
+                                                    Minimum Salary
                                                 </span>
                                                 <span className="text-muted fw-bold d-block">
-                                                    ${min_salary + '-' + max_salary}
-                                                    /month
+                                                    ${min_salary}
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-12 col-sm-4">
+                                        <div className="d-flex align-items-center bg-light-info rounded p-5 my-3">
+                                            <span className="svg-icon svg-icon-info me-5">
+                                                <span className="svg-icon svg-icon-1">
+                                                    <i className="fas fa-dollar-sign text-info"></i>
+                                                </span>
+
+                                            </span>
+                                            <div className="flex-grow-1 me-2">
+                                                <span className="fw-bolder text-gray-800  fs-6">
+                                                    Maximum Salary
+                                                </span>
+                                                <span className="text-muted fw-bold d-block">
+                                                    ${max_salary}
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-12 col-sm-4">
+                                        <div className="d-flex align-items-center bg-light-info rounded p-5 my-3">
+                                            <span className="svg-icon svg-icon-info me-5">
+                                                <span className="svg-icon svg-icon-1">
+                                                    <i className="fas fa-dollar-sign text-info"></i>
+                                                </span>
+
+                                            </span>
+                                            <div className="flex-grow-1 me-2">
+                                                <span className="fw-bolder text-gray-800  fs-6">
+                                                    Salary Currency
+                                                </span>
+                                                <span className="text-muted fw-bold d-block">
+                                                    {salary_currency}
+
                                                 </span>
                                             </div>
                                         </div>
@@ -157,7 +195,7 @@ const JobDesc = ({ job }) => {
                                                 <span className="fw-bolder text-gray-800  fs-6">
                                                     Hourly Rate
                                                 </span>
-                                                <span className="text-muted fw-bold d-block">{hourly_rate}/hour</span>
+                                                <span className="text-muted fw-bold d-block">${hourly_rate !== undefined ? 0 : hourly_rate}/hour</span>
                                             </div>
                                         </div>
                                     </div>}
@@ -195,44 +233,6 @@ const JobDesc = ({ job }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className=' col-12 p-5'>
-                            <div className='bg-white rounded my-3'>
-                                <div className='card-body p-5'>
-                                    <div className='row'>
-                                        {referars?.map((refer, i) => <div key={i} className='col-md-6 col-sm-12 col-lg-4'>
-
-                                            <div className='bg-light-info rounded p-5 my-3'>
-                                                <span className="text-warning  d-flex justify-content-end">
-                                                    <small><TimeAgo date={refer.created_at} />
-                                                    </small>
-                                                </span>
-                                                <div className="d-flex align-items-center ">
-
-                                                    <div className="flex-grow-1 me-2 border-end">
-                                                        <h4>Referrer</h4>
-                                                        <span className="fw-bolder text-gray-800  fs-6">
-                                                            {refer.referrer_name}
-                                                        </span>
-                                                        <span className="text-muted fw-bold d-block">{refer.referrer_email}</span>
-                                                        <span className="text-muted fw-bold d-block">{refer._referrerurl}</span>
-                                                    </div>
-                                                    <div className="flex-grow-1 me-2">
-                                                        <h4>Candidate</h4>
-                                                        <span className="fw-bolder text-gray-800  fs-6">
-                                                            {refer.candidate_name}
-                                                        </span>
-                                                        <span className="text-muted fw-bold d-block">{refer.candidate_email}</span>
-                                                        <span className="text-muted fw-bold d-block">{refer._candidateurl}</span>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>)}
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
                         <div className="rounded my-3 bg-white">
                             <div className="card-body">
                                 <div className="d-flex align-items-center bg-light-info rounded p-5 my-3">
@@ -254,6 +254,43 @@ const JobDesc = ({ job }) => {
                                 </div>
                             </div>
                         </div>
+
+                        <div className='bg-white rounded my-3'>
+                            <div className='card-body p-5'>
+                                {referars?.map((refer, i) => <div key={i} className=''>
+
+                                    <div className='bg-light-info rounded p-5 my-3'>
+                                        <span className="text-warning  d-flex justify-content-end">
+                                            <small><TimeAgo date={refer.created_at} />
+                                            </small>
+                                        </span>
+                                        <div className="d-flex align-items-center ">
+
+                                            <div className="flex-grow-1 me-2 border-end">
+                                                <h4>Referrer</h4>
+                                                <span className="fw-bolder text-gray-800  fs-6">
+                                                    {refer.referrer_name}
+                                                </span>
+                                                <span className="text-muted fw-bold d-block">{refer.referrer_email}</span>
+                                                <span className="text-muted fw-bold d-block">{refer._referrerurl}</span>
+                                            </div>
+                                            <div className="flex-grow-1 me-2">
+                                                <h4>Candidate</h4>
+                                                <span className="fw-bolder text-gray-800  fs-6">
+                                                    {refer.candidate_name}
+                                                </span>
+                                                <span className="text-muted fw-bold d-block">{refer.candidate_email}</span>
+                                                <span className="text-muted fw-bold d-block">{refer._candidateurl}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>)}
+
+                            </div>
+
+                        </div>
+
+
                     </div>
                 </div>
             </div>
