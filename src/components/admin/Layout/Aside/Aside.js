@@ -4,7 +4,6 @@ import Jobs from './Jobs/Jobs';
 import Location from './Location/Location';
 import Logo from './Logo/Logo';
 import Message from './Message/Message';
-import Refers from './Refers/Refers';
 import Tag from './Tag/Tag';
 
 
@@ -42,7 +41,6 @@ const Aside = () => {
                         <Tag />
                         <Location />
                         <Message />
-                        <Refers />
                     </div>
                 </div>
             </div>

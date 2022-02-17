@@ -6,7 +6,7 @@ import { IMAGE_URL } from '../../../../../__lib__/helpers/HttpService';
 const JobDesc = ({ job }) => {
 
 
-    const { job_title, job_description, job_salary, joining_date, expiry_date, created_at, hourly_rate, tags, job_type, job_vacancy, working_hours, job_referer, job_interviewer, hired, job_bounty, company, referars, country, state, _timezone } = job
+    const { job_title, job_description, min_salary, max_salary, joining_date, expiry_date, created_at, hourly_rate, tags, job_type, job_vacancy, working_hours, job_referer, job_interviewer, hired, job_bounty, company, referars, country, state, _timezone } = job
 
     return (
         <td className="bg-light-info rounded-2" colSpan={5} >
@@ -74,7 +74,10 @@ const JobDesc = ({ job }) => {
                                                 <span className="fw-bolder text-gray-800  fs-6">
                                                     Job Salary
                                                 </span>
-                                                <span className="text-muted fw-bold d-block">${job_salary}/month</span>
+                                                <span className="text-muted fw-bold d-block">
+                                                    ${min_salary + '-' + max_salary}
+                                                    /month
+                                                </span>
                                             </div>
                                         </div>
                                     </div>

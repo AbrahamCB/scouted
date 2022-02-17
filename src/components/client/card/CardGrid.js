@@ -4,7 +4,7 @@ import { IMAGE_URL } from '../../../../__lib__/helpers/HttpService';
 import styles from './Card.module.css';
 
 export default function CardGrid({ job }) {
-  const { job_title, job_salary, job_slug, job_bounty, job_type, company, state } = job
+  const { job_title, max_salary, min_salary, job_slug, job_bounty, job_type, company, state } = job
   const { company_logo, company_name, company_slug } = company
   const router = useRouter()
   return (

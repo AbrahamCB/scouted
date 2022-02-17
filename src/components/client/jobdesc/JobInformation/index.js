@@ -5,7 +5,7 @@ import { IMAGE_URL } from "../../../../../__lib__/helpers/HttpService";
 import styles from '../JobDesc.module.css';
 import ContactUs from './ContactUs';
 const JobInformation = ({ jobDetail }) => {
-    const { job_salary, company, country, state, joining_date, working_hours, expiry_date, _hourly, hourly_rate, job_title, job_slug } = jobDetail
+    const { min_salary, max_salary, company, country, state, joining_date, working_hours, expiry_date, _hourly, hourly_rate, job_title, job_slug } = jobDetail
     const { company_name, company_slug, company_logo } = company
     const router = useRouter()
     return (
@@ -60,7 +60,7 @@ const JobInformation = ({ jobDetail }) => {
                     <i className="fas fa-dollar-sign"></i>
                     <div className={styles.box__info}>
                         <h4 className={styles.info__title}>Salary</h4>
-                        <p>{`$${job_salary}`}/month</p>
+                        <p>{`$${min_salary + '-' + max_salary}`}/month</p>
                     </div>
                 </div>
             </div>

@@ -2,8 +2,8 @@
 import Image from 'next/image';
 import JobIcon from '../../../../assets/job-icon.png';
 import Layout from '../../Layout/Layout';
-import UpdateForm from './UpdateForm/UpdateForm';
 // import JobForm from './JobForm';
+import UpdateForm from './UpdateForm/UpdateForm';
 const UpdateJob = () => {
     return (
         <>

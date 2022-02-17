@@ -63,8 +63,9 @@ const Refer = () => {
                 <div className="mt-5">
                     <div className="text-center py-5">
                         <h1 className={Styles.refer_title}>Refer Candidate</h1>
-                        <p className={Styles.refer_text}>You can make up to 20 referrals on Scouted.</p>
-                        <p className={Styles.refer_text}>VIPs have unlimited referrals. <Link href="/"><a>Talk to us</a></Link> about becoming a VIP bounty hunter!</p>
+                        {/* <p className={Styles.refer_text}>You can make up to 20 referrals on Scouted.</p> */}
+                        <p className={Styles.refer_text}>VIPs have unlimited referrals. <Link href="mailto:abraham@thecareerbuddy.com"><a
+                            target="_blank">Talk to us</a></Link> about becoming a VIP bounty hunter!</p>
                     </div>
                     <div className={Styles.refer_area}>
 
