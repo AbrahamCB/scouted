@@ -2,11 +2,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
-import { BeatLoader } from 'react-spinners';
 import { getData } from '../../../../../../__lib__/helpers/HttpService';
-import { authPost } from './../../../../../../__lib__/helpers/HttpService';
 const UpdateForm = () => {
     const queryString = require('query-string');
     const [disable, setDisable] = useState(false)
@@ -20,19 +18,28 @@ const UpdateForm = () => {
     const { register, watch, handleSubmit, formState: { errors }, reset } = useForm()
     const router = useRouter()
     // const { id, company_name, company_description, facebook_url, twitter_url, website_url, employee_number, _timezone, country_id, state_id, linkedin_url, image, instagram_url, founded_date } = router.query
-
-
     const { country, company, state, } = JSON.parse(router.query.nested)
 
+    console.log(countries)
     useEffect(() => {
         allCountry()
-        if (watch('country_id')) {
-            allState()
-            allTimezone()
+        getData(`/states/${watch('country_id') || country.id}}`)
+            .then(res => {
+                if (res) {
+                    setStates(res)
+                }
+            })
+        // if (watch('country_id') == undefined ? country.id : watch('country_id')) {
+        //     console.log('country finded')
+        //     allState()
+        // }
+        if (countries?.length > 0) {
+            const zones = countries.find((item, i) => item.id == country.id && item)
+            if (zones) {
+                setTimezones(JSON.parse(zones?.timezones))
+            }
         }
-
-
-    }, [watch('country_id')])
+    }, [watch('country_id') == undefined ? country.id : watch('country_id')])
 
     const allCountry = () => {
         getData('/countries')
@@ -43,24 +50,18 @@ const UpdateForm = () => {
 
             })
     }
-    const allState = () => {
-        getData(`/states/${watch('country_id')}`)
-            .then(res => {
-                if (res) {
-                    setStates(res)
-                }
-            })
-    }
-    const allTimezone = () => {
-        getData(`/timezones/${watch('country_id')}`)
-            .then(res => {
-                if (res) {
-                    setTimezones(res)
-                }
-            })
-    }
+    // console.log(watch('country_id') == undefined ? country.id : watch('country_id'))
+    // const allState = () => {
+    //     getData(`/ states / ${ watch('country_id') == undefined ? country.id : watch('country_id')}`)
+    //         .then(res => {
+    //             if (res) {
+    //                 setStates(res)
+    //             }
+    //         })
+    // }
+
     const onSubmit = async data => {
-        console.log(data.company_logo.length > 0)
+        console.log(data.company_logo[0])
 
         setDisable(true)
         const formData = new FormData()
@@ -77,8 +78,10 @@ const UpdateForm = () => {
         formData.append('twitter_url', data.twitter_url || company.twitter_url)
         formData.append('linkedin_url', data.linkedin_url || company.linkedin_url)
         formData.append('instagram_url', data.instagram_url || company.instagram_url)
-        formData.append(data.company_logo.length > 0 && 'image', data.company_logo[0])
+        if (data.company_logo.length > 0) {
+            formData.append('image', data.company_logo[0])
 
+        }
         await submitData(formData)
         // console.log(data.company_logo.length)
 
@@ -86,16 +89,16 @@ const UpdateForm = () => {
 
     const submitData = async data => {
         setDisable(true)
-        authPost(`/company/u/${company.id}`, data, admins.token)
+        authPost(`/company/u/ ${company.id}`, data, admins.token)
 
             .then(res => {
                 if (res.success) {
                     toast.success(res.message)
                     setDisable(false)
-                    reset()
+                    router.push('/admin/companies')
                 } else {
                     setDisable(false)
-                    toast.error(res)
+                    toast.error('wrong')
                 }
             })
 
@@ -135,7 +138,7 @@ const UpdateForm = () => {
                                         style={{ paddingLeft: '30px' }}
                                     />
                                 </div>
-                                {errors.company_name && <span className="text-danger">Company name required</span>}
+                                {/* {errors.company_name && <span className="text-danger">Company name required</span>} */}
 
                             </div>
                             <div className="mb-3 col-12">
@@ -151,7 +154,7 @@ const UpdateForm = () => {
                                     className="form-control"
                                     placeholder="Type company name"
                                 />
-                                {errors.category_logo && <span className="text-danger">Company name required</span>}
+                                {/* {errors.category_logo && <span className="text-danger">Company name required</span>} */}
 
                             </div>
 
@@ -177,7 +180,7 @@ const UpdateForm = () => {
 
                                 <span className={`${watch().company_description?.length === 250 && 'text-danger'}`}>{watch().company_description?.length || 0}/250</span>
                             </p>
-                            {errors.company_description && <span className="text-danger">Description is required</span>}
+                            {/* {errors.company_description && <span className="text-danger">Description is required</span>} */}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -199,7 +202,7 @@ const UpdateForm = () => {
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.website_url && <span className="text-danger">Website required with https://</span>}
+                            {/* {errors.website_url && <span className="text-danger">Website required with https://</span>} */}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -222,7 +225,7 @@ const UpdateForm = () => {
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.employee_number && <span className="text-danger">Employee number required</span>}
+                            {/* {errors.employee_number && <span className="text-danger">Employee number required</span>} */}
 
                         </div>
 
@@ -252,8 +255,6 @@ const UpdateForm = () => {
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Country</label>
-                            <br />
-                            <span>Previous: {country?.country_name}</span>
                             <div>
                                 <span style={styles}>
                                     <i className="fas fa-flag"></i>
@@ -270,20 +271,17 @@ const UpdateForm = () => {
 
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option value={company.country_id} >Select Country</option>
                                     {
-                                        countries?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
+                                        countries?.map((item, index) => <option key={index} selected={item.id == country.id} value={item.id}>{item.country_name}</option>)
                                     }
                                 </select>
 
                             </div>
-                            {errors.country_id && <span className="text-danger">Country is required</span>}
+                            {/* {errors.country_id && <span className="text-danger">Country is required</span>} */}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>State</label>
-                            <br />
-                            <span>Previous: {state?.state_name}</span>
                             <div>
                                 <span style={styles}>
                                     <i className="fas fa-map-marker"></i>
@@ -301,20 +299,17 @@ const UpdateForm = () => {
 
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option defaultValue>Select State</option>
                                     {
-                                        states?.map((item, index) => <option key={index} value={item.id}>{item.state_name}</option>)
+                                        states?.map((item, index) => <option key={index} selected={item.id == state.id} value={item.id}>{item.state_name}</option>)
                                     }
 
                                 </select>
                             </div>
-                            {errors.state_id && <span className="text-danger">State required</span>}
+                            {/* {errors.state_id && <span className="text-danger">State required</span>} */}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Time Zone</label>
-                            <br />
-                            <label>Previous: {company._timezone}</label>
                             <div>
                                 <span style={styles}>
                                     <i className="fas fa-globe"></i>
@@ -332,14 +327,13 @@ const UpdateForm = () => {
 
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option defaultValue >Select time zone</option>
                                     {
-                                        timezones?.map((item, index) => <option key={index} value={item.id}>{item._zone_name_}</option>)
+                                        timezones?.map((item, index) => <option key={index} selected={item.zoneName == company._timezone} value={item.id}>{item._zone_name_}</option>)
                                     }
 
                                 </select>
                             </div>
-                            {errors._timezone && <span className="text-danger">Time zone required</span>}
+                            {/* {errors._timezone && <span className="text-danger">Time zone required</span>} */}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -361,7 +355,7 @@ const UpdateForm = () => {
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.facebook_url && <span className="text-danger">Facebook required with https://</span>}
+                            {/* {errors.facebook_url && <span className="text-danger">Facebook required with https://</span>} */}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -383,7 +377,7 @@ const UpdateForm = () => {
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.twitter_url && <span className="text-danger">Twitter required with https://</span>}
+                            {/* {errors.twitter_url && <span className="text-danger">Twitter required with https://</span>} */}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -405,7 +399,7 @@ const UpdateForm = () => {
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.linkedin_url && <span className="text-danger">Linkedin required with https://</span>}
+                            {/* {errors.linkedin_url && <span className="text-danger">Linkedin required with https://</span>} */}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -427,7 +421,7 @@ const UpdateForm = () => {
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.instagram_url && <span className="text-danger">Instagram required with https://</span>}
+                            {/* {errors.instagram_url && <span className="text-danger">Instagram required with https://</span>} */}
 
                         </div>
 
