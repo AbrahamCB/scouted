@@ -15,7 +15,7 @@ const Refer = () => {
     const { query } = router
     const [loading, setLoading] = useState(true);
     const [color, setColor] = useState("#ffffff");
-    const [recommender, setRecommender] = useState(false)
+    const [self, setSelf] = useState(false)
     const [job, setJob] = useState(null)
     const [disable, setDisable] = useState(false)
     // const [terms, setTerms] = useState(false)
@@ -99,11 +99,11 @@ const Refer = () => {
 
 
                             </div>
-                            <div className="d-flex gap-2 align-items-center">
-                                <input onChange={(e) => setRecommender(e.target.checked)} className="" type="checkbox" name="" id="" />
+                            {/* <div className="d-flex gap-2 align-items-center">
+                                <input onChange={(e) => setSelf(e.target.checked)} className="" type="checkbox" name="" id="" />
                                 <p>You&apos;re referring yourself as the candidate.</p>
-                            </div>
-                            <div className={`${recommender ? 'b-block' : 'd-none'}`}>
+                            </div> */}
+                            {/* <div className={`${recommender ? 'b-block' : 'd-none'}`}>
                                 <div className="mt-5">
                                     <h3 className={Styles.refer_form_title}>Recommender</h3>
 
@@ -122,24 +122,29 @@ const Refer = () => {
                                     {errors.recommender_email?.type === 'required' && <span className="text-danger">Required</span>}
                                     {errors.recommender_email?.type === "pattern" && <span className="text-danger">Valid email required</span>}
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className={Styles.form_candidate}>
                                 <div>
                                     <h3 className={Styles.refer_form_title}>Candidate</h3>
 
                                 </div>
+                                <div className="d-flex gap-2 align-items-center py-8">
+                                    <input onChange={(e) => setSelf(e.target.checked)} className="" type="checkbox" name="" id="" />
+                                    <p>You&apos;re referring yourself as the candidate.</p>
+                                </div>
+
                                 <div className="mb-4">
                                     <label>Candidate Name <span className="text-danger">*</span></label>
 
-                                    <input className="form-control" {...register("candidate_name", { required: true })} />
+                                    <input defaultValue={self ? users.user?.name : ''} className="form-control" {...register("candidate_name", { required: true })} />
                                     {errors.candidate_name && <span className="text-danger">Required</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label>Candidate Email <span className="text-danger">*</span></label>
 
 
-                                    <input className="form-control" {...register("candidate_email", { required: true, pattern: /\S+@\S+\.\S+/ })} />
+                                    <input defaultValue={self ? users.user?.email : ''} className="form-control" {...register("candidate_email", { required: true, pattern: /\S+@\S+\.\S+/ })} />
                                     {errors.candidate_email?.type === 'required' && <span className="text-danger">Required</span>}
                                     {errors.candidate_email?.type === "pattern" && <span className="text-danger">Valid email required</span>}
                                 </div>

@@ -25,7 +25,7 @@
   border-radius: 50px;
   background: var(--light-green);
   border: 1px solid var(--primary-color);
-  padding: 1rem 2rem;
+  padding: 6px 16px;
   font-weight: 600;
   font-size: 1.6rem;
   color: var(--primary-color);

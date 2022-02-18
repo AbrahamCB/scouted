@@ -41,7 +41,7 @@ const Header = () => {
             <div className={styles.header__logo}>
               <Link href="/">
                 <a >
-                  <img src="/images/scouted1.png" className='w-50' alt="logo" />
+                  <img src="/images/scouted1.png" className='w-100 w-sm-50' alt="logo" />
                 </a>
               </Link>
             </div>

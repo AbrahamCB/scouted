@@ -46,7 +46,7 @@ export default function Login() {
       <section className={styles.login__section}>
         <div className="container">
           <div className={styles.login__form_wrapper}>
-            <h3 className={styles.form__title}>Login Now</h3>
+            <h3 className={styles.form__title}>Login</h3>
             <form onSubmit={handleSubmit(onSubmit)} action="" className={styles.login__form}>
               <input {...register("email", { required: true, pattern: /\S+@\S+\.\S+/ })} type="text" placeholder="Email" />
 
@@ -70,7 +70,7 @@ export default function Login() {
                 </button>
               </div>
 
-              <button type="reset">Forgot Password?</button>
+              {/* <button type="reset">Forgot Password?</button> */}
               <p className="text-center">
                 <Link href="/signup">
                   <a>Create new account</a>

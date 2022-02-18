@@ -57,7 +57,7 @@ export default function Signup() {
       <section className={styles.signup__section}>
         <div className="container">
           <div className={styles.signup__form_wrapper}>
-            <h3 className={styles.form__title}>Sign Up Now</h3>
+            <h3 className={styles.form__title}>Sign Up</h3>
 
 
             <form onSubmit={handleSubmit(onSubmit)} action="" className={styles.signup__form}>
