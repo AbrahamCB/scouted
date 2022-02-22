@@ -11,11 +11,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          {/* <link
-            rel="icon"
-            href="/assets/images/brand/favicon.ico"
-            type="image/x-icon"
-          /> */}
           <link
             rel="shortcut icon"
             type="image/x-icon"
@@ -37,12 +32,6 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
           />
-          {/* ==================== css link part =============== */}
-          {/* <link rel="stylesheet" href="/css/bootstrap.min.css" />
-          <link rel="stylesheet" href="/css/all.min.css" />
-          <link rel="stylesheet" href="/css/style.css" />
-          <link rel="stylesheet" href="/css/dashboard.css" /> */}
-          {/* <link rel="stylesheet" href="/dashboard-responsive.css"/> */}
         </Head>
         <body>
           <Main />
