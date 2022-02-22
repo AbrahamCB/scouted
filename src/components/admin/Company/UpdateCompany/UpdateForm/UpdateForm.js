@@ -1,9 +1,9 @@
-
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Toaster } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
+import { BeatLoader } from 'react-spinners';
 import { getData } from '../../../../../../__lib__/helpers/HttpService';
 const UpdateForm = () => {
     const queryString = require('query-string');
