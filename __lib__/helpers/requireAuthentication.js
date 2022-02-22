@@ -5,7 +5,6 @@ export function userAuth(gssp) {
         const { req, res } = context
         if (req.headers.cookie) {
             const cookies = cookie.parse(req.headers.cookie)
-
             if (!cookies.user_token) {
                 return {
                     redirect: {
