@@ -398,6 +398,7 @@ const JobForm = () => {
                                     <option value="USD">USD</option>
                                     <option value="BDT">BDT</option>
                                     <option value="INR">INR</option>
+                                    <option value="NAIRA">NAIRA</option>
                                 </select>
                             </div>
 
